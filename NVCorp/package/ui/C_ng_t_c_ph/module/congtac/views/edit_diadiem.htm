@@ -1,0 +1,31 @@
+<div class="panel panel-default" ng-controller="edit_diadiem as vm">
+    <div class="no-padder">
+        <div class="panel-heading">
+            Sửa thông tin địa điểm
+            <a href class="btn btn-primary btn-xs pull-right" ng-click="save()"><i class="fa fa-save"></i> Lưu</a>
+        </div>
+        <div class="wrapper">
+            <form accept-charset="utf-8" class="bs-example form-horizontal">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Tên địa điểm <span class="text-danger">*</span></label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder="Tên địa điểm" ng-model="diadiem.name" class="form-control" value="{{diadiem.name}}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Địa chỉ <span class="text-danger">*</span></label>
+                    <div class="col-lg-6">
+                        <input type="text" placeholder="Địa chỉ" ng-model="diadiem.address" class="form-control" value="{{diadiem.address}}">
+                    </div>
+                </div>
+                <div class="form-group terms">
+                    <div style="width: 100%; float:left; height: 600px " class="wrapper">
+                        <ng-map zoom="15" center="{{center}}" on-click="vm.setCenter(event)" tilt="0" style="display: block; height: 600px;">
+                            <marker position="{{center}}" on-click="vm.foo(2,3)" draggable="true" on-dragend="getCurrentLocation()"></marker>
+                        </ng-map>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

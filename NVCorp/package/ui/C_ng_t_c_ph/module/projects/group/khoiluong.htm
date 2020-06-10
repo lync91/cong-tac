@@ -1,0 +1,156 @@
+<div class="m" ng-controller="khoiluong">
+    <section class="panel panel-default milestones-update animated fadeInRight ms-box">
+        <header class="header bg-white b-b clearfix wrapper-xs">
+            <div class="row ms-header">
+                <div class="col-sm-6 no-padder">
+                    <div class="">
+                        <h5 class="m-xs">Danh mục công tác giám sát</h5>
+                    </div>
+                </div>
+                <div class="col-sm-6 no-padder">
+                    <a href="" class="btn btn-default btn-xs pull-right m-l-xs" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <button class="btn btn-primary btn-xs m-l-xs pull-right" ng-click="themhoso_mau()">
+                        <i class="fa fa-navicon"></i>
+                        <font class="hidden-sm hidden-xs" ui-sref="app.projects.giamsat.listkehoach({p_id: param.p_id})"> Kế hoạch giám sát</font>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="row padder">
+            <div class="col-lg-12 no-padder">
+                <div class="wrapper-xs">
+                    <div class="btn-group">
+                        <a href="" class="btn btn-xs btn-success" ng-click="import_data()">
+                            <i class="fa fa-magic"></i> Nhập dữ liệu</a>
+                    </div>
+                    <div class="btn-group">
+                        <a href="" class="btn btn-xs btn-warning" ng-click="lapkehoach()">
+                            <i class="glyphicon glyphicon-flag"></i> Lập kế hoạch</a>
+                    </div>
+                    <!-- <div class="btn-group pull-right" ng-show="!tableform.$visible">
+                        <button type="button" class="btn btn-xs btn-danger" ng-show="!tableform.$visible" ng-click="kledit.$hide()">
+                            Chọn
+                        </button>
+                    </div> -->
+                    <div class="btn-group ng-scope">
+                        <label class="btn btn-xs btn-default ng-untouched ng-valid ng-dirty ng-valid-parse active" ng-model="radioModel" ng-click="change_check()" btn-radio="'Left'"
+                            uncheckable="" aria-invalid="false" style="">Chọn</label>
+                    </div>
+                    <div class="btn-group m-r ng-scope">
+                            <label class="btn btn-xs btn-default ng-untouched ng-valid ng-dirty ng-valid-parse active" ng-model="_edit" ng-click="change_editable()" btn-radio="'Left'"
+                                uncheckable="" aria-invalid="false" style="">Sửa</label>
+                        </div>
+                        <div class="btn-group m-r ng-scope">
+                            <button class="btn btn-xs btn-danger" ng-disabled="_edit" ng-click="xoa_congtac()">Xóa</button>
+                        </div>
+                    <div class="btn-group pull-right" ng-show="tableform.$visible">
+                        <!-- <button type="button" ng-disabled="tableform.$waiting" ng-click="addUser()" class="btn btn-default pull-right">add row</button> -->
+                        <button type="button" class="btn btn-xs btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
+                            Sửa
+                        </button>
+                        <button type="submit" ng-disabled="tableform.$waiting" ng-click="tableform.$save()" class="btn btn-primary">Lưu</button>
+                        <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()" class="btn btn-default">Hủy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 wrapper-xs hidden">
+                <label class="badge bg-info">Hợp đồng</label>
+                <label class="badge bg-primary">Nghiệm thu</label>
+            </div>
+        </div>
+        <div class="row padder">
+            <div class="table-responsive table-kl">
+                <div class="mail-box hidden">
+                    <table class="table table-hover table-mail ms-table lter">
+                        <!-- filter: {loaicongviec: {phongth: globals.user_details.company._id}} -->
+                        <tbody>
+                            <tr class="unread panel-collapse">
+                                <td class="check-mail" colspan="6" style="padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;">
+                                    <div class="collapse in" id="gd-{{$index}}">
+                                        <table class="table table-hover table-mail ms-table" style="table-layout: fixed;">
+                                            <thead>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 50px; max-width: 50px;">STT</th>
+                                                <th class="gs-th wrapper-xs text-center">Tên công việc</th>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 150px; max-width: 150px;">Loại công việc</th>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 80px; max-width: 80px;">Đơn vị</th>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 110px; max-width: 110px;">Khối lượng</th>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 110px; max-width: 110px;">Đơn giá</th>
+                                                <th class="gs-th wrapper-xs text-center" style="width: 110px; max-width: 110px;">Thành tiền</th>
+                                            </thead>
+                                            <!-- <tbody class="ms-row" dnd-list="gd.m" dnd-effect-allowed="copy" dnd-allowed-types="['m']"> -->
+                                            <tbody class="ms-row" ng-if="bangkhoiluong.length > 0">
+                                                <!-- <tr class="unread" ng-animate="'animate'" ng-repeat="kl in bangkhoiluong" dnd-list dnd-drop="add_scanfile(list, item, index, m)"
+                                                    dnd-allowed-types="['fscan']" dnd-draggable="m" dnd-type="'m'" dnd-dragstart="onDragstart(gd.m, event)"
+                                                    ng-click="chitiet(m)"> -->
+                                                <tr class="unread" ng-repeat="kl in bangkhoiluong">
+                                                    <td class="col-sm-1 gs-col-m text-center" style="width: 50px; max-width: 50px;">
+                                                        <p class="handle" style="width: 38px; margin:0px"> {{$index + 1}}</p>
+                                                    </td>
+                                                    <td class="col-lg-5 gs-col-m col-congtac">
+                                                        <!-- <a ng-click="chitiet(m)">{{ kl.tencongtac }}</a> -->
+                                                        <a editable-text="kl.tencongtac" onaftersave="update_lcvtc(kl)">{{ (kl.tencongtac) || 'Chưa có' }}</a>
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m gs-col-lcv" style="width: 150px; max-width: 150px;">
+                                                        <!-- {{ kl.donvi }} -->
+                                                        <span editable-select="kl.loaicongviec._id" e-ng-options="ct._id as ct.name for ct in congtachd" onaftersave="update_lcvtc(kl)">
+                                                            {{ showStatus(kl.loaicongviec) }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-center" style="width: 80px; max-width: 80px;">
+                                                        {{ kl.donvi }}
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m col-dongia text-right" style="width: 110px; max-width: 110px;">
+                                                        <a editable-number="kl.khoiluong" e-min="0" e-step="0.0000001" onaftersave="update_lcvtc(kl)">{{ (kl.khoiluong | number) || '0' }}</a>
+                                                        <!-- <input id="auto-unit-cost" type="text" name="unit_cost_hd" required=""  ui-number-mask="4" ng-model="gt.hopdong" placeholder="08.10" class="form-control"> -->
+                                                    </td>
+                                                    <td class="col-lg-1 gs-col-m col-dongia text-right" style="width: 110px; max-width: 110px;">
+                                                        <a editable-number="kl.dongia" e-min="0" e-step="1" onaftersave="update_lcvtc(kl)">{{ (kl.dongia | number) || '0' }}</a>
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-right" style="width: 110px; max-width: 110px;">
+                                                        {{ kl.khoiluong * kl.dongia | number }}
+                                                    </td>
+                                                </tr>
+                                                <tr class="unread">
+                                                    <td class="col-sm-1 gs-col-m text-center" style="width: 50px; max-width: 50px;">
+                                                        <!-- <p class="handle" style="width: 38px; margin:0px"> {{$index + 1}}</p> -->
+                                                    </td>
+                                                    <td class="col-lg-5 gs-col-m text-center">
+                                                        <!-- <a ng-click="chitiet(m)">{{ kl.tencongtac }}</a> -->
+                                                        <strong>Tổng cộng</strong>
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-center" style="width: 150px; max-width: 150px;">
+                                                        <!-- {{ kl.donvi }} -->
+                                                        <!-- <span editable-select="kl.loaicongviec._id" e-ng-options="ct._id as ct.name for ct in congtachd" onaftersave="update_lcvtc(kl)">
+                                                                {{ showStatus(kl.loaicongviec) }}
+                                                            </span> -->
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-center" style="width: 80px; max-width: 80px;">
+                                                        <!-- {{ kl.donvi }} -->
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-right" style="width: 110px; max-width: 110px;">
+                                                        <!-- <a editable-number="kl.khoiluong" e-min="0" e-step="0.0000001" onaftersave="update_lcvtc(kl)">{{ kl.khoiluong || '0' }}</a> -->
+                                                    </td>
+                                                    <td class="col-lg-1 gs-col-m text-right" style="width: 110px; max-width: 110px;">
+                                                        <!-- <a editable-number="kl.dongia" e-min="0" e-step="1" onaftersave="update_lcvtc(kl)">{{ kl.dongia || '0' }}</a> -->
+                                                    </td>
+                                                    <td class="col-lg-2 gs-col-m text-right" style="width: 110px; max-width: 110px;">
+                                                        <strong>{{ (bangkhoiluong | tongthanhtien:'khoiluong':'dongia') | number
+                                                            }}
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="grid1" ui-grid="gridOptions" class="grid" ui-grid-edit ui-grid-auto-resize style="height: {{myheight - 105}}px !important;"></div>
+            </div>
+        </div>
+
+</div>

@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Thêm nhiệm vụ</h4>
+</div>
+<div class="modal-body">
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Tên nhiệm vụ <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" ng-model="t.task_name" value="{{t.task_name}}" placeholder="Tên nhiệm vụ" name="task_name" required>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Mô tả</label></div>
+        <div class="col-lg-8">
+            <textarea name="description" class="form-control" ng-model="t.description" placeholder="{{t.description}}"></textarea>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="!u">
+        <div class="col-lg-4"><label class=" pull-right control-label">Phòng ban <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <ui-select ng-model="t.phongban" theme="bootstrap">
+            <ui-select-match placeholder="Chọn phòng ban...">{{$select.selected.company_name}}</ui-select-match>
+            <ui-select-choices repeat="item in pb | filter: $select.search">
+              <div ng-bind-html="item.name | highlight: $select.search"></div>
+              <small ng-bind-html="item.company_name | highlight: $select.search"></small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="!u">
+        <div class="col-lg-4"><label class=" pull-right control-label">Nhân viên thực hiện <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8" style="z-index:0">
+            <ui-select ng-model="t.nhanvien" theme="bootstrap" ng-disabled="disabled" style="min-width: 300px;">
+            <ui-select-match placeholder="Chọn nhân viên...">{{$select.selected.fullname}}</ui-select-match>
+            <ui-select-choices group-by="'company.company_name'" repeat="person in dsnv | filter: { company: {_id: t.phongban._id}, fullname: $select.search}">
+              <div ng-bind-html="person.fullname | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+    </div>
+    <div class="row form-group" ng-if="u">
+            <div class="col-lg-4"><label class=" pull-right control-label">Nhân viên thực hiện <span class="text-danger">*</span></label></div>
+            <div class="col-lg-8" style="z-index:0">
+                <span class="text-info">{{u.fullname}}</span>
+            </div>
+        </div>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Thêm nhiệm vụ</button>
+</div>

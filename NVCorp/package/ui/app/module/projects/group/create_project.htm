@@ -1,0 +1,167 @@
+<section id="content" ng-controller="create_project">
+    <section class="hbox stretch">
+        <aside>
+            <section class="vbox">
+                <section class="scrollable wrapper">
+                    <!-- Start Project Form -->
+                    <div class="col-sm-12">
+                        <section class="panel panel-default">
+                            <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Tạo dự án mới </header>
+                            <div class="panel-body">
+                                <form method="post" accept-charset="utf-8" class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Tên rút gọn  <span class="text-danger">*</span></label>
+                                        <div class="col-lg-3">
+                                            <input type="text" placeholder="Tên rút gọn" class="form-control" ng-model="p.project_code" name="project_code" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Tên dự án <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" ng-model="p.project_title" placeholder="Tên dự án" name="project_title" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Phòng ban <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-9">
+                                            <div class="m-b">
+                                                <ui-select ng-model="p.phongban" theme="bootstrap" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                                                    <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.company_name}}</ui-select-match>
+                                                    <ui-select-choices repeat="pb in phongban | filter: $select.search ">
+                                                        <span ng-bind-html="pb.company_name | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Chủ đầu tư <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-7">
+                                            <div class="m-b">
+                                                <ui-select ng-model="p.chudautu" theme="bootstrap" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                                                    <ui-select-match placeholder="Chọn chủ đầu tư">{{$select.selected.company_name}}</ui-select-match>
+                                                    <ui-select-choices repeat="pb in chudautu | filter: $select.search">
+                                                        <span ng-bind-html="pb.company_name | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <a class="btn btn-default" ng-click="them_chudautu()"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Loại công trình <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-6">
+                                            <div class="m-b">
+                                                <ui-select ng-model="p.loaicongtrinh" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 380px;" title="Choose a country" append-to-body="true">
+                                                    <ui-select-match placeholder="Chọn loại công trình">{{$select.selected.loaicongtrinh}}</ui-select-match>
+                                                    <ui-select-choices repeat="pb in loaicongtrinh | filter: $select.search">
+                                                        <span ng-bind-html="pb.loaicongtrinh | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Gói thầu thực hiện <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-6">
+                                            <div class="m-b">
+                                                <ui-select multiple ng-model="p.loaicongviec" theme="bootstrap" ng-disabled="disabled">
+                                                    <ui-select-match placeholder="Chọn gói thầu">{{$item.loaicongviec}}</ui-select-match>
+                                                    <ui-select-choices repeat="person in loaicongviec | propsFilter: {loaicongviec: $select.search} | orderBy: 'thutu'">
+                                                        <div ng-bind-html="person.loaicongviec | highlight: $select.search"></div>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Cấp công trình <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-6">
+                                            <div class="m-b">
+                                                <ui-select ng-model="p.capcongtrinh" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 300px;" title="Choose a country" append-to-body="true">
+                                                    <ui-select-match placeholder="Chọn cấp công trình">{{$select.selected}}</ui-select-match>
+                                                    <ui-select-choices repeat="cct in capcongtrinh">
+                                                        <span ng-bind-html="cct | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Nhóm dự án <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-6">
+                                            <div class="m-b">
+                                                <ui-select ng-model="p.nhomduan" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 300px;" title="Choose a country" append-to-body="true">
+                                                    <ui-select-match placeholder="Chọn nhóm dự án">{{$select.selected}}</ui-select-match>
+                                                    <ui-select-choices repeat="nda in nhomduan | filter: $select.search">
+                                                        <span ng-bind-html="nda | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Nguồn vốn đầu tư <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" placeholder="Nguồn vốn đầu tư" name="nguonvondautu">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Tổng mức đầu tư <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" placeholder="Tổng mức đầu tư" name="tongmucdautu">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Gói thầu thực hiện <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" placeholder="Gói thầu thực hiện" name="goithauthuchien">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Ngày bắt đầu <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="11-12-2016" name="start_date" data-date-format="dd-mm-yyyy">
+                                        </div>
+                                    </div>
+                                    <div class="form-group hidden">
+                                        <label class="col-lg-3 control-label">Ngày hoàn thành <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input class="input-sm input-s datepicker-input form-control" size="16" type="text" value="11-12-2016" name="due_date" data-date-format="dd-mm-yyyy">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Mô tả <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea name="description" ng-model="p.description" class="form-control" placeholder="Mô tả"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label"></label>
+                                        <div class="col-lg-8">
+                                            <button type="submit" class="btn btn-sm btn-primary" ng-click="create_project()"><i class="fa fa-plus"></i> Tạo dự án</button>
+                                        </div>
+                                    </div>
+                                    <!-- <ul ng-repeat="lcv in loaicongviec | groupBy: 'phongth._id'">
+                                      <li ng-repeat="l in lcv">{{l.phongth}}</li>
+                                    </ul> -->
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- End Project Form -->
+                </section>
+            </section>
+        </aside>
+    </section>
+    <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+</section>

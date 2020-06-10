@@ -1,0 +1,122 @@
+<!-- <aside ng-controller="project_view" class="bg-light lter b-l">
+        <header class="header bg-white b-b clearfix">
+            <div class="row m-t-sm project-header">
+                <div class="col-sm-12 m-b-xs">
+                    <div class="" style="position: absolute; padding-left: 10px">
+                        <h5><b>Dự án: {{p.project_code}}</b></h5>
+                    </div>
+                    <ul class="breadcrumb pull-right bg-white" style="margin-bottom:0px">
+                      <li><a href ui-sref="app.projects.view.project_details({p_id : param.p_id })" ui-sref-active="active">Thông tin dự án</a></li>
+                      <li><a href ui-sref="app.projects.view.milestones({p_id : param.p_id })"  ui-sref-active="active">Danh mục hồ sơ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="scrollable group-panel" ui-view></section>
+</aside> -->
+<!-- navbar -->
+<!-- <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div> -->
+<!-- / navbar -->
+
+<!-- menu -->
+<!-- <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}" ng-class="{'hide': app.hideAside }">
+  </div> -->
+<!-- / menu -->
+
+<!-- view -->
+<div ng-controller="welcome" class="app-content" ng-class="{'m-n': app.hideAside, 'h-full': app.hideFooter }">
+    <div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }" style="left:200px">
+      <!-- hbox layout -->
+      <div class="hbox hbox-auto-xs bg-light " ng-init="
+    app.settings.asideFolded = false; 
+    app.settings.asideFixed = true;
+    app.settings.asideDock = false;
+    app.settings.container = false;
+    app.hideAside = false;
+    mtool = '';
+    ">
+        <!-- Giao việc nhanh -->
+        <div class="col w-md lter b-l">
+            <div class="vbox">
+              <div class="wrapper b-b b-light hidden">
+                <div class="font-thin h4">DANH SÁCH NHÂN VIÊN</div>
+                <small class="text-muted">Giao việc nho nhân viên</small>
+              </div>
+              <div class="row-row">
+                <div class="cell slack-pane">
+                  <div class="cell-inner">
+                    <div class="">
+                        <div class="listings">
+                            <div class="listings_channels">
+                              <h2 class="listings_header">Chung</h2>
+                              <ul class="channel_list">
+                                <li class="channel" ui-sref-active="active"><a class="channel_name" ui-sref="app.home.main"><span class="tag-unread hidden">0</span><span><span class="prefix">#</span>Tất cả</span></a></li>
+                              </ul>
+                            </div>
+                            <div class="listings_channels">
+                              <h2 class="listings_header">Dự án</h2>
+                              <ul class="channel_list" ng-repeat="p in duan_theodoi">
+                                <li class="channel" ui-sref-active="active"><a ui-sref="app.home.duan({id: p._id})" class="channel_name"><b class="badge bg-danger m-xxs pull-right p-unread-count">{{p.count}}</b><div class="overflow ellipsis"><span class="prefix">#</span>{{p.ac.project.project_code}}</div></a></li>
+                              </ul>
+                            </div>
+                            <div class="listings_direct-messages">
+                              <h2 class="listings_header">Nhiệm vụ</h2>
+                              <ul class="channel_list">
+                                <li class="channel"><a class="channel_name"><span class="tag-unread hidden">20</span><span><span class="prefix"> </span>kryton</span></a></li>
+                              </ul>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="padder b-t b-light text-center hidden">
+                <div class="m-xs">Footer with fluid height</div>
+              </div>
+            </div>
+          </div>
+          <!-- /Giao việc nhanh -->
+        <!-- column -->
+        <div class="col">
+          <div class="vbox">
+            <!-- <header class="header bg-white b-b clearfix">
+              <div class="row m-t-sm project-header">
+                <div class="col-sm-12 m-b-xs">
+                  <div class="" style="position: absolute; padding-left: 10px">
+                    <h5>
+                      <b>Dự án: {{p.project_code}}</b>
+                    </h5>
+                  </div>
+                  <ul class="breadcrumb pull-right bg-white" style="margin-bottom:0px">
+                    <li>
+                      <a href ui-sref="app.projects.view.project_details({p_id : param.p_id })" ui-sref-active="active">Thông tin dự án</a>
+                    </li>
+                    <li>
+                      <a href ui-sref="app.projects.view.milestones({p_id : param.p_id })" ui-sref-active="active">Danh mục hồ sơ</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </header> -->
+            <div class="row-row">
+              <div class="cell" ui-view>
+                <div class="cell-inner">
+                  <div class="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /column -->
+      </div>
+      <!-- /hbox layout -->
+    </div>
+  </div>
+  <!-- / view -->
+  <!-- navbar -->
+  <!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+      
+    </div> -->
+  <!-- /navbar -->

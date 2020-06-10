@@ -1,0 +1,34 @@
+<div class="modal-header"style="padding-top: 10px;
+    padding-bottom: 7px;">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Nhập dữ liệu thi công từ Clipboard</h4>
+</div>
+<div class="modal-body" style="padding:0px; background: #f0f3f4;">
+    <div class="table-responsive">
+            <input type="text" ng-model="csv_input" ng-paste="copyPasted($event)">
+        <table class="table table-hover table-mail ms-table"  style="background:white">
+            <thead>
+                <th class="gs-th wrapper-xs text-center">STT</th>
+                <th class="gs-th wrapper-xs text-center">Tên công việc</th>
+                <th class="gs-th wrapper-xs text-center">Đơn vị</th>
+                <th class="gs-th wrapper-xs text-center">Khối lượng</th>
+                <th class="gs-th wrapper-xs text-center">Đơn giá</th>
+                <th class="gs-th wrapper-xs text-center">Thành tiền</th>
+            </thead>
+            <tbody>
+                <tr class="unread" ng-repeat="kl in source">
+                    <td class="gs-col text-center">{{kl[0]}}</td>
+                    <td class="gs-col">{{kl[1]}}</td>
+                    <td class="gs-col text-center">{{kl[2]}}</td>
+                    <td class="gs-col text-right">{{kl[3] | number}}</td>
+                    <td class="gs-col text-right">{{kl[4] | number}}</td>
+                    <td class="gs-col text-right">{{kl[3] * kl[4] | number}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <a href="" class="btn btn-default" ng-click="cancel()">Hủy</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Nhập</button>
+</div>

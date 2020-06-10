@@ -1,0 +1,67 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Báo lỗi hồ sơ</h4>
+</div>
+<div class="modal-body">
+    <form accept-charset="utf-8" class="bs-example form-horizontal">
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Dự án <span class="text-danger">*</span></label>
+            <div class="col-lg-6">
+                <label class="control-label"><strong>{{p.project_title}}</strong></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Công việc <span class="text-danger">*</span></label>
+            <div class="col-lg-6">
+                <label class="control-label"><strong>{{m.loaicongviec.loaicongviec}}</strong></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Hồ sơ <span class="text-danger">*</span></label>
+            <div class="col-lg-6">
+                <label class="control-label"><strong>{{m.milestone_name}}</strong></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-3 control-label">Người thông báo <span class="ng-">*</span></label>
+            <div class="col-lg-9">
+                <label class="control-label"><strong>{{user_details.fullname}}</strong> <span class="text-danger"></span></label>
+            </div>
+        </div>
+
+
+        <!-- <div class="form-group">
+            <label class="col-lg-3 control-label">Nơi nhận <span class="text-danger">*</span> </label>
+            <div class="col-lg-7">
+                <div class="m-b">
+                    <ui-select ng-model="tk.nguoiky" theme="bootstrap" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                        <ui-select-match placeholder="Chọn người ký">{{$select.selected.fullname}}</ui-select-match>
+                        <ui-select-choices repeat="pn in nv | filter: $select.search ">
+                            <span ng-bind-html="pn.fullname | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <a href="" class="btn btn-default"><i class="fa fa-plus"></i></a>
+            </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+            <label class="col-lg-3 control-label">Số lượng</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" ng-model="tk.soluong">
+            </div>
+        </div> -->
+        <!-- End discount Fields -->
+        <div class="form-group terms">
+            <label class="col-lg-3 control-label">Ghi chú </label>
+            <div class="col-lg-9">
+                <textarea name="description" ng-model="tk.ghichu" class="form-control ng-pristine ng-valid ng-touched" placeholder="Ghi chú"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Trình ký</button>
+</div>

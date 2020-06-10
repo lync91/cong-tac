@@ -1,0 +1,47 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Thêm chức danh thực hiện dự án</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Loại công việc</label>
+            <div class="col-lg-8">
+                <ui-select ng-model="ns.loaicongviec" theme="bootstrap">
+                    <ui-select-match placeholder="Chọn loại công việc">{{$select.selected.loaicongviec}}</ui-select-match>
+                    <ui-select-choices repeat="item in listloaicongviec">
+                        <div ng-bind-html="item.loaicongviec | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Chức danh</label>
+            <div class="col-lg-8">
+              <ui-select ng-model="ns.chucdanh" theme="bootstrap">
+                  <ui-select-match placeholder="Chọn chức danh">{{$select.selected.chucdanh}}</ui-select-match>
+                  <ui-select-choices repeat="item in listchucdanh | filter: { loaicongviec : { _id :  ns.loaicongviec._id} }">
+                      <div ng-bind-html="item.chucdanh | highlight: $select.search"></div>
+                  </ui-select-choices>
+              </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên nhân sự</label>
+            <div class="col-lg-8">
+              <ui-select ng-model="ns.nhansu" theme="bootstrap">
+                  <ui-select-match placeholder="Chọn nhân sự">{{$select.selected.fullname}}</ui-select-match>
+                  <ui-select-choices repeat="item in listchungchi | filter: $select.search">
+                      <div ng-bind-html="item.fullname | highlight: $select.search"></div>
+                      <small>Chứng chỉ: </small>
+                      <small ng-repeat="cc in item.chungchi"> <{{cc.loaichungchi.loaichungchi}}> </small>
+                      <small ng-if="item.chungchi.length == 0"> <{{'Không có'}}> </small>
+                  </ui-select-choices>
+              </ui-select>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Thêm</button>
+
+    </div>

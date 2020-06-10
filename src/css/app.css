@@ -5175,3 +5175,16 @@ a.text-#000000:hover {
     background-color: #7266ba;
   }
 }
+
+.no-header {
+  padding-top: 50px !important;
+}
+
+.no-aside {
+  margin-left: 1px !important;
+}
+
+.pdf-frame {
+  width: 100%;
+  height: 600px;
+}

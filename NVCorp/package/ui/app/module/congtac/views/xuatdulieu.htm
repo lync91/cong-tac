@@ -1,0 +1,69 @@
+<div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }">
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs bg-light " size-watcher size-watcher-height="myheight">
+        <!-- column -->
+
+        <!-- /column -->
+
+        <!-- column -->
+        <div class="col">
+            <div class="vbox" ng-controller="xuatdulieu">
+                <div class="row-row">
+                    <div class="col w-md lter b-r">
+                        <div class="vbox">
+                            <div class="wrapper-sm b-b b-light">
+                                <div class="font-thin">
+                                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, thang: param.thang, nam: param.nam})" class="btn btn-xs btn-default m-r-sm">
+                                        <i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                                    <strong>Danh sách công tác</strong>
+                                </div>
+                            </div>
+                            <div class="row-row">
+                                <div class="cell">
+                                    <div class="cell-inner bg-light lter">
+                                        <div class="">
+                                            <div class="">
+                                                <iframe id='pdfV' class="pdf-frame"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /column -->
+
+    <!-- column -->
+    <div class="col w-md lter b-l hidden">
+        <div class="vbox">
+            <div class="wrapper b-b b-light">
+                <div class="font-thin h4">Header</div>
+                <small class="text-muted">with fluid height</small>
+            </div>
+            <div class="row-row">
+                <div class="cell">
+                    <div class="cell-inner">
+                        <div class="wrapper-md">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /column -->
+</div>
+<!-- /hbox layout -->
+
+</div>
+<!-- </div> -->
+<!-- / view -->
+<!-- navbar -->
+<!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+          
+          </div> -->
+<!-- /navbar -->

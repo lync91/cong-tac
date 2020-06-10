@@ -1,0 +1,115 @@
+<!-- <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Footable</h1>
+</div> -->
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh mục chứng chỉ
+            <a href="" class="btn m-b-xs btn-xs btn-primary pull-right" ng-click="them_nhansu()"><i class="fa fa-plus"></i> Thêm nhân sự</a>
+        </div>
+        <div class="panel-body b-b b-light hidden" style="padding-bottom:0px; padding-top:10px;">
+            <p class="pull-right">Tìm kiếm:
+                <input id="filter" ng-model="search" ng-change="updateFilteredList()" type="text" class="form-control input-sm w-sm inline m-r" /></p>
+        </div>
+        <div class="dataTables_wrapper">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="dataTables_length" id="table-projects_length"><label>Hiển thị <select name="table-projects_length" ng-model="sl" aria-controls="table-projects" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> mục</label></div>
+                </div>
+                <div class="row col-lg-8 dataTables_filter m-r">
+                    <label>Tìm kiếm <input id="filter" type="text" ng-model="search" ng-change="updateFilteredList()" class="form-control input-sm" placeholder="" aria-controls="table-projects"></label>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr class="table table-striped b-t b-b" ng-repeat="cv in listchungchi | orderBy: '-created' | filter:search | limitTo:Math.ceil(listchungchi.length/3):Math.ceil(listchungchi.length/3)*0">
+                            <td>
+                                <!-- <a class="text-info" href="" ui-sref="app.hopdong.chitiet({hd_id: item._id})" ng-bind-html="item.tengoithau | highlight:search">{{item.tengoithau}}<br></a>
+                            <br> -->
+                                <h5><strong><a href="" ui-sref="app.phaply.chungchi_details({cc_id: cv._id})" class="text-info"><font ng-bind-html="cv.fullname | highlight:search">{{cv.tenchungchi}}</font></a></strong></h5>
+                                <font size="2">Trình độ: <b ng-bind-html="cv.sochungchi | highlight:search"></b><br>
+                                  Số lượng chứng chỉ: <b>{{cv.chungchi.length}}</b>
+                                  <!-- Người lập: <b ng-bind-html="cv.nguoilap.fullname | highlight:search"></b> -->
+                                </font><br>
+                                <div class="col-md-12 no-padder">
+                                    <h5 class="card-detail-item-header">Chứng chỉ: </h5>
+                                    <!-- <span class="ng-binding ng-scope"><i class="fa fa-file-pdf-o"></i> Tập tin đính kèm.pdf </span> -->
+                                    <div class="">
+                                      <table class="table table-striped m-b-none">
+                                          <!-- <thead>
+                                              <tr>
+                                                  <th class="col-options">Tên TT</th>
+                                                  <th class="col-date">Ngày TT</th>
+                                                  <th class="col-currency text-right">Giá trị</th>
+                                                  <th style="width: 30px hidden-print"></th>
+                                              </tr>
+                                          </thead> -->
+                                          <tbody>
+                                              <tr ng-repeat="cc in cv.chungchi">
+                                                  <td><a href="phaply/download/{{cc.file}}">+ {{cc.loaichungchi.loaichungchi}} <font ng-if="cc.loaichungchi.loaichungchi != 'Định giá'">| {{cc.loaicongtrinh.loaicongtrinh}}</font></a>
+                                                    <div class="progress-striped active m-b-sm progress" value="dynamic" type="info" ng-repeat="item in uploader.queue | filter: {headers : {id : cc._id}}">
+                                                        <a href=""><span class="padder"><i class="fa fa-file-pdf-o"></i> {{item.file.name}} </span></a><span class="{{item.progress == 100 ? 'hidden' : ''}}"></i> {{item.progress}}% </span><span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}"></i> {{item.progress}}% </span>
+                                                        <div class="progress-bar bg-info {{item.progress == 100 ? 'hidden' : ''}}" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                                        <div class="{{item.progress == 100 ? 'elementToFadeInAndOut' : 'hidden'}}"></div>
+                                                        <!-- {{item.uploader}} -->
+                                                    </div>
+                                                   </td>
+                                                  <td><a editable-date="tt.ngaythanhtoan" onaftersave="update_thanhtoan(tt)">{{tt.ngaythanhtoan | date:'dd/MM/yyyy'}}</a></td>
+                                                  <td class="text-right"><a href>{{ cc.chungchiluu | slhoso }}</a></td>
+                                                  <td class="no-padder hidden-print hidden-xs" style="width: 135px;">
+                                                    <span class="btn btn-default btn-xs btn-file m-xs"><span class="fileinput-new"><i class="fa fa-paperclip"></i></span><input type="file" nv-file-select="" uploader="uploader" options="{headers: {id: cc._id}, autoUpload: 'true'}" multiple /></span>
+                                                    <a href="" class="btn btn-xs btn-default m-xs m-l-n-xs" ng-if="cc.file" ng-click="inchungchi(cc.file)"><i class="fa fa-print text-primary"></i></a>
+                                                    <a href="" class="btn btn-xs btn-default m-xs m-l-n-xs" ng-click="giaonhanhs(cc, 'nhan')"><i class="fa fa-plus text-info-lt"></i></a>
+                                                    <a href="" class="btn btn-xs btn-default m-xs m-l-n-xs" ng-click="giaonhanhs(cc, 'giao')"><i class="fa fa-minus text-info-lt"></i></a>
+                                                    <a href="" class="btn btn-xs btn-default m-xs m-l-n-xs" ng-click="xoa_chungchi(cv, cc)"><i class="fa fa-trash text-danger"></i></a>
+                                                  </td>
+                                              </tr>
+                                              <!-- <tr>
+                                                  <td></td>
+                                                  <td><strong>Tổng:</strong></td>
+                                                  <td class="text-right"><strong>{{hopdong.thanhtoan | tinhtong: 'giatri' | number}} đ</strong></td>
+                                                  <td></td>
+                                              </tr> -->
+                                          </tbody>
+                                      </table>
+                                    </div>
+                                    <div class="progress-striped active m-b-sm progress" value="dynamic" type="info" ng-repeat="item in uploader.queue | filter: {headers : {id : cv._id}}">
+                                        <a href=""><span class="padder"><i class="fa fa-file-pdf-o"></i> {{item.file.name}} </span></a><span class="{{item.progress == 100 ? 'hidden' : ''}}"></i> {{item.progress}}% </span><span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}"></i> {{item.progress}}% </span>
+                                        <div class="progress-bar bg-info {{item.progress == 100 ? 'hidden' : ''}}" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                        <div class="{{item.progress == 100 ? 'elementToFadeInAndOut' : 'hidden'}}"></div>
+                                        <!-- {{item.uploader}} -->
+                                    </div>
+                                </div>
+
+                            </td>
+                            <!-- <td class="col-currency text-right">
+                            <font size="2pt">Hợp đồng: <b>{{ cv.giatri | tinhtong: 'gthopdong' | number}}đ</b><br> Thực hiện: <b>{{cv.giatri | tinhtong: 'gtnghiemthu' | number}}đ</b></font>
+                        </td> -->
+                            <td class="col-currency text-right hidden-md">
+                                <!-- <font size="2pt">Thanh toán: <b>{{cv.thanhtoan | tinhtong: 'giatri' | number}}đ</b><br> Đã chuyển: <b>{{cv.chuyentien | tinhtong: 'giatri' | number}}đ</b><br> Còn lại: <b>{{(cv.thanhtoan | tinhtong: 'giatri') - (cv.chuyentien | tinhtong: 'giatri') | number}}đ</b></font>
+                            <br> -->
+                                <span class="btn btn-default btn-xs btn-file m-xs" ng-click="them_chungchi(cv)"><span class="fileinput-new"><i class="fa fa-plus"></i> Thêm chứng chỉ</span></span><br>
+                                <div class="btn-group m-r-xs hidden" dropdown="" is-open="status.isopen">
+                                    <button type="button" class="btn btn-xs btn-default " dropdown-toggle="" ng-disabled="disabled" aria-haspopup="true" aria-expanded="false" aria-disabled="false">
+                                <i class="fa fa-bars"></i> Tùy chỉnh <span class="caret"></span>
+                              </button>
+                                    <!-- <a dropdown-toggle="" ><span class="label bg-info pull-right">Đính kèm</span><br></a> -->
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-click="sua_chungchi(cv)"><a href=""><i class="fa fa-pencil"></i> Sửa</a></li>
+                                        <li ng-click="xoa_chungchi(cv)"><a href=""><i class="fa fa-trash"></i> Xóa</a></li>
+                                    </ul>
+                                </div><br>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <pagination total-items="5" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm m-t-none m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>

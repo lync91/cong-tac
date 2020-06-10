@@ -1,0 +1,147 @@
+<div class="m" ng-controller="milestones">
+    <section class="milestones-update ms-load" style="height: 100px;">
+        <div style="font-size: 50px; margin: auto; width:0px">
+            <i class="fa fa-spin fa-spinner center"></i>
+        </div>
+    </section>
+    <section class="panel panel-default milestones-update animated fadeInRight ms-box hidden">
+        <header class="header bg-white b-b clearfix wrapper-xs">
+            <div class="row ms-header">
+                <div class="col-sm-6 no-padder">
+                    <div class="hidden-sm hidden-xs">
+                        <h5 class="m-l">Danh mục hồ sơ dự án</h5>
+                        <!-- <ul>
+                                  {{p.milestones}}
+                                </ul> -->
+                    </div>
+                </div>
+                <div class="col-sm-6 no-padder">
+                    <a href="" class="btn btn-default pull-right m-l-xs" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <button class="btn btn-default m-l-xs pull-right" ng-click="themhoso_mau()">
+                        <i class="fa fa-navicon"></i>
+                        <font class="hidden-sm hidden-xs"> Thêm từ biểu mẫu</font>
+                    </button>
+                    <button class="btn btn-default pull-right" ng-click="themhoso()">
+                        <i class="fa fa-plus"></i>
+                        <font class="hidden-sm hidden-xs"> Thêm hồ sơ</font>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div class="row padder">
+            <div class="col-lg-8">
+                <div class="wrapper-xs">
+                    <div class="btn-group">
+                        <a href="" class="btn  btn-default" ng-click="change_mtool('giaoviec')">
+                            <i class="glyphicon glyphicon-flag"></i> Giao việc</a>
+                        <a href="" class="btn  btn-default" ng-click="change_mtool('chuyenphaths')">
+                            <i class="glyphicon glyphicon-transfer"></i> CP hồ sơ</a>
+                        <a href="" class="btn  btn-default" ng-click="change_mtool('filescan')">
+                            <i class="fa fa-file"></i> File Scan</a>
+                    </div>
+                    <a href="" class="btn  btn-default" ui-sref="app.projects.mtools.biavb({id: p.project_id, mid: p.milestones[0]._id})">
+                        <i class="glyphicon glyphicon-print"></i> Bìa văn bản</a>
+                </div>
+            </div>
+            <div class="col-lg-4 wrapper-xs">
+                <label class="badge bg-info">Hợp đồng</label>
+                <label class="badge bg-primary">Nghiệm thu</label>
+            </div>
+        </div>
+        <div class="row padder">
+            <div class="table-responsive">
+                <div class="mail-box">
+                    <table class="table table-hover table-mail">
+                        <!-- filter: {loaicongviec: {phongth: globals.user_details.company._id}} -->
+                        <tbody ng-repeat="lcv in milestones">
+                            <tr class="unread giaidoan">
+                                <td class="mail-ontact" colspan="6">
+                                    <a href="">
+                                        <i class="fa fa-circle"></i>
+                                        <strong> {{lcv._id.lcv[0]}}</strong>
+                                    </a> ({{ {ms: p.milestones, gd: gd[0]} | get_phapnhan}})
+                                    <a href="" class="pull-right" data-toggle="collapse" data-target="#gd-{{$index}}">
+                                        <i class="fa fa-chevron-circle-down"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr class="unread panel-collapse">
+                                <td class="check-mail" colspan="6" style="padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;">
+                                    <div class="collapse in" id="gd-{{$index}}">
+                                        <table class="table table-hover table-mail ms-table table-animate-container">
+                                            <tbody ng-repeat="gd in lcv.gd">
+                                                <tr class="unread">
+                                                    <td class="mail-ontact" colspan="6">
+                                                        <a href="">
+                                                            <i class="fa fa-angle-right"> </i>
+                                                            <strong> {{gd._id.giaidoan[0]}}</strong>
+                                                        </a>
+                                                        <!-- <a href=""> <i class="fa fa-angle-right"> </i><strong> {{gd[0].m.lcv[0].gd[0].giaidoan}}</strong></a> -->
+                                                    </td>
+                                                </tr>
+                                                <tr class="unread animate-repeat">
+                                                    <td class="check-mail" id="ms-table" colspan="5" style="padding-left: 0px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;">
+                                                        <!-- <table class="table table-hover table-mail ms-table" html-sortable="{disableDrag: true}" html-sortable-callback="sortableCallback(sourceModel, destModel, start, end, lcv)" ng-model='lcv'> -->
+                                                        <table class="table table-hover table-mail ms-table" style="table-layout: fixed;">
+                                                            <tbody class="ms-row" dnd-list="gd.m" dnd-effect-allowed="copy" dnd-allowed-types="['m']">
+                                                                <tr class="unread" ng-animate="'animate'" ng-repeat="m in gd.m" ng-show="!m.deleted" dnd-list dnd-drop="add_scanfile(list, item, index, m)"
+                                                                    dnd-allowed-types="['fscan']" dnd-draggable="m" dnd-type="'m'"
+                                                                    dnd-dragstart="onDragstart(gd.m, event)"
+                                                                    ng-click="chitiet(m)">
+                                                                    <td class="col-sm-1 hidden-xs" style="width: 65px; max-width: 65px;">
+                                                                        <div class="" style="width: 65px; max-width: 65px;">
+                                                                            <p class="handle" style="width: 38px; margin:0px">
+                                                                                <i class="fa fa-bars text-{{m.nhomhs[0].label}}" style="margin-right:7px" as-sortable-item-handle></i> {{$index + 1}}</p>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-lg-5 col-xs-11 ms-col">
+                                                                        <p style="margin:0px">
+                                                                            <a ng-click="chitiet(m)">{{ m.milestone_name}}</a>
+                                                                            <!-- <a ng-click="chitiet(m)" ng-if="m.hopdong[0]._id">Hợp đồng {{m.hopdong[0].tengoithau}}</a> -->
+                                                                        </p>
+                                                                    </td>
+                                                                    <td class="col-lg-2 ms-col hidden-md hidden-sm hidden-xs" style="width: 140px; max-width: 140px;">
+                                                                        <div class="" style="width: 140px; max-width: 140px;">
+                                                                            <a href>{{(m.nhomhs._id == '586a0ab8516a3e129131fc86'
+                                                                                && m.hopdong) ? m.hopdong.sohopdong : m.sovanban}}</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-lg-2 ms-col hidden-md hidden-sm hidden-xs" style="width: 100px; max-width: 100px;">
+                                                                        <div class="" style="width: 100px; max-width: 100px;">
+                                                                            <a href>{{(((m.nhomhs._id == '586a0ab8516a3e129131fc86'
+                                                                                && m.hopdong) ? m.hopdong.ngayky : m.ngayph)
+                                                                                | date:"dd/MM/yyyy")}}</a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-lg-1 ms-col hidden-md hidden-sm hidden-xs" style="width: 50px; max-width: 50px;">
+                                                                        <div class="" style="width: 50px; max-width: 50px;">
+                                                                            <span class="badge pull-right {{m.slluu > 0 ? 'mint' : ''}}" style="position: absolute;">{{m.slluu || 0}}</span>
+                                                                            </i>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="col-lg-2 hidden-md hidden-sm hidden-xs" style="width: 115px; max-width: 115px;">
+                                                                        <div class="btn-group pull-right" style="width: 115px; max-width: 115px;">
+                                                                            <a type="button" class="badge pull-right dropdown-toggle ms-trangthai {{m.trangthai[0].class}}">
+                                                                                {{m.trangthai[0].name}}
+                                                                            </a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+</div>

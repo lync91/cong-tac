@@ -1,0 +1,61 @@
+<div class="vbox" ng-controller="bieumaugiamsat">
+    <div class="row-row">
+        <div ng-if="param.ac == 'kehoach'" class="col w-xxl lter b-r">
+            <div class="vbox">
+                <div class="wrapper-sm b-b b-light">
+                    <div class="font-thin">
+                            <a href="" ui-sref="app.projects.giamsat.kehoach({p_id: param.p_id, kh_id: param.kh_id})" class="btn btn-xs btn-default m-r-sm"><i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                        <strong>Danh sách biểu mẫu</strong>
+                    </div>
+                </div>
+                <div class="row-row">
+                    <div class="cell">
+                        <div class="cell-inner">
+                            <div class="">
+                                <div class="panel panel-info m-n" draggable="true">
+                                    <div class="panel-heading">
+                                        Kế hoạch giám sát
+                                    </div>
+                                    <div class="list-group bg-white">
+                                        <a href="" class="list-group-item" ui-sref="app.projects.giamsat.bieumau({p_id: param.p_id, kh_id: param.kh_id, ac: 'kehoach', ct: '0'})" ui-sref-active="active">
+                                            Kế hoạch số {{param.kh_id}}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="panel panel-info m-n" draggable="true">
+                                    <div class="panel-heading">
+                                        Công tác giám sát
+                                    </div>
+                                    <div class="list-group bg-white">
+                                        <a ng-repeat="ct in kehoach.dscongtac" href="" class="list-group-item" ui-sref="app.projects.giamsat.bieumau({p_id: param.p_id, kh_id: param.kh_id, ac: 'kehoach', ct: ct.socongtac})" ui-sref-active="active" ng-click="gen_bieumau_ct(ct)">
+                                            {{ct.congtac.tencongtac}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cell">
+            <div class="vbox">
+                <div class="wrapper-sm b-b b-light">
+                    <div class="font-thin">
+                        <strong ng-if="param.ac == 'kehoach'">Nội dung</strong>
+                        <a href="" ng-if="param.ac == 'baocaokehoach'" class="btn btn-default btn-xs m-r-xs" ui-sref="app.projects.giamsat.baocaokehoach({p_id: param.p_id, kh_id: param.kh_id})">
+                                <i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                        <strong ng-if="param.ac == 'baocaokehoach'">| Biểu mẫu báo cáo hoàn thành kế hoạch gián sát</strong>
+                    </div>
+                </div>
+                <div class="row-row">
+                    <div class="cell">
+                        <div class="cell-inner">
+                            <iframe id='pdfV' class="pdf-frame"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

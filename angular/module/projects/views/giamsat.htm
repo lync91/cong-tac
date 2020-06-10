@@ -1,0 +1,78 @@
+<!-- navbar -->
+<!-- <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+</div> -->
+<!-- / navbar -->
+
+<!-- menu -->
+<!-- <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}" ng-class="{'hide': app.hideAside }">
+</div> -->
+<!-- / menu -->
+
+<!-- view -->
+<!-- <div class="app-content" ng-class="{'m-n': app.hideAside, 'h-full': app.hideFooter }"> -->
+  <div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }" ng-controller="biavb_main">
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs bg-light " size-watcher size-watcher-height="myheight">
+      <!-- column -->
+      <!-- <div class="col w lter b-r hidden">
+        <div class="vbox">
+          <div class="wrapper-sm b-b b-light">
+            <div class="font-thin"><strong>Hồ sơ</strong></div>
+          </div>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner">
+                <div ng-repeat="lcv in milestones" class="">
+                  <div class="panel panel-info m-n" draggable="true">
+                    <div class="panel-heading">
+                      {{lcv._id.lcv[0]}}
+                    </div>
+                    <div class="list-group bg-white" ng-repeat="gd in lcv.gd">
+                      <a ng-repeat="m in gd.m" href="" class="list-group-item" ui-sref="app.projects.mtools.biavb({id: pid, mid: m.milestone_num})" ui-sref-active="active">
+                        {{m.milestone_name}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- /column -->
+
+      <!-- column -->
+      <div class="col" ui-view>
+
+      </div>
+      <!-- /column -->
+
+      <!-- column -->
+      <div class="col w-md lter b-l hidden">
+        <div class="vbox">
+          <div class="wrapper b-b b-light">
+            <div class="font-thin h4">Header</div>
+            <small class="text-muted">with fluid height</small>
+          </div>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner">
+                <div class="wrapper-md">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /hbox layout -->
+
+  </div>
+<!-- </div> -->
+<!-- / view -->
+<!-- navbar -->
+<!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+
+</div> -->
+<!-- /navbar -->

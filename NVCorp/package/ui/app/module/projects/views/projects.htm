@@ -1,0 +1,78 @@
+<section ng-controller="projects" class="hbox stretch">
+    <aside>
+        <section class="vbox">
+            <section class="scrollable wrapper w-f">
+                <section class="panel panel-default">
+                    <header class="panel-heading">
+                        Tất cả dự án <a href="#/projects/create" class="btn btn-xs btn-primary pull-right hidden">Tạo dự án</a>
+                        <a href="http://dl.navices.com/projects?view=archive" class="btn btn-xs btn-dark pull-right hidden">
+                          Xem lưu trữ
+                        </a>
+                    </header>
+
+                    <div>
+                        <div id="table-projects_wrapper" class="dataTables_wrapper">
+                            <div class="col-sm-4 hidden-xs no-padder-xs">
+                                <div class="dataTables_length" id="table-projects_length"><label>Hiển thị <select name="table-projects_length" ng-model="sl" aria-controls="table-projects" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> mục</label></div>
+                            </div>
+                            <div class="row col-lg-8 dataTables_filter m-r">
+                                <label>Tìm kiếm <input id="filter" type="text" ng-model="search" ng-change="updateFilteredList()" class="form-control input-sm" placeholder="" aria-controls="table-projects"></label>
+                            </div>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr class="odd" role="row" ng-repeat="p in projects">
+                                        <td class="hidden-xs">
+                                            <div class="btn-group" dropdown is-open="status.isopen">
+                                                <button type="button" class="btn btn-xs btn-default" dropdown-toggle ng-disabled="disabled">
+                                              Tùy chọn <span class="caret"></span>
+                                            </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href>Truy cập</a></li>
+                                                    <li><a href>Sửa thông tin</a></li>
+                                                    <li><a href ng-click="delete_project(p)">Xóa</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a class="" ui-sref="app.projects.view.project_details({p_id : p.project_id})">
+                                                <font ng-bind-html="p.project_title | highlight:search">{{p.project_title}}</font>
+                                            </a>
+                                            <div class="progress progress-xxs progress-striped active p-progress">
+                                                <div class="progress-bar progress-bar-primary" data-toggle="tooltip" data-original-title="{{ p.progress || 0 }}%" style="width: {{ p.progress || 0 }}%"></div>
+                                            </div>
+                                        </td>
+                                        <td class="hidden-xs"><span class="label label-{{p.trangthai.trangthai.class}}">{{p.trangthai.trangthai.name}}</span></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" class="text-center">
+                                            <at-pagination at-list="projects" at-config="config"></at-pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="row hidden">
+                                <div class="col-sm-4">
+                                    <div class="dataTables_info" id="table-projects_info" role="status" aria-live="polite">Hiển thị 1 đến 25 của 33 mục</div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="dataTables_paginate paging_full_numbers" id="table-projects_paginate">
+                                        <a class="paginate_button first disabled" aria-controls="table-projects" data-dt-idx="0" tabindex="0" id="table-projects_first">Đầu</a>
+                                        <a class="paginate_button previous disabled" aria-controls="table-projects" data-dt-idx="1" tabindex="0" id="table-projects_previous">Trước</a>
+                                        <span>
+                                                <a class="paginate_button current" aria-controls="table-projects" data-dt-idx="2" tabindex="0">1</a>
+                                                <a class="paginate_button " aria-controls="table-projects" data-dt-idx="3" tabindex="0">2</a>
+                                            </span>
+                                        <a class="paginate_button next" aria-controls="table-projects" data-dt-idx="4" tabindex="0" id="table-projects_next">Sau</a>
+                                        <a class="paginate_button last" aria-controls="table-projects" data-dt-idx="5" tabindex="0" id="table-projects_last">Cuối</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+    </aside>
+</section>

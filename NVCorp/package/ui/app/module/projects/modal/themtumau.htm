@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Thêm mẫu hồ sơ</h3>
+</div>
+<form method="post" accept-charset="utf-8" class="bs-example form-horizontal"> <input type="hidden" name="project" ng-model="t.p_id" value="{{t.p_id}}">
+    <input type="hidden" name="milestone" ng-model="t.mid" value="{{t.id}}">
+    <div class="modal-body">
+        <div class="row form-group">
+            <div class="col-lg-4"><label class=" pull-right control-label">Tên hồ sơ <span class="text-danger">*</span></label></div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="hs.tencongviec" placeholder="Tên hồ sơ" name="task_name" required>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-4"><label class=" pull-right control-label">Tên nhóm hồ sơ <span class="text-danger">*</span></label></div>
+            <div class="col-lg-8">
+                <ui-select ng-model="hs.nhomhs" theme="selectize" title="Choose a person">
+                    <ui-select-match placeholder="Tên nhóm hồ sơ">{{$select.selected.nhomhs}}</ui-select-match>
+                    <ui-select-choices repeat="item in nhomhs | filter: $select.search">
+                        <div ng-bind-html="item.nhomhs | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+
+</div>

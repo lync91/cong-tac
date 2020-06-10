@@ -1,0 +1,34 @@
+{
+  ".url": {
+    "NVCorp.App.C_ng_t_c_ph": {
+      "itemType": 2,
+      "type": "legacy",
+      "allUsers": false,
+      "title": "Công tác phí",
+      "desc": "",
+      "icon": "images/C_ng_t_c_ph_{0}.png",
+      "url": "/webman/3rdparty/NVCorp/app/nvcorp.php#!/app/congtac/users",
+      "allowMultiInstance": false,
+      "configablePrivilege": true,
+      "advanceGrantPrivilege": false,
+      "grantPrivilege": "",
+      "width": 0,
+      "height": 0
+    },
+    "NVCorp.App.H_p_ng": {
+      "itemType": 2,
+      "type": "legacy",
+      "allUsers": false,
+      "title": "Hợp đồng",
+      "desc": "",
+      "icon": "images/H_p_ng_{0}.png",
+      "url": "/webman/3rdparty/NVCorp/H_p_ng/helloworld.php",
+      "allowMultiInstance": false,
+      "configablePrivilege": true,
+      "advanceGrantPrivilege": false,
+      "grantPrivilege": "local",
+      "width": 0,
+      "height": 0
+    }
+  }
+}

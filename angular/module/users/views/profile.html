@@ -1,0 +1,153 @@
+<section class="hbox stretch" ng-controller="user_profile">
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    <aside>
+        <section class="vbox">
+            <section class="scrollable wrapper">
+                <!-- Start Project Form -->
+                <div class="col-sm-12">
+                    <section class="panel panel-default">
+                        <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Thông tin cá nhân </header>
+                        <div class="panel-body">
+                            <div class="bs-example form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Tên đăng nhập</label>
+                                    <div class="col-lg-4">
+                                        <input type="text" class="form-control" ng-model="user_profiles.username" disabled="true">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Tên đầy đủ</label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.fullname" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.fullname || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Địa chỉ</label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.address" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.address || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Số điện thoại</label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.mobile" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.mobile || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Email <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.email" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.email || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Facebook <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.facebook" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.facebook || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Twitter <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <p class="form-control-static">
+                                            <a editable-text="user_profiles.twitter" onaftersave="update_user_profile(user_profiles)">{{ user_profiles.twitter || 'chưa có' }}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg"></div>
+                                <!-- <div class="form-group">
+                                    <label class="col-lg-3 control-label">Mật khẩu</label>
+                                    <div class="col-lg-4">
+                                        <input type="password" class="form-control" ng-model="u.password_new" value="" name="password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Xác nhận mật khẩu</label>
+                                    <div class="col-lg-4">
+                                        <input type="password" class="form-control" ng-model="u.password_comfirm" value="" name="confirm_password">
+                                    </div>
+                                </div> -->
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label"></label>
+                                    <div class="col-lg-4">
+                                        <a href="" class="btn btn-primary {{(u.password_new && u.password_new == u.password_comfirm) ? '' : 'disabled'}}" ng-click="change_password()">Đổi mật khẩu</a>
+                                    </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg"></div>
+                                <div class="form-group">
+                                    <div class="col-lg-3 control-label">
+                                      Chọn ảnh đại diện
+                                    </div>
+                                    <div class="col-lg-3">
+                                      <div class="inline bg-white wrapper-sm b-a">
+                                          <div class="bg-light">
+                                              <img src="files/get/{{globals.user_details.cur_avatar}}" style="width: 150px;" />
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <!-- {{globals.user_details.avatar}} -->
+                                      <a href="" ng-repeat="avatar in globals.user_details.avatar">
+                                        <div class="inline {{avatar == globals.user_details.cur_avatar ? 'bg-info' : 'bg-white'}} lter wrapper-xs m-r-xs m-b-xs b-a" ng-mouseover="hov_avatar = avatar">
+                                            <div class="bg-light showhim" style="height: 50px;">
+                                                <div class="" style="z-index:2;">
+                                                  <img src="files/get/{{avatar}}" style="width: 50px;" />
+                                                </div>
+                                                <div class="showme" style="position:relative;left: 2px; bottom: 20px; z-index:3; height: 0px;">
+                                                  <button class="btn btn-xs btn-success {{avatar == globals.user_details.cur_avatar ? 'notshow' : ''}}" ng-click="change_avatar(avatar)"><i class="glyphicon glyphicon-ok"></i></button>
+                                                  <button class="btn btn-xs btn-danger {{avatar == globals.user_details.cur_avatar ? 'notshow' : ''}} {{avatar == '59168727cc57c5032ad3fef1' ? 'notshow' : ''}}" ng-click="delete_avatar(avatar)"> <i class="fa fa-trash"></i> </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </a>
+                                    </div>
+                                </div>
+                                <div class="line line-dashed b-b line-lg"></div>
+                                <div class="wrapper-md">
+                                    <div class="m-b">
+                                        Tải avatar mới
+                                        <input type="file" id="fileInput" />
+                                    </div>
+                                    <div class="hbox hbox-auto-xs">
+                                        <div class="col">
+                                            <div class="wrapper-sm b-a bg-white m-r-xs m-b-xs">
+                                                <div class="bg-light" style="height:320px">
+                                                    <img-crop image="myImage" result-image="myCroppedImage" result-image-size="160" area-type="{{cropType}}"></img-crop>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="inline bg-white wrapper-sm b-a">
+                                                <div class="bg-light">
+                                                    <img ng-src="{{myCroppedImage}}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group m-t">
+                                        <label class="btn btn-default" ng-model="cropType" btn-radio="'circle'">Tròn</label>
+                                        <label class="btn btn-default" ng-model="cropType" btn-radio="'square'">Vuông</label>
+                                    </div>
+                                    <div class="btn-group m-t">
+                                        <a href="" class="btn btn-primary" ng-click="upload_avatar()">Tải lên</a>
+                                    </div>
+                                    <div>
+                                    </div>
+                                </div>
+
+                    </section>
+                    </div>
+                    <!-- End Project Form -->
+            </section>
+        </section>
+    </aside>
+</section>

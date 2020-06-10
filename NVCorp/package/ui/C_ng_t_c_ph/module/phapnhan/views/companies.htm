@@ -1,0 +1,83 @@
+<!-- <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Footable</h1>
+</div> -->
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label class="" ui-sref="app.phapnhan.phongban" ui-sref-active="visible" style="visibility: hidden; display: none;">Danh mục phòng ban</label>
+            <label class="" ui-sref="app.phapnhan.doitac" ui-sref-active="visible" style="visibility: hidden; display: none;">Danh mục đối tác</label>
+            <label class="" ui-sref="app.phapnhan.chudautu" ui-sref-active="visible" style="visibility: hidden; display: none;">Danh mục chủ đầu tư</label>
+            <a href="" class="btn m-b-xs btn-xs btn-primary pull-right" ng-click="them_phapnhan()">
+                <i class="fa fa-plus"></i>
+                <font class="" ui-sref="app.phapnhan.phongban" ui-sref-active="visible" style="visibility: hidden; display: none;">Thêm phòng ban</font>
+                <font class="" ui-sref="app.phapnhan.doitac" ui-sref-active="visible" style="visibility: hidden; display: none;">Thêm đối tác</font>
+                <font class="" ui-sref="app.phapnhan.chudautu" ui-sref-active="visible" style="visibility: hidden; display: none;">Thêm chủ đầu tư</font>
+            </a>
+        </div>
+        <div class="panel-body b-b b-light hidden" style="padding-bottom:0px; padding-top:10px;">
+            <p class="pull-right">Tìm kiếm:
+                <input id="filter" ng-model="search" ng-change="updateFilteredList()" type="text" class="form-control input-sm w-sm inline m-r"
+                />
+            </p>
+        </div>
+        <div class="dataTables_wrapper">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="dataTables_length" id="table-projects_length">
+                        <label>Hiển thị
+                            <select name="table-projects_length" ng-model="sl" aria-controls="table-projects" class="">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select> mục</label>
+                    </div>
+                </div>
+                <div class="row col-lg-8 dataTables_filter m-r">
+                    <label>Tìm kiếm
+                        <input id="filter" type="text" ng-model="search" ng-change="updateFilteredList()" class="form-control input-sm" placeholder=""
+                            aria-controls="table-projects">
+                    </label>
+                </div>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr class="table table-striped b-t b-b" ng-repeat="c in companies">
+                            <td>
+                                <a href="" ui-sref="app.phapnhan.chitiet({id: c._id, mod: param.mod})" class="text-info">
+                                    <font ng-bind-html="c.company_name | highlight:search">{{c.company_name}}</font>
+                                </a>
+                                <br>
+                                <div class="card-detail-item js-card-detail-due-date m-n">
+                                </div>
+
+                            </td>
+                            <td class="col-currency text-right">
+                                <!-- <span class="btn btn-default btn-xs btn-file m-xs"><span class="fileinput-new"><i class="fa fa-paperclip"></i> Đính kèm</span><input type="file" nv-file-select="" uploader="uploader" options="{headers: {id: c._id}, autoUpload: 'true'}" multiple /></span><br>
+                                <div class="btn-group m-r-xs" dropdown="" is-open="status.isopen">
+                                    <button type="button" class="btn btn-xs btn-default " dropdown-toggle="" ng-disabled="disabled" aria-haspopup="true" aria-expanded="false" aria-disabled="false">
+                                <i class="fa fa-bars"></i> Khác <span class="caret"></span> -->
+                                <!-- </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-click="sua_quyetdinh(c)"><a href=""><i class="fa fa-pencil"></i> Sửa</a></li>
+                                        <li ng-click="xoa_quyetdinh(c)"><a href=""><i class="fa fa-trash"></i> Xóa</a></li>
+                                    </ul>
+                                </div><br> -->
+                                <a href="" class="btn btn-xs btn-success" ng-click="sua_phapnhan(c)">
+                                    <i class="fa fa-pencil"></i> Sửa</a>
+                                <a href="" class="btn btn-xs btn-danger" ng-click="xoa_phapnhan(c)">
+                                    <i class="fa fa-trash"></i> Xóa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <at-pagination at-list="listhopdong" at-config="config"></at-pagination>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>

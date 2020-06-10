@@ -1,0 +1,42 @@
+<div class="vbox"  ng-controller="filescan">
+  <div class="row-row">
+    <div class="cell">
+      <div class="cell-inner">
+        <div class="col-sm-12 no-padder">
+          <section class="panel panel-default">
+            <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Bìa hồ sơ
+              <a href="" class="btn btn-success pull-right btn-xs" ng-click="print()"><i class="fa fa-print"></i> In bìa</a>
+              <a href="" class="btn btn-primary pull-right btn-xs m-r-xs" ng-click="save()"><i class="fa fa-save"></i> Lưu</a>
+              <button ui-sref="app.projects.view.project_details({p_id: p._id})" class="btn btn-xs btn-default pull-right m-r-xs"><i class="fa  fa-arrow-left"></i> Quay lại</button>
+            </header>
+            <div class="">
+              <div class="col-lg-12 b-b">
+                <div class="wrapper-md">
+                  <div class="col-lg-6">
+
+                  </div>
+                  <div class="col-lg-6">
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="col b-r" style="width: 400px;">
+                <div class="panel m-n" draggable="true">
+                  <div class="list-group bg-white">
+                    <a ng-repeat="f in files_scan" href="" class="list-group-item">
+                      {{f}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col padder">
+
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

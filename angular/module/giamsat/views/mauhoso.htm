@@ -1,0 +1,256 @@
+<section ng-controller="mauhoso" class="scrollable wrapper animated fadeInRight">
+    <!-- Start Project Form -->
+    <div class="col-sm-4">
+        <section class="panel panel-default">
+            <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Nhóm hồ sơ</header>
+            <div class="panel-body">
+                <div class="m-b">
+                    <p>Phòng ban</p>
+                    <ui-select ng-model="hs.phongth" theme="bootstrap" on-select="chon_phongth($item)" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                        <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.company_name}}</ui-select-match>
+                        <ui-select-choices repeat="pb in phongban | filter: $select.search">
+                            <span ng-bind-html="pb.company_name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="m-b">
+                    <p>Nhóm công việc</p>
+                    <ui-select ng-model="hs.loaicongviec" theme="bootstrap" on-select="chon_loaicongviec($item)" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                        <ui-select-match placeholder="Chọn nhóm công việc">{{$select.selected.loaicongviec}}</ui-select-match>
+                        <ui-select-choices repeat="lcv in loaicongviec | filter: {phongth: {_id: hs.phongth._id}} | orderBy: 'thutu'">
+                            <span ng-bind-html="lcv.loaicongviec | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="m-b hidden">
+                    <p>Giai đoạn </p>
+                    <ui-select ng-model="hs.giaidoan" theme="bootstrap" on-select="chon_giaidoan($item)" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                        <ui-select-match placeholder="Chọn giai đoạn">{{$select.selected.giaidoan}}</ui-select-match>
+                        <ui-select-choices repeat="gd in giaidoan | filter: $select.search">
+                            <span ng-bind-html="gd.giaidoan | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="m-b">
+                    <a href class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="themmauhoso()"><i class="fa fa-plus"></i>Thêm mẫu hồ sơ</a>
+                </div>
+                <!-- Modal thêm mẫu hồ sơ -->
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-title">Thêm mẫu hồ sơ</h3>
+                    </div>
+                    <form method="post" accept-charset="utf-8" class="bs-example form-horizontal"> <input type="hidden" name="project" ng-model="t.p_id" value="{{t.p_id}}">
+                        <input type="hidden" name="milestone" ng-model="t.mid" value="{{t.id}}">
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-lg-4"><label class=" pull-right control-label">Tên hồ sơ <span class="text-danger">*</span></label></div>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" ng-model="hs.tencongviec" placeholder="Tên hồ sơ" name="task_name" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-4"><label class=" pull-right control-label">Nhóm hồ sơ <span class="text-danger">*</span></label></div>
+                                <div class="col-lg-8">
+                                    <ui-select ng-model="hs.nhomhs" theme="bootstrap" title="Choose a person">
+                                        <ui-select-match placeholder="Tên nhóm hồ sơ">{{$select.selected.nhomhs}}</ui-select-match>
+                                        <ui-select-choices repeat="item in nhomhs | filter: $select.search">
+                                            <div ng-bind-html="item.nhomhs | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-4"><label class=" pull-right control-label">Giai đoạn <span class="text-danger">*</span></label></div>
+                                <div class="col-lg-8">
+                                  <ui-select ng-model="hs.giaidoan" theme="bootstrap" on-select="chon_giaidoan($item)" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                                      <ui-select-match placeholder="Chọn giai đoạn">{{$select.selected.giaidoan}}</ui-select-match>
+                                      <ui-select-choices repeat="gd in giaidoan | filter: $select.search">
+                                          <span ng-bind-html="gd.giaidoan | highlight: $select.search"></span>
+                                      </ui-select-choices>
+                                  </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+
+                    </div>
+                </script>
+                <!-- End modal thêm mẫu hồ sơ -->
+
+                <!-- Modal sửa mẫu hồ sơ -->
+                <script type="text/ng-template" id="suahoso.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-title">Sửa mẫu hồ sơ</h3>
+                    </div>
+                    <form method="post" accept-charset="utf-8" class="bs-example form-horizontal"> <input type="hidden" name="project" ng-model="t.p_id" value="{{t.p_id}}">
+                        <input type="hidden" name="milestone" ng-model="t.mid" value="{{t.id}}">
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-lg-4"><label class=" pull-right control-label">Tên hồ sơ <span class="text-danger">*</span></label></div>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" ng-model="mauhs.milestone_name_edit" value="mauhs.milestone_name_edit" placeholder="Tên hồ sơ" name="task_name" required>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-4"><label class=" pull-right control-label">Tên nhóm hồ sơ <span class="text-danger">*</span></label></div>
+                                <div class="col-lg-8">
+                                    <ui-select ng-model="mauhs.nhomhs_edit" theme="bootstrap" on-select="change_nhomhs()" title="Choose a person">
+                                        <ui-select-match placeholder="Tên nhóm hồ sơ">{{$select.selected.nhomhs}}</ui-select-match>
+                                        <ui-select-choices repeat="item in nhomhs | filter: $select.search">
+                                            <div ng-bind-html="item.nhomhs | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+
+                    </div>
+                </script>
+                <!-- End modal sửa mẫu hồ sơ -->
+                <!-- Modal xóa mẫu hồ sơ -->
+                <script type="text/ng-template" id="xoamauhoso.html">
+                    <div class="modal-header modal-header-danger">
+                        <h3 class="modal-title" id="modal-title">Xóa mẫu hồ sơ</h3>
+                    </div>
+                    <form method="post" accept-charset="utf-8" class="bs-example form-horizontal"> <input type="hidden" name="project" ng-model="t.p_id" value="{{t.p_id}}">
+                        <input type="hidden" name="milestone" ng-model="t.mid" value="{{t.id}}">
+                        <div class="modal-body">
+                            Mẫu hồ sơ này sẽ bị xóa trong hệ thống
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                      <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+
+                    </div>
+                </script>
+                <!-- End modal xóa mẫu hồ sơ -->
+            </div>
+        </section>
+    </div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Danh sách hồ sơ
+                <!-- <ul class="m2 flex flex-column list-reset" html-sortable="" html-sortable-callback="sortableCallback(sourceModel, destModel, start, end)" ng-model='data1'>
+                <li ng-repeat="itm in data1" class="p1 mb1 yellow border border-navy bg-navy" >
+                  {{itm}}
+                </li>
+              </ul> -->
+              <!-- <ul ng-repeat="gd in mauhoso | groupBy: 'giaidoan._id'"> -->
+                <!-- {{mauhoso}} -->
+                <!-- <li ng-repeat="mhs in gd">{{mhs.milestone_name}}</li>
+              </ul> -->
+
+            </div>
+            <div class="row wrapper hidden">
+                <div class="col-sm-5 pull-right">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" placeholder="Search">
+                        <span class="input-group-btn">
+                          <button class="btn btn-sm btn-default" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                        <tr>
+                            <th style="width:60px; padding-right:0px">
+                                STT
+                            </th>
+                            <th>Tên hồ sơ</th>
+                            <th></th>
+                            <th style="width:90px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr ng-repeat="mauhs in cacmauhoso | filter: { deleted: '0', phongth: hs.phongth.co_id, loai_id: hs.loaicongviec.id }"> -->
+                        <!-- <tr ng-repeat="gd in mauhoso | filter: { deleted: '0', phongth: hs.phongth.co_id, loai_id: hs.loaicongviec.id} | orderBy : 'sort' | groupBy: 'giaidoan'"> -->
+                        <tr ng-if="hs.loaicongviec" ng-repeat="gd in mauhoso | orderBy: 'sort'| filter: { loaicongviec: {_id : hs.loaicongviec._id} } | groupBy : 'giaidoan._id'">
+                            <td colspan="4" style="padding: 0px;">
+                              <table class="table table-striped b-t b-light" style="margin:0px">
+                                <tbody>
+                                  <tr>
+                                    <td colspan="4" style=" background: #f4f4f4;"><b>{{gd[0].giaidoan.giaidoan}} </b></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="4" style="padding:0px">
+                                        <tbody id="table-container" html-sortable="sortableOptions" html-sortable-callback="sortableCallback(sourceModel, destModel, start, end, gd)" ng-model='gd1'>
+                                          <tr class="connected" ng-repeat="h in gd">
+                                              <td style="width:60px; padding-right:0px"><i class="fa fa-bars" style="margin-right:7px"></i> {{$index +1}}</td>
+                                              <td>{{h.milestone_name}}</td>
+                                              <td><span class="text-ellipsis hidden">12</span></td>
+                                              <td style="width:84px;" class="mauh-btn">
+                                                  <button class="text-sm btn btn-xs btn-default" ng-click="suahoso('', '', h)"><i class="fa fa-pencil text-success"></i></button>
+                                                  <button class="text-sm btn btn-xs btn-default" ng-click="xoamauhoso('', '', h)" style="margin-left: 2px !important;"><i class="fa fa-times text-danger"></i></button>
+                                              </td>
+                                          </tr>
+                                        </tbody>
+                                      </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                            <!-- <td>{{mauhs.tencongviec}}</td>
+                            <td><span class="text-ellipsis">12</span></td>
+                            <td class="mauhs-btn">
+                                <button class="text-sm btn btn-xs btn-default" ng-click="suahoso('', '', mauhs)"><i class="fa fa-pencil text-success"></i></button>
+                                <button class="text-sm btn btn-xs btn-default" ng-click="xoamauhoso('', '', mauhs)" style="margin-left: 2px !important;"><i class="fa fa-times text-danger"></i></button>
+                            </td> -->
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <footer class="panel-footer">
+                <div class="row hidden">
+                    <div class="col-sm-4 hidden-xs">
+                        <select class="input-sm form-control w-sm inline v-middle">
+                          <option value="0">Bulk action</option>
+                          <option value="1">Delete selected</option>
+                          <option value="2">Bulk edit</option>
+                          <option value="3">Export</option>
+                        </select>
+                        <button class="btn btn-sm btn-default">Apply</button>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+                    </div>
+                    <div class="col-sm-4 text-right text-center-xs">
+                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                            <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                            <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href="">5</a></li>
+                            <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <!-- End Project Form -->
+
+
+
+
+
+
+</section>

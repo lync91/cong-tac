@@ -1,0 +1,17 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">×</button>
+    <h4 class="modal-title">Phân quyền nhân viên</h4>
+</div>
+<div ng-repeat="module in roles" class="modal-body no-padder">
+    <h5 class="padder"><i class="fa fa-list m-r-xs"></i> {{module.module.value}} </h5>
+    <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+        <tbody>
+            <tr ng-repeat="role in module.roles">
+                <td><span class="padder">{{role.key_lang.value}}</span></td>
+                <td class="no-padder"><label class="i-switch m-t-xs"><input type="checkbox" ng-model="u_roles[role.key]"><i></i></label></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+    <button type="submit" class="btn btn-primary" ng-click="ok()">Lưu thay đổi</button>
+</div>

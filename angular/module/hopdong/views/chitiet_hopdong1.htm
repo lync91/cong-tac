@@ -1,0 +1,236 @@
+<div class="wrapper-md ng-scope">
+    <div class="panel panel-default" id="printJS-form">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-8">
+                    Chi tiết hợp đồng
+                </div>
+                <div class="col-xs-4 text-right hidden-print">
+                    <a href class="btn btn-xs btn-primary" ng-click="print()"><i class="fa fa-print"></i></a>
+                    <span class="btn-group text-right hidden" dropdown is-open="status.isopen">
+                <button type="button" class="btn btn-primary btn-xs" dropdown-toggle ng-disabled="disabled">
+                  <i class="fa fa-cog"></i>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href></a></li>
+                  <li><a href>Another action</a></li>
+                  <li><a href>Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href>Separated link</a></li>
+                </ul>
+              </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="wrapper m no-padder text-right">
+            <table class="col-lg-12 m-b">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="m-r text-right" style="padding-right: 120px;">
+                                <div class="">
+                                    <h5><strong><a href ui-sref="app.projects.view.project_details({p_id : hopdong.milestone.project._id})">Dự án: {{hopdong.milestone.project.project_title}}</a></strong></h4>
+                        <h5><a href ui-sref="app.projects.view.milestones({p_id: hopdong.milestone.project._id, mid: hopdong.milestone._id})"><strong>Gói thầu: {{hopdong.tengoithau}}</strong></a></h4>
+                    </div>
+                    <div class="">
+                        <div>Số hợp đồng: <span class="col-lg-4 no-padder pull-right"><strong>{{hopdong.sohopdong}}</strong></span></div>
+                        <div>Ngày ký: <span class="col-lg-4 no-padder pull-right"><strong>{{hopdong.ngayky | date: 'dd/MM/yyyy'}}</strong></span></div>
+                        <div>Trạng thái thanh toán:
+                            <span class="col-lg-4 no-padder pull-right" ng-if="(hopdong.thanhtoan | tinhtong) <= 0"><span class="label bg-danger">Chưa thanh toán</span></span>
+                            <span class="col-lg-4 no-padder pull-right" ng-if="((hopdong.thanhtoan | tinhtong: 'giatri') > 0) && (((hopdong.giatri | tinhtong: 'gtnghiemthu') - (hopdong.thanhtoan | tinhtong: 'giatri')) > 0) "><span class="label bg-warning">Đang thanh toán</span></span>
+                            <span class="col-lg-4 no-padder pull-right" ng-if="((hopdong.thanhtoan | tinhtong: 'giatri') > 0) && (((hopdong.giatri | tinhtong: 'gtnghiemthu') - (hopdong.thanhtoan | tinhtong: 'giatri')) <= 0) "><span class="label bg-success">Thanh toán hoàn tất</span></span>
+                        </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="" style="position: relative; width: 0px; left: -120px;">
+                    <div class="b" id="qr" style="width: 122x">
+                      <qrcode data="https://www.namviet.tk/app/projects/view/{{p._id}}/project_details.html" version="2" error-correction-level="M" size="120"></qrcode>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row wrapper m m-t no-padder">
+            <div class="col-xs-6">
+
+            </div>
+            <div class="col-xs-6">
+                <section class="panel panel-default m-n">
+                    <!-- <header class="panel-heading">Lịch sử thanh toán <a href="" class="btn btn-xs btn-default pull-right" ng-click="add_thanhtoan()"><i class="fa fa-plus"></i> Thêm</a></header> -->
+                    <table class="table table-striped m-b-none" ng-repeat="nt in hopdong.nghiemthu">
+                        <thead>
+                            <tr>
+                                <th class="col-options" style="font-weight: normal;" ng-click="nt_click(nt)"><a href="">{{nt.milestone_name}}</a></th>
+                                <th style="width: 30px"><a href="" class="btn btn-xs btn-default pull-right" ng-click="nt_click(nt)"><i class="fa fa-plus"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <td class="no-padder" colspan="2">
+                                <div collapse="!nt.collapse">
+                                  <table class="table table-border bg-white-only b-a m-n">
+                                    <tbody>
+                                      <tr ng-repeat="f in nt.files" class="ng-scope">
+                                          <td><a href="{{f.path}}">{{f.file_name}}</a></td>
+                                          <td class="no-padder text-right padder"><button type="submit" class="btn btn-xs btn-default m-xs" ng-click="delete_thanhtoan(tt)"><i class="fa fa-download"></i></button></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+        <div class="well m">
+            <div class="row">
+                <div class="col-xs-6">
+                    <p><strong>Đơn vị thực hiện:</strong></p>
+                    <p><h5>{{hopdong.dvthuchien.company_name}}</h5></p>
+                </div>
+                <div class="col-xs-6">
+                    <p><strong>Khách hàng:</strong></p>
+                    <p><h5>{{hopdong.milestone.project.chudautu.company_name}}</h5></p>
+                </div>
+            </div>
+        </div>
+        <div class="line b-b"></div>
+        <table id="inv-details" class="table sorted_table" type="invoices">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th width="50%">Hạng mục </th>
+                    <th width="25%" class="text-right">Giá trị hợp đồng </th>
+                    <th width="25%" class="text-right">Giá trị thực hiện </th>
+                    <th class="text-right"><button type="submit" class="btn btn-sm btn-default hidden-print"><i class="fa fa-plus"></i></button></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="g in hopdong.giatri">
+                    <td class="drag-handle"><i class="fa fa-reorder"></i></td>
+                    <td>
+                        <span editable-select="g.congtac._id" e-ng-options="ct._id as ct.name for ct in congtachd" onaftersave="update_hd_ct(g)">
+                        {{ showStatus(g.congtac) }}
+                      </span>
+                    </td>
+                    <td class="text-right"><a editable-number="g.gthopdong" onaftersave="update_giatri({g : g, ac: 'gthopdong'})">{{(g.gthopdong | number) || '0'}}</a></td>
+                    <td class="text-right"><a editable-number="g.gtnghiemthu" onaftersave="update_giatri({g : g, ac: 'cap_nhat_gia_tri_nghiem_thu'})">{{(g.gtnghiemthu | number) || 0}}</a></td>
+                    <td class="text-right"><button type="submit" class="btn btn-xs btn-default hidden-print" ng-click="delete_giatri(g)"><i class="fa fa-trash text-danger"></td>
+              </tr>
+              <tr class="hidden-print">
+                            <td></td>
+                            <td>
+                              <ui-select ng-model="gt.congtac" theme="bootstrap" title="Choose a person">
+                                  <ui-select-match placeholder="Chọn công tác">{{$select.selected.name}}</ui-select-match>
+                                  <ui-select-choices repeat="item in congtachd | filter: $select.search">
+                                      <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                  </ui-select-choices>
+                              </ui-select>
+                            </td>
+                            <td><input id="auto-unit-cost" type="text" name="unit_cost_hd" required=""  ui-number-mask="0" ng-model="gt.hopdong" placeholder="08.10" class="form-control"></td>
+                            <td><input id="auto-unit-cost" type="text" name="unit_cost" required="" ui-number-mask="0" ng-model="gt.nghiemthu" placeholder="08.10" class="form-control"></td>
+                            <td><button type="submit" class="btn btn-sm btn-success" ng-click="add_gthopdong(hopdong.giatri)"><i class="fa fa-check"></i></button></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Tổng giá trị hợp đồng</strong></td>
+                    <td class="text-right">{{ hopdong.giatri | tinhtong: 'gthopdong' | number}} đ</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Tổng giá trị thực hiện</strong></td>
+                    <td class="text-right">{{hopdong.giatri | tinhtong: 'gtnghiemthu' | number}} đ</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Tổng giá trị thanh toán</strong></td>
+                    <td class="text-right">{{hopdong.thanhtoan | tinhtong: 'giatri' | number}} đ</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Chưa thanh toán</strong></td>
+                    <td class="text-right">{{(hopdong.giatri | tinhtong: 'gtnghiemthu') - (hopdong.thanhtoan | tinhtong: 'giatri') | number}} đ</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Đã chuyển</strong></td>
+                    <td class="text-right">{{hopdong.chuyentien | tinhtong: 'giatri' | number}} đ</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-right no-border"><strong>Còn lại</strong></td>
+                    <td class="text-right">{{(hopdong.thanhtoan | tinhtong: 'giatri') - (hopdong.chuyentien | tinhtong: 'giatri') | number}} đ</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row wrapper">
+            <div class="col-sm-6">
+                <section class="panel panel-default">
+                    <header class="panel-heading">Lịch sử thanh toán <a href="" class="btn btn-xs btn-default pull-right hidden-print" ng-click="add_thanhtoan()"><i class="fa fa-plus"></i> Thêm</a></header>
+                    <table class="table table-striped m-b-none">
+                        <thead>
+                            <tr>
+                                <th class="col-options">Tên TT</th>
+                                <th class="col-date">Ngày TT</th>
+                                <th class="col-currency text-right">Giá trị</th>
+                                <th style="width: 30px hidden-print"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tt in hopdong.thanhtoan">
+                                <td><a editable-text="tt.tenthanhtoan" onaftersave="update_thanhtoan(tt)">{{tt.tenthanhtoan}}</a></td>
+                                <td><a editable-date="tt.ngaythanhtoan" onaftersave="update_thanhtoan(tt)">{{tt.ngaythanhtoan | date:'dd/MM/yyyy'}}</a></td>
+                                <td class="text-right"><a editable-number="tt.giatri" onaftersave="update_thanhtoan(tt)">{{tt.giatri | number}} đ</a></td>
+                                <td class="no-padder hidden-print"><button type="submit" class="btn btn-xs btn-default m-xs" ng-click="delete_thanhtoan(tt)"><i class="fa fa-trash text-danger"></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><strong>Tổng:</strong></td>
+                                <td class="text-right"><strong>{{hopdong.thanhtoan | tinhtong: 'giatri' | number}} đ</strong></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            <div class="col-sm-6">
+                <section class="panel panel-default">
+                    <header class="panel-heading">Lịch sử chuyển tiền <a href="" class="btn btn-xs btn-default pull-right hidden-print" ng-click="add_chuyentien()"><i class="fa fa-plus"></i> Thêm</a></header>
+                    <table class="table table-striped m-b-none">
+                        <thead>
+                            <tr>
+                                <th class="">Tên TT</th>
+                                <th class="">Ngày CT</th>
+                                <th class="text-right">Giá trị</th>
+                                <th style="width: 30px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tt in hopdong.chuyentien">
+                                <td><a editable-text="tt.tenthanhtoan" onaftersave="update_chuyentien(tt)">{{tt.tenthanhtoan}}</a></td>
+                                <td><a editable-date="tt.ngaychuyentien" onaftersave="update_chuyentien(tt)">{{tt.ngaychuyentien | date:'dd/MM/yyyy'}}</a></td>
+                                <td class="text-right"><a editable-number="tt.giatri" onaftersave="update_chuyentien(tt)">{{tt.giatri | number}} đ</a></td>
+                                <td class="no-padder"><button type="submit" class="btn btn-xs btn-default m-xs" ng-click="delete_chuyentien(tt)"><i class="fa fa-trash text-danger"></button></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><strong>Tổng:</strong></td>
+                                <td class="text-right"><strong>{{hopdong.chuyentien | tinhtong: 'giatri' | number}} đ</strong></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>

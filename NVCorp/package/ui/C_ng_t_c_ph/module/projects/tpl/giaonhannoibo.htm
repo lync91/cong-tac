@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Biên bản giao nhận hồ sơ nội bộ</title>
+
+    <style>
+    body {
+        -webkit-print-color-adjust: exact;
+        display: block;
+        margin: 0px;
+        font-size: 15px;
+        /*font-family: "Times New Roman", Times, serif;*/
+    }
+
+    #bg-text {
+        position: absolute;
+        top: 200px;
+        left: 30px;
+        z-index: 2;
+        color: lightgrey;
+        font-size: 140px;
+        transform: rotate(300deg);
+        -webkit-transform: rotate(335deg);
+        /*-webkit-font-smoothing:antialiased !important;*/
+        /*-webkit-text-stroke: .025em rgba(51,51,51,0.50);*/
+        opacity: 0.3;
+        /*-webkit-opacity: 0.5;*/
+
+    }
+
+    .invoice-box {
+        max-width: 800px;
+        /*margin:auto;*/
+        /*padding:30px;*/
+        /*border:1px solid #eee;*/
+        /*box-shadow:0 0 10px rgba(0, 0, 0, .15);*/
+        font-size: 18px;
+        line-height: 25px;
+        /*font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;*/
+        color: #555;
+    }
+    .no-border {
+        border: 0px solid black;
+    }
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .company-box {
+        line-height: 16px;
+        text-align: right;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .qr-box {
+        width: 100px;
+    }
+
+    .ben-giaonhan-box {
+        padding-bottom: 5px !important;
+    }
+
+    .giaonhan-table {
+        display: table;
+        border-collapse: collapse;
+        ;
+        border-spacing: 0px;
+        border: 1px solid #eee;
+        /*border-color: grey;*/
+    }
+
+    .giaonhan-table tr td {
+        border: 1px solid #eee;
+    }
+
+    .duan-box {
+        padding: 0px !important;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div id="background">
+        <p id="bg-text">NAM VIỆT</p>
+    </div>
+    <div class="invoice-box" style="padding-left:30px">
+        <table style="border-bottom:1px solid" class=" no-border">
+            <tbody>
+                <tr>
+                    <td class="title no-border" style="width: 30%;">
+                        <img style="width: 90px" src="{{logo}}" alt="">
+                    </td>
+                    <td class="company-box no-border">
+                        <p style="font-size: 10px; margin: 0px;">
+                            <b>CÔNG TY CỔ PHẦN ĐẦU TƯ XÂY DỰNG DỊCH VỤ NAM VIỆT</b><br> 156 Đường 11, KP5, P.Linh Xuân, Q.Thủ Đức, TP.HCM<br> http://navices.com
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="invoice-box" style="padding-left:30px">
+        <table>
+            <tr>
+                <td class="no-border">
+                </td>
+                <td class="no-border" style="    font-style: italic;">
+                    Tp. Hồ Chí Minh, ngày {{bb.ngaygiaonhan | date: 'dd'}} tháng {{bb.ngaygiaonhan | date: 'MM'}} năm {{bb.ngaygiaonhan | date: 'yyyy'}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="no-border">
+                    <font>
+                        <center><b style="    font-size: 24px;">BIÊN BẢN GIAO NHẬN HỒ SƠ NỘI BỘ</b></center>
+                    </font>
+                    <br>
+                </td>
+            </tr>
+        </table>
+
+
+            <table class="giaonhan-table" style="margin-bottom:24px">
+                <tr class="heading">
+                    <td>
+                        Thông tin chung:
+                    </td>
+
+                    <td>
+
+                    </td>
+                </tr>
+
+                <tr class="details">
+                    <td class="duan-box" style="padding: 0px">
+
+                        <table class="giaonhan-table">
+                            <tr class="item">
+                                <td class="ben-giaonhan-box">
+                                    <b>Dự án: {{p.project_title}}</b><br> Chủ đầu tư: {{p.chudautu.company_name}}
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="giaonhan-table">
+                            <tr class="item">
+                                <td class="ben-giaonhan-box">
+                                    Bên giao: {{bb.nguoigiao.fullname}}
+                                </td>
+                            </tr>
+                            <tr class="item">
+                                <td class="ben-giaonhan-box">
+                                      <label class="control-label m-t-xs">Bên nhận: {{bb.nguoinhan.fullname}}</label>
+                                </td>
+                            </tr>
+                            <tr class="item">
+                                <td class="ben-giaonhan-box">
+                                    Bộ phận: {{bb.phongban.company_name}}
+                                </td>
+                            </tr>
+                            <tr class="item">
+                                <td class="ben-giaonhan-box">
+                                    Ghi chú: {{bb.ghichu}}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td style="width: 150px; padding-bottom:5px">
+                      <center><img class="qr-box" style="width: 140px" src="{{qr}}"></img>
+                      </center>
+                    </td>
+                </tr>
+
+                <tr class="heading">
+                    <td>
+                        Danh mục hồ giao nhận
+                    </td>
+
+                    <td>
+                        Số lượng
+                    </td>
+                </tr>
+
+                <tr class="item">
+                    <td>
+                        {{bb.milestone.milestone_name}}
+                    </td>
+
+                    <td>
+                      {{bb.soluong}}
+                    </td>
+
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td class="no-border">
+                        <!-- <br> -->
+                        <center><b>Bên nhận
+                      <div class="" style="height: 100px; width: 274px;">
+                        <img src="img/approved.png" alt="" style="width: 50%; position: relative; top: 20px;" ng-if="tk.sign_token.user1.signed == true">
+                      </div>
+                       </b></center>
+                    </td>
+                    <td class="no-border" style="">
+                        <!-- <br> -->
+                        <center><b>Bên giao
+                          <div class="" style="height: 100px; width: 274px;">
+                            <img src="img/approved.png" alt="" style="width: 50%; position: relative; top: 20px;" ng-if="tk.sign_token.user2.signed == true">
+                          </div>
+                       {{tk.nhanvienchuyenphat.fullname}}</b></center>
+                    </td>
+                </tr>
+
+            </table>
+
+    </div>
+</body>
+
+</html>

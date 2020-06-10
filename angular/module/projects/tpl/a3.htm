@@ -1,0 +1,211 @@
+<div class="" style="zoom: 0.3" id="htmlContent">
+<style id="style">
+  @media print and (min-resolution: 300dpi) {
+    /*body:before { content: url('http://www.namviet.tk/images/logos/biaa3.png');}*/
+    body {
+      -webkit-print-color-adjust: exact;
+    }
+  }
+
+  @page {
+    size: A3 landscape;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    /*display: -webkit-box;*/
+    /*margin: 0px;*/
+    /*font-size: 15px;*/
+    /*background-image: url("http://www.namviet.tk/images/logos/biaa3.png") !important;*/
+    /*font-family: "Times New Roman", Times, serif;*/
+  }
+
+  .page {
+    width: 1587px;
+    height: 1110px;
+    background-image: url('http://www.namviet.tk/images/logos/biaa3.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    /*background-position-y: -20px;*/
+  }
+
+  .table-a3 {
+    width: 1587px;
+  }
+
+  h1 {
+    /*font-family: "your ideal typeface", Verdana, sans-serif;*/
+    text-decoration: none;
+    font-size: 40px;
+    line-height: 300px;
+    -webkit-filter: drop-shadow(-0.5px 0 0.5px #006);
+    /*text-shadow: -0.5px 0 0.5px #006;*/
+  }
+
+  h1 a:link,
+  h1 a:visited,
+  h1 a:hover,
+  h1 a:active {
+    color: #d12;
+    text-decoration: none;
+  }
+
+  .love-hate {
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    position: relative;
+    padding: 6px 0px;
+    border: none;
+    font: bold 50px/1 "Oswald", Helvetica, sans-serif;
+    color: #e74c3c;
+    text-align: center;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    /*letter-spacing: 15px;*/
+    /*-webkit-filter: drop-shadow(0.6px 0.6px 0.6px rgba(0, 0, 0, 0.2));
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);*/
+  }
+
+  .text-title {}
+
+  .text-tap {
+    font-size: 40px;
+  }
+
+  .text-tentap {
+    font-size: 44px;
+  }
+
+  .text-pinfo {
+    font-size: 28px;
+    color: #094db4;
+  }
+
+  .h-spacing {
+    height: 240px;
+  }
+
+  .pinfo-spacing {
+    width: 220px;
+  }
+
+  .pinfo-title {
+    width: 160px;
+  }
+
+  .pinfo-content {
+    /*width: 220px;*/
+    padding-left: 10px;
+    /*content: ":";*/
+    padding-right: 55px;
+  }
+
+  .pinfo-content::before {
+    /*width: 220px;*/
+    content: ":";
+    position: absolute;
+    left: -5px;
+  }
+
+  .center div {
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0px;
+  }
+  .qr {
+    position: absolute;
+    width: 794px;
+    height: 1110px;
+  }
+  .qr div {
+    position: relative;
+    top: 1005px;
+    left: 120px;
+    width: 100px;
+    height: 100px;
+  }
+  .qr img {
+    width: 100%;
+    border: 1px solid black;
+  }
+</style>
+<div class="page">
+  <div class="qr">
+      <div class="">
+        <img src="{{qr}}" alt="">
+      </div>
+  </div>
+  <table class="table-a3">
+    <tbody>
+      <tr>
+        <td colspan="3" class="h-spacing" style="height: {{(bia_data.tieude_opts.cao*(1121/297))}}px"></td>
+      </tr>
+      <tr ng-show="bia_data.tieude.show">
+        <td colspan="3" class="center">
+          <div class="love-hate text-title" style="font-size: {{bia_data.tieude.size}}px;">{{bia_data.tieude.content}}</div>
+        </td>
+      </tr>
+      <tr ng-show="bia_data.tap.show">
+        <td colspan="3" class="center">
+          <div class="love-hate text-tap" style="font-size: {{bia_data.tap.size}}px;">{{bia_data.tap.content}}</div>
+        </td>
+      </tr>
+      <tr ng-show="bia_data.tentap.show">
+        <td colspan="3" class="center">
+          <div class="love-hate text-tentap" style="font-size: {{bia_data.tentap.size}}px;">{{bia_data.tentap.content}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" style="height: {{(bia_data.pinfo_opts.cao*(1121/297))}}px"></td>
+      </tr>
+      <tr>
+        <td class="pinfo-spacing" style="width: {{bia_data.pinfo_opts.pad*(1587/420)}}px;"></td>
+        <td valign="top" class="pinfo-title">
+          <div class="love-hate text-pinfo" style="font-size: {{bia_data.pinfo_opts.size}}px;">
+            Công trình
+          </div>
+        </td>
+        <td>
+          <div class="love-hate text-pinfo pinfo-content" style="font-size: {{bia_data.pinfo_opts.size}}px;">{{p.project_title}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="pinfo-spacing" style="width: {{bia_data.pinfo_opts.pad*(1587/420)}}px;"></td>
+        <td valign="top" class="pinfo-title">
+          <div class="love-hate text-pinfo" style="font-size: {{bia_data.pinfo_opts.size}}px;">
+            Địa điểm
+          </div>
+        </td>
+        <td>
+          <div class="love-hate text-pinfo pinfo-content" style="font-size: {{bia_data.pinfo_opts.size}}px;">{{p.daidiem}}</div>
+        </td>
+      </tr>
+      <tr>
+        <td class="pinfo-spacing" style="width: {{bia_data.pinfo_opts.pad*(1587/420)}}px;"></td>
+        <td valign="top" class="pinfo-title">
+          <div class="love-hate text-pinfo" style="font-size: {{bia_data.pinfo_opts.size}}px;">
+            Chủ đầu tư
+          </div>
+        </td>
+        <td>
+          <div class="love-hate text-pinfo pinfo-content" style="font-size: {{bia_data.pinfo_opts.size}}px;">{{p.chudautu.company_name}}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>

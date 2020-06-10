@@ -1,0 +1,313 @@
+<div class="col" ng-controller="welcome" ng-init="app.settings.container = false;">
+    <div style="background:url(img/c4.jpg) center center; background-size:cover">
+        <div class="wrapper-lg bg-white-opacity">
+            <div class="row m-t">
+                <div class="col-sm-7">
+                    <a href="" class="thumb-lg pull-left m-r">
+                        <img src="files/get/{{globals.user_details.cur_avatar}}" class="img-circle">
+                    </a>
+                    <div class="clear m-b">
+                        <div class="m-b m-t-sm">
+                            <div class="">
+                              <span class="h3 text-black">{{globals.user_details.fullname}}</span>
+                            </div>
+                            <small class="m-l">{{globals.user_details.chucvu.chucvu}}</small>
+                        </div>
+                        <p class="m-b">
+                            <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-twitter"></i></a>
+                            <a href="{{globals.user_details.facebook}}" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-facebook"></i></a>
+                            <a href="" class="btn btn-sm btn-bg btn-rounded btn-default btn-icon"><i class="fa fa-google-plus"></i></a>
+                        </p>
+                        <a href="" class="btn btn-sm btn-success btn-rounded hidden">Follow</a>
+                    </div>
+                </div>
+                <div class="col-sm-5 hidden">
+                    <div class="pull-right pull-none-xs text-center">
+                        <a href="" class="m-b-md inline m">
+                            <span class="h3 block font-bold">2k</span>
+                            <small>Followers</small>
+                        </a>
+                        <a href="" class="m-b-md inline m">
+                            <span class="h3 block font-bold">250</span>
+                            <small>Following</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper bg-white b-b">
+        <ul class="nav nav-pills nav-sm">
+            <li class="active"><a href="">Stream</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Messages</a></li>
+        </ul>
+    </div>
+    <div class="padder-top m">
+      <div class="col-lg-4">
+
+          <div class="ibox hidden">
+              <div class="ibox-content">
+                  <h3>About Alex Smith</h3>
+
+                  <p class="small">
+                      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't.
+                      <br>
+                      <br> If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing
+                  </p>
+
+                  <p class="small font-bold">
+                      <span><i class="fa fa-circle text-navy"></i> Online status</span>
+                  </p>
+
+              </div>
+          </div>
+          <div class="ibox hidden-xs">
+              <div class="ibox-content">
+                  <h4 class="lienhe_title">Các dự án tham gia</h4>
+                  <table class="table m-b-none text-sm">
+                      <tbody>
+
+                          <tr>
+                              <td><a href="projects/view/54">Xây dựng Cống Gốc Tre 2</a></td>
+
+                          </tr>
+                          <tr>
+                              <td><a href="projects/view/53">Xây dựng cống cấp nước rạch lá</a></td>
+
+                          </tr>
+                          <tr>
+                              <td><a href="projects/view/52">Đường đê tiểu vùng (100ha)</a></td>
+
+                          </tr>
+                          <tr>
+                              <td><a href="projects/view/51">Xây dựng kè chống sạt lở khu vực rạch Tắc Mương Lớn (rạch Ngã Tư)</a></td>
+
+                          </tr>
+                          <tr>
+                              <td><a href="projects/view/50">Bến tàu quận 2</a></td>
+
+                          </tr>
+
+
+                      </tbody>
+                  </table>
+
+              </div>
+          </div>
+          <div class="ibox hidden-xs">
+              <div class="ibox-content">
+                  <h4 class="lienhe_title">Các nhiệm vụ gần đây</h4>
+                  <div class="list-group bg-white">
+                      <a href="projects/view/43?group=tasks&view=task&id=245" class="list-group-item task-feed">
+      Hoàn thành các CC An Toàn lao động + Xác nhận bảo hiểm - <small class="text-muted">Chống sạt lỏ bán đảo Thanh Đa - Đoạn 3 (Bình Qưới - Cây Bàng, Rạch Chùa)</small>
+    </a>
+                      <a href="projects/view/43?group=tasks&view=task&id=244" class="list-group-item task-feed">
+      Làm hồ sơ đề xuất kỹ thuật (Nam Việt) - <small class="text-muted">Chống sạt lỏ bán đảo Thanh Đa - Đoạn 3 (Bình Qưới - Cây Bàng, Rạch Chùa)</small>
+    </a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="ibox">
+              <div class="ibox-content hidden">
+                  <h3>Private message</h3>
+
+                  <p class="small">
+                      Send private message to Alex Smith
+                  </p>
+
+                  <div class="form-group">
+                      <label>Subject</label>
+                      <input type="email" class="form-control" placeholder="Message subject">
+                  </div>
+                  <div class="form-group">
+                      <label>Message</label>
+                      <textarea class="form-control" placeholder="Your message" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-block">Send</button>
+
+              </div>
+          </div>
+
+      </div>
+
+      <div class="col-lg-8 feed-col">
+          <div class="social-feed-box">
+
+              <div class="social-avatar">
+                  <a href="" class="pull-left">
+                      <img alt="image" src="files/get/{{globals.user_details.cur_avatar}}">
+                  </a>
+                  <div class="media-body">
+                      <div class="media-body" id="hello">
+                          <textarea class="form-control" id="postcontent" style="border-color: Transparent; resize: none; min-height:60px; " placeholder="Hãy viết gì đó..."></textarea>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="social-footer" style=" padding-bottom: 15px;">
+                  <div class="social-comment">
+
+
+                      <div class="pull-right dropdown">
+                          <button class="btn btn-primary pull-right dang-button" style="margin-top: 1px; " id="btn-post">Đăng</button>
+                          <button data-toggle="dropdown" class="dropdown-toggle btn-white" style="margin-right: 5px; height: 28px;"><i class="fa fa-globe"></i><small> Công khai</small></button>
+                          <ul class="dropdown-menu m-t-xs">
+                              <li><a href="#"><i class="fa fa-globe"></i> Công khai</a></li>
+                              <li><a href="#"><i class="fa fa-bullhorn"></i> Thông báo</a></li>
+                              <li><a href="#"><i class="fa fa-lock"></i>  Riêng tư</a></li>
+                          </ul>
+                      </div>
+                      <br>
+                  </div>
+              </div>
+          </div>
+          <div class="hidden lastac" id="lastac" data-lastac="2335">2335</div>
+          <div class="hidden cur-lastac" id="cur-lastac" data-lastac="2335">2335</div>
+
+
+          <div id="newsfeed" ng-repeat="f in feeds">
+              <div class="social-feed-box feed-header hidden"><small><b>{{f.feed.fullname}}</b>
+                                                                    Đã comment dự án <b>Cống Gốc Tre 2</b> </small></div>
+              <div class="social-feed-box">
+                  <div class="pull-right social-action dropdown">
+                      <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                    <i class="fa fa-angle-down"></i>
+                  </button>
+                      <ul class="dropdown-menu m-t-xs">
+                          <li><a href="#">Config</a></li>
+                      </ul>
+                  </div>
+                  <div class="social-avatar">
+                      <a href="" class="pull-left">
+                          <img alt="image" src="resource/avatar/{{f.feed.avatar}}">
+                      </a>
+                      <div class="media-body">
+                          <div class="media-body">
+                              <font style="margin-bottom: 0px;"><b>{{f.feed.fullname}}</b> {{ac_render(f.feed)}}</font><br>
+                              <small class="text-muted">  <i class="fa fa-clock-o"></i> {{ f.feed.activity_date | fromNow}}</small>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="social-body" ng-if="f.feed.module == 'projects'">
+                      Tên dự án: <b>{{f.module.project_title}}</b><br>
+                      <small>
+                        Chủ đầu tư: {{f.module.chudautu_name}}<br>
+                        Loại công trình: {{f.module.loaicongtrinh}}<br>
+                        Cấp công trình: {{f.module.capcongtrinh}}<br>
+                        Nhóm dự án: {{f.module.nhomduan}}<br>
+                        Nguồn vốn đầu tư: {{f.module.nguonvondautu}}<br>
+                      </small>
+                                <p>
+                      </p>
+                      <div class="btn-group">
+                          <a href="#" class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like!</a>
+                          <a href="#" class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</a>
+                          <a href="projects/view/{{f.feed.module_field_id}}/?group=tasks" class="btn btn-white btn-xs"><i class="fa fa-tasks"></i> Nhiệm vụ</a>
+                          <a href="projects/view/{{f.feed.module_field_id}}/?group=milestones" class="btn btn-white btn-xs"><i class="fa fa-rocket"></i> Tiến trình</a>
+                          <a href="projects/view/{{f.feed.module_field_id}}/?group=files" class="btn btn-white btn-xs"><i class="fa fa-folder-open"></i> File</a>
+                          <a href="projects/view/{{f.feed.module_field_id}}/?group=dashboard" class="btn btn-white btn-xs"><i class="fa fa-share"></i> Mở</a>
+                      </div>
+                  </div>
+                  <div class="social-body feed-txt" ng-if="f.feed.module == 'invoices'">
+                      <a class="text-info" href="invoices/view/{{f.feed.module_field_id}}"></a>
+                      Hợp đồng số: <b>{{f.module.reference_no}}</b> <br>
+                      <small>
+                        Gói thầu: {{f.module.goithau}} <br>
+                        Công trình: {{f.module.duan_id != 55 ? f.module.projects_title : f.module.duan}}<br>
+                        Chủ đầu tư: {{f.module.duan_id != 55 ? f.module.chudautu : f.module.chudautu_name}}
+                      </small>
+                      <br>
+                      <p></p>
+
+                      <div class="btn-group">
+                          <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like!</button>
+                          <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                          <a href="resource/hd-files/{{f.module.inv_id}}/{{f.module.hd}}" class="btn btn-white btn-xs {{f.module.hd == null ? 'hidden' : 'show'}}"><i class="fa fa-download"></i> Tải hợp đồng</a>
+                          <a href="resource/hd-files/{{f.module.inv_id}}/{{f.module.nt}}" class="btn btn-white btn-xs {{f.module.nt == null ? 'hidden' : 'show'}}"><i class="fa fa-download"></i> Tải nghiệm thu</a>
+                          <a href="invoices/view/{{f.module.inv_id}}" class="btn btn-white btn-xs"><i class="fa fa-share"></i> Mở</a>
+                      </div>
+                  </div>
+                  <div class="social-body " ng-if="f.feed.module == 'task'">
+                      <div id="addbox_m"> Nhiệm vụ: <b>{{f.module.task_name}} </b></div>
+                      <div id="addbox_m"> Mô tả: {{f.module.description == null ? 'Không có mô tả nào' : f.module.description}} </div>
+                      <section class="panel panel-body" style="margin-bottom: 0px; padding-bottom: 5px; border-bottom-width: 0px; padding-left: 0px; padding-top: 5px; padding-right: 5px;">
+                          <div>
+                          </div>
+                          <div class="input-group col-sm-6 hidden" id="duocgiao_panel">
+                              <div id="addbox_duocgiao"><a href="#" id="giaoviec" class="small">Thực hiện: Vũ Văn Lịch</a>
+
+                              </div>
+                          </div>
+                          <div class="input-group col-sm-6 hidden" id="giaoviec_panel">
+                              <div id="addbox_giaoviec"><a href="#" class="small" id="giaoviec"> + Giao cho nhân viên </a>
+                              </div>
+                          </div>
+                          <div class="input-group col-sm-6" id="label_panel">
+
+                          </div>
+                          <div class="input-group hidden col-sm-12 hidden" id="m_panel">
+                              <div id="addbox_m"><a href="#" id="mota"> + Thêm mô tả công việc</a>
+                              </div>
+                          </div>
+                          <div class="hidden input-group col-sm-12 panel" id="mota_tbx">
+                              <input type="text" onkeypress="checkinput_m(event)" class="form-control" id="mota_txt" value="">
+                              <span class="input-group-btn">
+                                                            <button type="hidden" class="btn btn-primary" id="add_mota_btn">Thêm</button>
+      </span>
+                          </div>
+                          <div class="input-group col-sm-12" id="list_panel">
+                              <div class="checkbox feed-task-checklist" ng-repeat="check in checklist_render(f)"><label class="cbx">
+                  <input class="cbx-box" type="checkbox" name="clist" checked='{{check.val}}' disabled='true'; ?> {{check.name}}<font class='cbx-label'> Hello</label></font><input class="hidden cbx-txt">
+                                  <a href="#" class="clst-delete btn btn-xs btn-success cbx_edit small hidden"><label class="small">Sửa</label></a>
+                                  <a href="#" class="clst-delete btn btn-xs btn-danger cbx_remove small hidden"><label class="small"> Xóa</label></a>
+                              </div>
+                          </div>
+                          <div class="input-group col-sm-12 hidden" id="f_panel">
+                              <div id="addbox"><a href="#"> + Thêm tiểu mục công việc </a>
+                              </div>
+                          </div>
+                          <div class="hidden input-group col-sm-12 panel" id="clst_tbx">
+                              <input type="text" class="form-control" id="check_name">
+                              <span class="input-group-btn">
+                                                            <button type="hidden" class="btn btn-primary" onclick="add()" id="add_btn">Thêm</button>
+        </span>
+                          </div>
+
+                      </section>
+                      <p>
+                      </p>
+                      <div class="btn-group">
+                          <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like!</button>
+                          <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                          <a href="collaborator/task_file/{{f.module.project}}/{{f.feed.module.t_id}}" data-toggle="ajaxModal" class="btn btn-white btn-xs"><i class="fa fa-paperclip"></i> Đính kèm</a>
+                          <a href="kanban" class="btn btn-white btn-xs"><i class="fa fa-share"></i> Mở</a>
+                          <a href="kanban" class="btn btn-white btn-xs"><i class="fa fa-share"></i> Xem trong bảng kanban</a>
+                      </div>
+                  </div>
+                  <div class="social-footer">
+                      <div class="social-comment" id="{{feed.activity_id}}">
+                          <div ng-repeat="c in f.comments | orderBy:'comment_id'" class="social-comment comment-view">
+                              <a href="" class="pull-left"><img alt="image" src="resource/avatar/lync.jpg"></a>
+                              <div class="media-body user-comment-content">
+                                  <a href="#" class="text-info"><small>{{c.fullname}} </small></a><br>
+                                  <a href="#" class="small"><i class="fa fa-thumbs-up"></i></a> - <small class="text-muted small"><i class="fa fa-clock-o"></i> {{ c.date_posted | fromNow}}</small>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="social-comment">
+                          <a href="" class="pull-left">
+                              <img alt="image" src="files/get/{{globals.user_details.cur_avatar}}">
+                          </a>
+                          <div class="comment-textbox cc-tarea" id="hello">
+                              <textarea class="form-control ccontent cm-{{f.feed.activity_id}}" id="cm-{{f.feed.activity_id}}" ng-keypress="cm_keypress($event)" ng-click="feed_cclick(f)" placeholder="Comment..."></textarea>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="" ng-controller="welcome as vm" ng-init="app.settings.container = false;">
+    <div class="wrapper bg-white b-b hidden">
+        <ul class="nav nav-pills nav-sm">
+            <li class="active"><a href="">Stream</a></li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Messages</a></li>
+        </ul>
+    </div>
+    <div class="padder-top">
+      <div class="">
+      <div class="team-menu">Team Awesome</div>
+      <div class="channel-menu"><span class="channel-menu_name"><span class="channel-menu_prefix">#</span>                admin</span></div>
+    </div>
+    <div class="main">
+
+    </div>
+    <div class="main">
+      <div class="listings">
+        <div class="listings_channels">
+          <h2 class="listings_header">Chung</h2>
+          <ul class="channel_list">
+            <li class="channel" ui-sref-active="active"><a class="channel_name" ui-sref="app.home.main"><span class="tag-unread">0</span><span><span class="prefix">#</span>Tất cả</span></a></li>
+          </ul>
+        </div>
+        <div class="listings_channels">
+          <h2 class="listings_header">Dự án</h2>
+          <ul class="channel_list" ng-repeat="p in duan_theodoi">
+            <li class="channel" ui-sref-active="active"><a ui-sref="app.home.duan({id: p._id})" class="channel_name"><span class="tag-unread">0</span><div class="overflow ellipsis"><span class="prefix">#</span>{{p.project_code}}</div></a></li>
+          </ul>
+        </div>
+        <div class="listings_direct-messages">
+          <h2 class="listings_header">Nhiệm vụ</h2>
+          <ul class="channel_list">
+            <li class="channel"><a class="channel_name"><span class="tag-unread">20</span><span><span class="prefix"> </span>kryton</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="" ui-view>
+
+            <!-- <div class="h-content" ng-repeat="ac in activities">
+              <div class="message">
+                <a class="message_profile-pic" href=""><img class="h-avatar" src="files/get/{{ac.user.cur_avatar}}" alt=""></a>
+                <a class="message_username" href=""><strong>{{ac.user.fullname}}</strong></a>
+                <span class="message_timestamp">1:31 AM</span>
+                <span class="message_star"></span>
+                <span class="message_content">{{ {ac : ac, state: 'projects'} | acrender}} dự án <a href="" class="text-info h-highlight" ui-sref="app.projects.view.project_details({p_id: ac.module_content._id})">{{ac.module_content.project_title}}</a></span>
+              </div>
+            </div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+    </div>
+</div>

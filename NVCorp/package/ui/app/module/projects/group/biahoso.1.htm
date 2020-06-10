@@ -1,0 +1,188 @@
+<section id="content" ng-controller="edit_project">
+  <section class="hbox stretch">
+    <aside>
+      <section class="vbox">
+        <section class="scrollable wrapper">
+          <!-- Start Project Form -->
+          <div class="col-sm-12">
+            <section class="panel panel-default">
+              <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Tạo bìa hồ sơ lưu trữ
+                <a href="" class="btn btn-success pull-right btn-xs" ng-click="print()"><i class="fa fa-print"></i> In bìa</a>
+                <button ui-sref="app.projects.view.project_details({p_id: param.id})" class="btn btn-xs btn-default pull-right m-r-xs"><i class="fa  fa-arrow-left"></i> Quay lại</button>
+              </header>
+              <div class="panel-body">
+                <style id="style">
+                  body {
+                    -webkit-print-color-adjust: exact;
+                  }
+
+                  .table-bia {
+                    width: 259px;
+                    border-collapse: collapse;
+                    font-family: "Times New Roman", Georgia, Serif;
+                  }
+
+                  .table-bia,
+                  td,
+                  th {
+                    border: 1px solid black;
+                    font-family: "Times New Roman", Georgia, Serif;
+                    color: black;
+                    border-style: double;
+                  }
+
+                  .table-bia div {
+                    padding: 0px 6px;
+                  }
+
+                  .table-bia input {
+                    max-width: 80px !important;
+                    border: 0px !important;
+                    background: none !important;
+                    position: relative !important;
+                    top: -10px !important;
+                    text-align: center !important;
+                  }
+
+                  .bia-hidder {
+                    background: antiquewhite;
+                    max-height: 56px !important;
+                  }
+
+                  .tencongtrinh {
+                    height: 444px;
+                    font-size: 44px;
+                    text-transform: uppercase;
+                  }
+
+                  .p-id {
+                    height: 56px;
+                    max-height: 56px !important;
+                    font-size: 44px;
+                  }
+
+                  .phongban-name {
+                    height: 33px;
+                    /*position: relative;*/
+                    font-size: 18px;
+                    text-transform: uppercase;
+                  }
+
+                  .logo {
+                    height: 74px !important;
+                    width: 130px;
+                    padding-top: 6px;
+                  }
+
+                  .bia-nam {
+                    height: 37px !important;
+                    max-height: 37px !important;
+                    font-size: 30px;
+                  }
+
+                  .bia-qr {
+                    height: 136px;
+                  }
+
+                  .logo img {
+                    /*height: 74px;*/
+                    width: 120px;
+                  }
+
+                  .bia-div {
+                    /*padding: 1px;
+                    border: 1px solid;*/
+                    display: -webkit-box;
+                  }
+
+                  .center p {
+                    font-weight: bold;
+                    text-align: center;
+                    vertical-align: middle;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    margin: 0px;
+                  }
+                </style> 
+                <div class="col b-r" style="width: 400px;">
+                  <div class="wrapper-md">
+                    <p>Chiều rộng bìa: ( {{bia_width}} mm)</p>
+                    <slider ng-model="bia_width" floor="50" ceiling="200">
+                    </slider>
+                    <p>Cỡ chữ ID: ( {{size_id}} px)</p>
+                    <slider ng-model="size_id" floor="35" ceiling="80">
+                    </slider>
+                    <p>Cỡ chữ tên công trình: ( {{size_congtrinh}} px)</p>
+                    <slider ng-model="size_congtrinh" floor="30" ceiling="100">
+                    </slider>
+                    <p>Cỡ chữ phòng ban: ( {{size_phongban}} px)</p>
+                    <slider ng-model="size_phongban" floor="15" ceiling="30">
+                    </slider>
+                  </div>
+                </div>
+                <div class="col center padder">
+                  <div style="zoom: 0.7" id="htmlContent">
+                    <div class="bia-div">
+                      <table class="table-bia" ng-style="table" style="width: {{bia_width*100/27}}px">
+                        <tbody>
+                          <tr>
+                            <td colspan="2" class="bia-hidder">
+                              <div class="p-id center" style="font-size: {{size_id}}px">
+                                <p>{{p.project_id}}</p>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">
+                              <div class="tencongtrinh center" style="font-size: {{size_congtrinh}}px">
+                                <p>{{p.project_code}}</p>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" class="bia-qr">
+                              <center><img src="{{qr}}" alt=""></center>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="2" class="bia-hidder">
+                              <div class="phongban-name center" style="font-size: {{size_phongban}}px">
+                                <p>{{globals.user_details.company.company_name}}</p>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td rowspan="2" class="logo">
+                              <div class="logo">
+                                <center><img src="{{logo}}" alt=""></center>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="bia-nam center">
+                                <p>{{p.date_created | date: 'yyyy'}}</p>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div class="bia-nam center">
+                                <p>01</p>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- End Project Form -->
+        </section>
+      </section>
+    </aside>
+  </section>
+  <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+</section>

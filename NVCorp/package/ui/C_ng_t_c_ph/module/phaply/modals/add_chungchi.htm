@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Thêm chứng chỉ</h4>
+</div>
+<div class="modal-body">
+  <form accept-charset="utf-8" class="bs-example form-horizontal">
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Số chứng chỉ<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Số chứng chỉ" ng-model="cc.sochungchi" class="form-control" value="" name="reference_no">
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Loại chứng chỉ<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+            <ui-select ng-model="cc.loaichungchi" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 380px;" title="Choose a country" append-to-body="true">
+                <ui-select-match placeholder="Chọn loại chứng chỉ">{{$select.selected.loaichungchi}}</ui-select-match>
+                <ui-select-choices repeat="pb in loaichungchi | filter: $select.search">
+                    <span ng-bind-html="pb.loaichungchi | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Loại công trình<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+            <ui-select ng-model="cc.loaicongtrinh" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 380px;" title="Choose a country" append-to-body="true">
+                <ui-select-match placeholder="Chọn loại công trình">{{$select.selected.loaicongtrinh}}</ui-select-match>
+                <ui-select-choices repeat="pb in loaicongtrinh | filter: $select.search">
+                    <span ng-bind-html="pb.loaicongtrinh | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Hạng<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+            <ui-select ng-model="cc.hang" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 380px;" title="Choose a country" append-to-body="true">
+                <ui-select-match placeholder="Chọn loại công trình">{{$select.selected.hang}}</ui-select-match>
+                <ui-select-choices repeat="h in hang | filter: $select.search">
+                    <span ng-bind-html="h.hang | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Số lượng<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Số lượng" ng-model="cc.soluong" class="form-control" value="" name="reference_no">
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Ngày hết hạn</label>
+          <div class="col-lg-4">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" popup-placement="auto" ng-model="cc.ngayhethan" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+      </div>
+
+
+      <!-- End discount Fields -->
+      <!-- <div class="form-group">
+          <label class="col-lg-3 control-label">Giá trị<span class="text-danger">*</span></label>
+          <div class="col-lg-6">
+              <input type="text" placeholder="Giá trị" ng-model="tt.giatri" ui-number-mask="0" class="form-control" value="" name="reference_no">
+          </div>
+
+      </div> -->
+  </form>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Thêm chứng chỉ</button>
+</div>

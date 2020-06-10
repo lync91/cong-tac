@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+      Quản lý loại công việc dự án
+      <a href class="btn btn-default btn-xs pull-right" ng-click="them_lcv()"><i class="fa fa-plus"></i> Thêm loại công việc</a>
+    </div>
+    <!-- <div class="panel-body b-b b-light">
+      Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+    </div> -->
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+        <thead>
+          <tr>
+              <th>
+                  Loại công việc
+              </th>
+              <th>
+                  Phòng thực hiện
+              </th>
+              <th>
+                  Thứ tự
+              </th>
+              <th class="pull-right">
+                  Tùy chọn
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="lcv in loaicongviec | orderBy: 'thutu'">
+              <td>{{lcv.loaicongviec}}</td>
+              <td><a href>{{lcv.phongth.company_name}}</a></td>
+              <td><a href>{{lcv.thutu}}</a></td>
+              <td>
+                <div class="pull-right">
+                  <a href class="btn btn-default btn-xs m-l-xs pull-right" ng-click="delete_lcv(lcv)"><i class="fa fa-trash text-danger"></i></a>
+                  <a href class="btn btn-default btn-xs pull-right" ng-click="edit_lcv(lcv)"><i class="fa fa-pencil"></i></a>
+                </div>
+              </td>
+          </tr>
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>

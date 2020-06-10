@@ -1,0 +1,109 @@
+<div class="panel panel-default" ng-controller="users">
+  <div class="panel-heading">
+    Quản lý nhân viên
+    <a href class="btn btn-default btn-xs pull-right" ng-click="add_user()">
+      <i class="fa fa-plus"></i> Thêm nhân viên</a>
+  </div>
+  <div class="panel-body wrapper-xs b-b b-light">
+    <div class="rows pull-right">
+      Search:
+      <input id="filter" type="text" class="form-control input-sm w-sm inline m-r" />
+    </div>
+  </div>
+  <div>
+    <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+      <thead>
+        <tr>
+          <th width="280px">
+            Họ và tên
+          </th>
+          <th width="220px">
+            Phòng ban
+          </th>
+          <th width="220px">
+            Chức vụ
+          </th>
+          <th width="180px">
+            Trạng thái
+          </th>
+          <th class="pull-right">
+            Tùy chọn
+          </th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="pb in users">
+        <tr>
+          <td width="280px">
+            <a href class="">
+              <strong>Phòng {{pb._id.company_name}}</strong>
+            </a>
+          </td>
+          <td width="220px">
+            <a href>{{u.company.company_name}}</a>
+          </td>
+          <td width="220px">
+            <a href>{{u.chucvu.chucvu}}</a>
+          </td>
+          <td width="180px">
+            <a href ng-if="!u.disable"></a>
+            <a href ng-if="u.disable" class="text-danger">Khoá</a>
+          </td>
+          <td>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5" class="no-padder">
+            <table class="table m-b-none" >
+              <tbody>
+                <tr ng-repeat="u in pb.users">
+                  <td width="280px">
+                    <a href class="text-info">
+                     {{u.fullname}}
+                    </a>
+                  </td>
+                  <td width="220px">
+                    <a href>{{u.company.company_name}}</a>
+                  </td>
+                  <td width="220px">
+                    <a href>{{u.chucvu.chucvu}}</a>
+                  </td>
+                  <td width="180px">
+                    <a href ng-if="!u.disable"></a>
+                    <a href ng-if="u.disable" class="text-danger">Khoá</a>
+                  </td>
+                  <td>
+                    <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-if="u.disable" ng-click="enable_user(u)">
+                      <i class="fa fa-unlock text-success"></i>
+                    </a>
+                    <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-if="!u.disable" ng-click="disable_user(u)">
+                      <i class="fa fa-lock text-danger"></i>
+                    </a>
+                    <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-click="delete_user(u)">
+                      <i class="fa fa-circle-o-notch text-danger"></i>
+                    </a>
+                    <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-click="link_user_zalo(u)">
+                      <i class="fa fa-qrcode"></i>
+                    </a>
+                    <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-click="user_role(u)">
+                      <i class="fa fa-cog"></i>
+                    </a>
+                    <a href class="btn btn-default btn-xs pull-right" ng-click="edit_user(u)">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="hide-if-no-paging">
+        <tr>
+          <td colspan="5" class="text-center">
+            <ul class="pagination"></ul>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

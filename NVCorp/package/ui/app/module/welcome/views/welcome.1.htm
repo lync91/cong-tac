@@ -1,0 +1,119 @@
+<div class="" ng-controller="welcome">
+  <!-- navbar -->
+  <!-- <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div> -->
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <div class="app-aside hidden-xs {{app.settings.asideColor}}" ng-class="{'hide': app.hideAside }">
+    <div class="listings">
+      <div class="listings_channels">
+        <h2 class="listings_header">Chung</h2>
+        <ul class="channel_list">
+          <li class="channel" ui-sref-active="active"><a class="channel_name" ui-sref="app.home.main"><span class="tag-unread hidden">0</span><span><span class="prefix">#</span>Tất cả</span></a></li>
+        </ul>
+      </div>
+      <div class="listings_channels">
+        <h2 class="listings_header">Dự án</h2>
+        <ul class="channel_list" ng-repeat="p in duan_theodoi">
+          <li class="channel" ui-sref-active="active"><a ui-sref="app.home.duan({id: p._id})" class="channel_name"><b class="badge bg-danger m-xxs pull-right p-unread-count">{{p.count}}</b><div class="overflow ellipsis"><span class="prefix">#</span>{{p.ac.project.project_code}}</div></a></li>
+        </ul>
+      </div>
+      <div class="listings_direct-messages">
+        <h2 class="listings_header">Nhiệm vụ</h2>
+        <ul class="channel_list">
+          <li class="channel"><a class="channel_name"><span class="tag-unread hidden">20</span><span><span class="prefix"> </span>kryton</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- / menu -->
+
+  <!-- view -->
+  <div class="" ng-class="{'m-n': app.hideAside, 'h-full': app.hideFooter }">
+    <div class="app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }">
+      <!-- hbox layout -->
+      <div class="hbox hbox-auto-xs bg-light ">
+        <!-- column -->
+        <!-- <div class="col" style="width: 54px;">
+          <div class="vbox">
+            <div class="wrapper b-b hidden">
+              <div class="font-thin h4">Header</div>
+            </div>
+            <div class="nav-tabs-alt hidden">
+              <ul class="nav nav-tabs nav-justified">
+                <li ng-class="{'active': tabs[0]}">
+                  <a href ng-click="tab(0)">Day</a>
+                </li>
+                <li ng-class="{'active': tabs[1]}">
+                  <a href ng-click="tab(1)">Month</a>
+                </li>
+                <li ng-class="{'active': tabs[2]}">
+                  <a href ng-click="tab(2)">Year</a>
+                </li>
+              </ul>
+            </div>
+            <div class="row-row">
+              <div class="cell scrollable hover">
+                <div class="cell-inner">
+                  <div class="tab-content listings">
+                    <div class="listings_channels">
+                      <h2 class="listings_header">Chung</h2>
+                      <ul class="channel_list">
+                        <li class="channel" ui-sref-active="active"><a class="channel_name" ui-sref="app.home.main"><span class="tag-unread">0</span><span><span class="prefix">#</span>Tất cả</span></a></li>
+                      </ul>
+                    </div>
+                    <div class="listings_channels">
+                      <h2 class="listings_header">Dự án</h2>
+                      <ul class="channel_list" ng-repeat="p in duan_theodoi">
+                        <li class="channel" ui-sref-active="active"><a ui-sref="app.home.duan({id: p._id})" class="channel_name"><span class="tag-unread">0</span><div class="overflow ellipsis"><span class="prefix">#</span>{{p.project_code}}</div></a></li>
+                      </ul>
+                    </div>
+                    <div class="listings_direct-messages">
+                      <h2 class="listings_header">Nhiệm vụ</h2>
+                      <ul class="channel_list">
+                        <li class="channel"><a class="channel_name"><span class="tag-unread">20</span><span><span class="prefix"> </span>kryton</span></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- /column -->
+
+        <!-- column -->
+        <!-- <div class="col">
+          <div class="vbox">
+            <div class="row-row">
+              <div class="cell">
+                <div class="cell-inner">
+                  <div class="wrapper-md">
+                    This is the scrollable content
+                    <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+                    You got the bottom
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <!-- /column -->
+
+        <!-- column -->
+        <div class="col w-md lter b-l ac-view" ui-view>
+
+        </div>
+        <!-- /column -->
+      </div>
+      <!-- /hbox layout -->
+    </div>
+  </div>
+  <!-- / view -->
+  <!-- navbar -->
+  <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t hidden" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+
+  </div>
+  <!-- /navbar -->
+</div>

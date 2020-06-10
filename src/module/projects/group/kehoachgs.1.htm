@@ -1,0 +1,46 @@
+<div class="vbox" ng-controller="kehoachgiamsat">
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="col-sm-12 no-padder">
+                    <section class="panel panel-default">
+                        <header class="panel-heading font-bold">
+                            <i class="fa fa-info-circle"></i> Kế hoạch giám sát
+                            <a href="" class="btn btn-success pull-right btn-xs" ng-click="print()">
+                                <i class="fa fa-print"></i> In bìa</a>
+                            <a href="" class="btn btn-primary pull-right btn-xs m-r-xs" ng-click="save()">
+                                <i class="fa fa-save"></i> Lưu</a>
+                            <button ui-sref="app.projects.view.project_details({p_id: p.project_id})" class="btn btn-xs btn-default pull-right m-r-xs">
+                                <i class="fa  fa-arrow-left"></i> Quay lại</button>
+                        </header>
+                        <div class="">
+                            <div class="col-lg-12 b-b">
+                                <div class="col-lg-6 m-t-xs">
+                                    <P>Số:</P>
+                                    <p>Dự án:</p>
+                                    <p>Người lập</p>
+                                    <input type="text" class="hidden" ng-model="test">
+                                    <button class="btn-default hidden" ng-click="okkk(test)">OK</button>
+                                </div>
+                                <div class="col-lg-2">
+                                    <!-- <div class="btn-group pull-right">
+                                            <label class="btn btn-sm btn-default" ng-model="bia_data.type" btn-radio="'a4d'">
+                                                <i class="fa fa-check text-active"></i> A4 Dọc</label>
+                                            <label class="btn btn-sm btn-default" ng-model="bia_data.type" btn-radio="'a4n'">
+                                                <i class="fa fa-check text-active"></i> A4 Ngang</label>
+                                            <label class="btn btn-sm btn-default" ng-model="bia_data.type" btn-radio="'a3'">
+                                                <i class="fa fa-check text-active"></i> A3</label>
+                                        </div> -->
+
+                                </div>
+                            </div>
+                            <div class="col-lg-12 no-padder">
+                                <div id="grid1" ui-grid="gridOptions" class="grid" ui-grid-edit ui-grid-auto-resize></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

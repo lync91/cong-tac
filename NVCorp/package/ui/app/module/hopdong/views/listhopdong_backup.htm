@@ -1,0 +1,77 @@
+<!-- <div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Datatable</h1>
+</div> -->
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Danh mục hợp đồng
+    </div>
+    <div class="table-responsive">
+      <table ui-jq="dataTable" ui-options="{
+              'language': {
+                  'url': 'api/datatabes_vi.json'
+              },
+              'searchHighlight': true
+          }" class="table table-striped b-t b-b">
+        <thead>
+          <tr>
+            <tr>
+                <th width="6%">
+                    Tùy chọn </th>
+                <th width="58%">
+                    Hợp đồng </th>
+                <th width="18%" class="text-right">
+                    Giá trị </th>
+                <th width="18%" class="text-right">
+                    Thanh toán </th>
+            </tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="hd in listhopdong" class="table table-striped b-t b-b" >
+              <td>
+                  <div class="btn-group">
+                      <button class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                Tùy chọn                          <span class="caret"></span>
+              </button>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="http://dl.navices.com/invoices/view/17">
+                    Xem thông tin                            </a>
+                          </li>
+                          <li>
+                              <a href="http://dl.navices.com/invoices/edit/17">
+                    Sửa hợp đồng                            </a>
+                          </li>
+                          <li>
+                              <a href="http://dl.navices.com/invoices/timeline/17">
+                    Xem lịch sử                            </a>
+                          </li>
+                          <li><a href="http://dl.navices.com/resource/hd-files/17/3.jpg">Tải nghiệm thu</a></li>
+                          <!-- Nút bên phải -->
+                          <li><a href="http://dl.navices.com/resource/hd-files/17/Long_hoa.jpg">Tải hợp đồng</a></li>
+                      </ul>
+                  </div>
+              </td>
+              <td>
+                  <a class="text-info" href="http://dl.navices.com/invoices/view/17">{{hd.goithau}}<br>Công trình: {{hd.duan}}</a>
+                  <br>
+                  <font size="2">Số hợp đồng: <b>{{hd.reference_no}}</b> | Ký ngày <b>{{hd.ngayky}}</b><br> Chủ đầu tư: <b>{{hd.duan_id != 1 ? hd.chudautu_name : hd.chudautu_name_chualink}}</b><br> Đơn vị thực hiện: <b>{{hd.donvithuchien_name}}</b>
+                  </font>
+              </td>
+              <td class="col-currency text-right">
+                  <font size="2pt">Hợp đồng: <b>{{hd.giatrihd | currency:"":0}} đ</b><br> Thực hiện: <b>{{hd.giatrith | currency:"":0}} đ</b></font>
+              </td>
+              <td class="col-currency text-right">
+                  <font size="2pt">Thanh toán: <b>{{hd.thanhtoan | currency:"":0}} đ</b><br> Đã chuyển: <b>{{hd.chuyentien | currency:"":0}} đ</b><br> Còn lại: <b>{{hd.thanhtoan - hd.chuyentien | currency:"":0}} đ</b></font>
+                  <br>
+                  <span ng-if="hd.thanhtoan == 0" class="label bg-danger">Chưa thanh toán</span>
+                  <span ng-if="hd.thanhtoan > 0 && hd.thanhtoan - hd.chuyentien > 0" class="label bg-info">Đang thanh toán</span>
+                  <span ng-if="hd.thanhtoan > 0 && hd.thanhtoan - hd.chuyentien <= 0" class="label bg-success">Thanh toán hoàn tất</span>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

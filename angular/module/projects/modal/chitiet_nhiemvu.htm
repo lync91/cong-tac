@@ -1,0 +1,84 @@
+<div class="social-feed-box m-t-xs no-border" style="border-width: 0 !important;">
+    <div class="pull-right social-action dropdown hidden">
+        <button data-toggle="dropdown" class="dropdown-toggle btn-white"><i class="fa fa-angle-down"></i></button>
+        <ul class="dropdown-menu m-t-xs">
+            <li><a href="#">Config</a></li>
+        </ul>
+    </div>
+    <div class="pull-right social-action dropdown" dropdown is-open="status.isopen">
+      <button type="button" class="dropdown-toggle btn-white" dropdown-toggle ng-disabled="disabled">
+        <span class="fa fa-angle-down"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href ng-click="huy_nhiemvu()">Hủy nhiệm vụ</a></li>
+        <!-- <li><a href>Another action</a></li>
+        <li><a href>Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href>Separated link</a></li> -->
+      </ul>
+    </div>
+    <div class="social-avatar">
+        <a href="" class="pull-left"><img alt="image" src="resource/avatar/{{t.assigned_to.avatar}}"></a>
+        <div class="media-body">
+            <div class="media-body">
+                <font style="margin-bottom: 0px;"><b>{{t.assigned_to.fullname}}</b> <br>Nhiệm vụ: <b>{{t.task_name}}</b></font><br>
+                <small class="text-muted">  <i class="fa fa-clock-o"></i> Dự án: {{ t.milestone.project.project_title}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="social-body ">
+        <div id="addbox_m"> Mô tả: <a editable-textarea="t.description" e-rows="4" onaftersave="update_des($data)">{{ t.description || 'Chưa có' }}</a> </div>
+        <section class="panel panel-body" style="margin-bottom: 0px; padding-bottom: 5px; border-bottom-width: 0px; padding-left: 0px; padding-top: 5px; padding-right: 5px;">
+            <div>
+            </div>
+            <div class="input-group col-sm-6 hidden" id="duocgiao_panel">
+                <div id="addbox_duocgiao"><a href="#" id="giaoviec" class="small">Thực hiện: Vũ Văn Lịch</a></div>
+            </div>
+
+            <div class="checkbox" ng-repeat="check in t.check_list">
+                <label class="i-checks i-checks-sm">
+                <input type="checkbox" ng-model="check.val" ng-change="update_task()">
+                <i></i>
+                {{check.name}}
+              </label>
+            </div>
+            <div class="input-group col-sm-12" id="f_panel">
+                <div id="addbox">
+                    <a editable-text="check_add" onaftersave="add_check($data)">{{ m.sovanban || ' + Thêm tiểu mục công việc ' }}</a>
+                </div>
+            </div>
+            <div class="hidden input-group col-sm-12 panel" id="clst_tbx">
+                <input type="text" class="form-control" id="check_name">
+                <span class="input-group-btn"><button type="hidden" class="btn btn-primary" onclick="add()" id="add_btn">Thêm</button></span>
+            </div>
+        </section>
+        <p>
+        </p>
+        <div class="btn-group">
+            <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Theo dõi</button>
+            <a class="btn btn-white btn-xs"><i class="fa fa-paperclip"></i> Đính kèm</a>
+            <a class="btn btn-white btn-xs" ng-click="phieu_giaoviec()"><i class="fa fa-share"></i></a>
+            <!-- <a class="btn btn-white btn-xs"><i class="fa fa-share"></i> Xem trong bảng kanban</a> -->
+        </div>
+    </div>
+    <div class="social-footer">
+      <div class="social-comment">
+          <a href="" class="pull-left">
+              <img alt="image" src="resource/avatar/{{user_details.avatar}}">
+          </a>
+          <div class="comment-textbox cc-tarea">
+              <textarea class="form-control ccontent" ng-keypress="cm_keypress($event)" ng-model="t.comment" placeholder="Comment..."></textarea>
+          </div>
+      </div>
+        <div class="social-comment">
+            <div ng-repeat="c in t.comments | orderBy: '-date_posted'" class="social-comment comment-view">
+                <a href="" class="pull-left"><img alt="image" src="resource/avatar/{{c.posted_by.avatar}}"></a>
+                <div class="media-body user-comment-content">
+                    <a href="#" class="text-info"><small>{{c.posted_by.fullname}}</small></a>: {{c.message}}<br>
+                    <a href="#" class="small"><i class="fa fa-thumbs-up"></i></a> - <small class="text-muted small"><i class="fa fa-clock-o"></i> {{ c.date_posted | fromNow}}</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

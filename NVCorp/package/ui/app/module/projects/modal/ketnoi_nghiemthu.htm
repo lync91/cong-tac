@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Kết nối nối biên bản nghiệm thu</h4>
+</div>
+<div class="modal-body">
+  <span ng-repeat="m in project.milestones | lochopdong">
+    <div class="radio">
+              <label class="i-checks i-checks-sm">
+                <input type="radio" ng-model="m.checked" name="a" value="m">
+                <i></i>
+                {{m.hopdong ? m.hopdong.tengoithau : m.milestone_name}}
+              </label>
+            </div>
+  </span>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Tạo hợp đồng</button>
+</div>

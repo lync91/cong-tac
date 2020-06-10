@@ -1,0 +1,253 @@
+<div class="wrapper-md ng-scope">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-8">
+                    <h5 class="m-n" ng-if="param.mod == 'phongban'">Thông tin phòng ban</h5>
+                    <h5 class="m-n" ng-if="param.mod == 'doitac'">Thông tin Đối tác</h5>
+                    <h5 class="m-n" ng-if="param.mod == 'chudautu'">Thông tin Chủ đầu tư</h5>
+                </div>
+                <div class="col-xs-4 text-right hidden-print">
+                    <a href class="btn btn-xs btn-primary hidden" ng-click="print()">
+                        <i class="fa fa-print"></i>
+                    </a>
+                    <a href class="btn btn-xs btn-primary" ui-sref="app.phapnhan.edit({ id: param.id , mod: param.mod})">
+                        <i class="fa fa-pencil"></i> Sửa thông tin</a>
+                    <span class="btn-group text-right hidden" dropdown is-open="status.isopen">
+                        <button type="button" class="btn btn-primary btn-xs" dropdown-toggle ng-disabled="disabled">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href></a>
+                            </li>
+                            <li>
+                                <a href>Another action</a>
+                            </li>
+                            <li>
+                                <a href>Something else here</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href>Separated link</a>
+                            </li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+        <div class="row col-xs-12 wrapper m no-padder">
+            <table class="m-r-lg">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="m-r">
+                                <div class="">
+                                    <p>
+                                            <h5 class="m-n" ng-if="param.mod == 'phongban'"><strong>Tên phòng:</strong> <strong>{{company.company_name}}</strong></h5>
+                                            <h5 class="m-n" ng-if="param.mod == 'doitac'"><strong>Tên đối tác:</strong> <strong>{{company.company_name}}</strong></h5>
+                                            <h5 class="m-n" ng-if="param.mod == 'chudautu'"><strong>Tên chủ đầu tư:</strong> <strong>{{company.company_name}}</strong></h5>
+                                    </p>
+                                </div>
+                                <div class="">
+                                    <p>
+                                        <span class="no-padder">Người đứng đầu:
+                                            <strong>{{company.primary_user.fullname}}</strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Người đại điện:
+                                            <strong>{{company.super_user.fullname}}</strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Địa chỉ:
+                                            <strong>
+                                                {{ company.company_address || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Điện thoại:
+                                            <strong>
+                                                {{ company.company_phone || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Fax:
+                                            <strong>
+                                                {{ company.company_fax || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Mã số thuế:
+                                            <strong>
+                                                {{ company.company_VAT || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Home Folder:
+                                            <strong>
+                                                {{ company.home_folder || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="no-padder">Home Volume:
+                                            <strong>
+                                                {{ company.home_volume || 'chưa có' }}
+                                            </strong>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row wrapper m no-padder">
+
+        </div>
+        <div class="well m">
+            <div class="row ">
+                <div class="col-xs-6">
+                    <strong>Danh sách nhân liên hệ:</strong>
+                </div>
+            </div>
+        </div>
+        <div class="line b-b"></div>
+        <div class="wrapper">
+            <table id="inv-details" class="table sorted_table" type="invoices">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th width="50%">Họ và tên </th>
+                        <th width="25%" class="text-right">Chức vụ </th>
+                        <th width="25%" class="text-right">Điện thoại </th>
+                        <th width="25%" class="text-right">Email </th>
+                        <!-- <th class="text-right"><button type="submit" class="btn btn-sm btn-default hidden-print"><i class="fa fa-plus"></i></button></th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="u in users ">
+                        <td class="drag-handle">
+                            <i class="fa fa-reorder"></i>
+                        </td>
+                        <td>{{u.fullname}} </td>
+                        <td class="text-right">
+                            <a>{{u.chucvu.chucvu}}</a>
+                        </td>
+                        <td class="text-right">
+                            <a>{{u.mobile}}</a>
+                        </td>
+                        <td class="text-right">
+                            <a>{{u.email}}</a>
+                        </td>
+                        <!-- <td class="text-right"><button type="submit" class="btn btn-xs btn-default hidden-print" ng-click="delete_giatri(g)"><i class="fa fa-trash text-danger"></td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row wrapper hidden">
+            <div class="col-sm-6">
+                <section class="panel panel-default">
+                    <header class="panel-heading">Lịch sử thanh toán
+                        <a href="" class="btn btn-xs btn-default pull-right hidden-print" ng-click="add_thanhtoan()">
+                            <i class="fa fa-plus"></i> Thêm</a>
+                    </header>
+                    <table class="table table-striped m-b-none">
+                        <thead>
+                            <tr>
+                                <th class="col-options">Tên TT</th>
+                                <th class="col-date">Ngày TT</th>
+                                <th class="col-currency text-right">Giá trị</th>
+                                <th style="width: 30px hidden-print"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tt in hopdong.thanhtoan">
+                                <td>
+                                    <a editable-text="tt.tenthanhtoan" onaftersave="update_thanhtoan(tt)">{{tt.tenthanhtoan}}</a>
+                                </td>
+                                <td>
+                                    <a editable-date="tt.ngaythanhtoan" onaftersave="update_thanhtoan(tt)">{{tt.ngaythanhtoan | date:'dd/MM/yyyy'}}</a>
+                                </td>
+                                <td class="text-right">
+                                    <a editable-number="tt.giatri" onaftersave="update_thanhtoan(tt)">{{tt.giatri | number}} đ</a>
+                                </td>
+                                <td class="no-padder hidden-print">
+                                    <button type="submit" class="btn btn-xs btn-default m-xs" ng-click="delete_thanhtoan(tt)">
+                                        <i class="fa fa-trash text-danger">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <strong>Tổng:</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>{{hopdong.thanhtoan | tinhtong: 'giatri' | number}} đ</strong>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+            <div class="col-sm-6">
+                <section class="panel panel-default">
+                    <header class="panel-heading">Lịch sử chuyển tiền
+                        <a href="" class="btn btn-xs btn-default pull-right hidden-print" ng-click="add_chuyentien()">
+                            <i class="fa fa-plus"></i> Thêm</a>
+                    </header>
+                    <table class="table table-striped m-b-none">
+                        <thead>
+                            <tr>
+                                <th class="">Tên TT</th>
+                                <th class="">Ngày CT</th>
+                                <th class="text-right">Giá trị</th>
+                                <th style="width: 30px"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tt in hopdong.chuyentien">
+                                <td>
+                                    <a editable-text="tt.tenthanhtoan" onaftersave="update_chuyentien(tt)">{{tt.tenthanhtoan}}</a>
+                                </td>
+                                <td>
+                                    <a editable-date="tt.ngaychuyentien" onaftersave="update_chuyentien(tt)">{{tt.ngaychuyentien | date:'dd/MM/yyyy'}}</a>
+                                </td>
+                                <td class="text-right">
+                                    <a editable-number="tt.giatri" onaftersave="update_chuyentien(tt)">{{tt.giatri | number}} đ</a>
+                                </td>
+                                <td class="no-padder">
+                                    <button type="submit" class="btn btn-xs btn-default m-xs" ng-click="delete_chuyentien(tt)">
+                                        <i class="fa fa-trash text-danger">
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <strong>Tổng:</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>{{hopdong.chuyentien | tinhtong: 'giatri' | number}} đ</strong>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>

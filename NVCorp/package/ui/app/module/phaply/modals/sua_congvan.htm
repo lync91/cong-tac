@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Sửa thông tin công văn</h4>
+</div>
+<div class="modal-body">
+  <form accept-charset="utf-8" class="bs-example form-horizontal">
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Tên công văn<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Tên công văn" ng-model="cv.tencongvan_new" class="form-control" value="" name="reference_no">
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Ngày ký</label>
+          <div class="col-lg-4">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" popup-placement="auto" ng-model="cv.ngayky_new" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Số công văn<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Tên công văn" ng-model="cv.socongvan_new" class="form-control" value="" name="reference_no">
+          </div>
+      </div>
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Nơi nhận<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Tên công văn" ng-model="cv.noinhan_new" class="form-control" value="" name="reference_no">
+          </div>
+      </div>
+      <!-- End discount Fields -->
+      <!-- <div class="form-group">
+          <label class="col-lg-3 control-label">Giá trị<span class="text-danger">*</span></label>
+          <div class="col-lg-6">
+              <input type="text" placeholder="Giá trị" ng-model="tt.giatri" ui-number-mask="0" class="form-control" value="" name="reference_no">
+          </div>
+
+      </div> -->
+  </form>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Thêm thanh toán</button>
+</div>

@@ -1,0 +1,103 @@
+<section id="content" ng-controller="vitri_duan as vm">
+    <section class="hbox stretch">
+        <aside>
+            <section class="vbox">
+                <section class="scrollable wrapper">
+                    <!-- Start Project Form -->
+                    <div class="col-sm-12">
+                        <section class="panel panel-default">
+                            <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Vị trí dự án
+                              <span class="pull-right">
+                                <button type="submit" ui-sref="app.projects.view.project_details({p_id: param.id})" class="btn btn-xs btn-default"> Quay lại</button>
+                                <button type="submit" class="btn btn-xs btn-success" ng-click="sua()"><i class="fa fa-pencil"></i> Sửa</button>
+                                <button type="submit" class="btn btn-xs btn-primary" ng-click="luu()"><i class="fa fa-check"></i> Lưu</button>
+                              </span>
+                            </header>
+                            <div class="panel-body">
+
+                                <form method="post" accept-charset="utf-8" class="bs-example form-horizontal">
+                                    <div class="form-group">
+                                      <div class="col-lg-12">
+                                        <div style="width: 100%; float:left; height: 600px " class="wrapper">
+                                            <map zoom="16" center="[10.886633, 106.768182]" map-type-id="satellite" style="display:block;height:600px">
+                                              <map-data on-addfeature"vm.savePolygon()">
+                                              </map-data>
+                                              <drawing-manager
+                                                on-overlaycomplete="vm.onMapOverlayCompleted()"
+                                                drawing-control-options="{position: 'TOP_CENTER',drawingModes:['marker', 'circle', 'polygon', 'polyline', 'rectangle']}"
+                                                drawingControl="true"
+                                                drawingMode="null"
+                                                markerOptions="{icon:'www.example.com/icon'}"
+                                                polylineOptions="{strokeColor: '#FF0000', strokeOpacity: 1.0, editable: true}"
+                                                rectangleOptions="{fillColor: '#FFFF00',fillOpacity: 1,strokeWeight: 5,zIndex: 1,editable: true}"
+                                                polygonOptions="{fillColor: '#FFFF00',fillOpacity: 1,strokeWeight: 5,zIndex: 1,editable: true}"
+                                                circleOptions="{fillColor: '#FFFF00',fillOpacity: 1,strokeWeight: 5,zIndex: 1,editable: true}"
+                                                 >
+                                              </drawing-manager>
+                                              <custom-control id="home" position="TOP_RIGHT" index="1" on-click="vm.click()">
+                                                <div class="btn-group" dropdown="">
+                                                  <button type="button" class="btn btn-xs btn-default" colorpicker type="text" colorpicker-selected="change_strokcolor()" ng-model="strokeColor"><i class="fa fa-minus" style="color: {{strokeColor}}"></i></button>
+                                                  <button type="button" class="btn btn-xs btn-default dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                                                    {{strokeWeight}}
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="" ng-click="change_strokeWeight(1)">1</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(2)">2</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(3)">3</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(4)">3</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(5)">5</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(6)">6</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(7)">7</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(8)">8</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(9)">9</a></li>
+                                                    <li><a href="" ng-click="change_strokeWeight(10)">10</a></li>
+                                                  </ul>
+                                                </div>
+                                                <div class="btn-group" dropdown="">
+                                                  <button type="button" class="btn btn-xs btn-default" colorpicker type="text" ng-model="fillColor"><i class="fa fa-stop" style="color: {{fillColor}}"></i></button>
+                                                  <button type="button" class="btn btn-xs btn-default dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                                                    {{fillOpacity}}
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="" ng-click="change_fillOpacity(0)">0.00</a></li>
+                                                    <li><a href="" ng-click="change_fillOpacity(0.25)">0.25</a></li>
+                                                    <li><a href="" ng-click="change_fillOpacity(0.5)">0.5</a></li>
+                                                    <li><a href="" ng-click="change_fillOpacity(0.75)">0.75</a></li>
+                                                    <li><a href="" ng-click="change_fillOpacity(1)">1.00</a></li>
+                                                  </ul>
+                                                </div>
+                                                <div class="m-xs btn-group">
+                                                  <button type="" class="btn btn-xs btn-default" name="button" ng-click="delete()"><i class="fa fa-trash text-danger"></i></button>
+                                                </div>
+                                              </custom-control>
+
+                                            </map>
+                                            {{vm.geoType}} : {{vm.geoArray}}
+                                            <p class="hidden">Route: {{route}}</p>
+                                            <p class="hidden">Start: {{start}}</p>
+                                            <p class="hidden">Waypoints: {{theWaypoints}}</p>
+                                            <p class="hidden">End: {{end}}</p>
+                                            <!-- <p>{{tinh(map.directionsRenderers[0].directions.routes[0])}}</p> -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label"></label>
+                                        <div class="col-lg-8">
+
+                                        </div>
+                                    </div>
+                                    <!-- <ul ng-repeat="lcv in loaicongviec | groupBy: 'phongth._id'">
+                                      <li ng-repeat="l in lcv">{{l.phongth}}</li>
+                                    </ul> -->
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- End Project Form -->
+                </section>
+            </section>
+        </aside>
+    </section>
+    <a href="#" class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+</section>

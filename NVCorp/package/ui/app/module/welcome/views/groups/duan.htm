@@ -1,0 +1,51 @@
+<div class="padder-top">
+  <div class="main">
+  </div>
+  <div class="">
+    <div class="message-history col-xs-12" style="float: right; height:0px; overflow: hidden;padding:0px"></div>
+    <div class="">
+      <div>
+        <div class="h-content message-history" ng-repeat="ac in activities | orderBy:'-activity_date'">
+          <div class="message">
+            <a class="message_profile-pic" href=""><img class="h-avatar" src="files/get/{{ac.user.cur_avatar}}" alt=""></a>
+            <a class="message_username" href=""><strong>{{ac.user.fullname}}</strong></a>
+            <span class="message_timestamp">1:31 AM</span>
+            <span class="message_star"></span>
+            <span class="message_content">{{ac.activity}}<a href="" class="text-info h-highlight" ui-sref="app.projects.view.project_details({p_id: ac.module_content._id})">{{ac.module_content.project_title}}</a></span>
+            <div class="comment-container" ng-if="ac.sub_module == 'comments'">
+              <div class="action-comment markeddown js-comment" dir="auto">
+                <div class="current-comment js-friendly-links js-open-card">
+                  <p class="m-n" ng-if="ac.sub_module_content.message != ''">
+                    <commentmes data="ac.sub_module_content" mes="{content: ac.sub_module_content}"></commentmes>
+                  </p>
+                  <div class="line b-b" ng-if="(ac.sub_module_content.html) && (ac.sub_module_content.message != '')"></div>
+                  <div ng-bind-html="ac.sub_module_content.html" class="">
+                  </div>
+                  <div class="line b-b" ng-if="ac.comment_files.length > 0 && (ac.sub_module_content.message != '')"></div>
+                  <h3 class="card-detail-item-header file-list-header js-show-with-desc" ng-if="ac.comment_files.length > 0">Tập tin đính kèm</h3>
+                  <div class="checklist-item file-list-title" ng-repeat="f in ac.comment_files" ng-if="!(f.mimetype | isImage)">
+                    <div class="normal-item enabled js-toggle-checklist-item"><i class="fa fa-file-text-o sub-cat-icon"></i>
+                    </div>
+                    <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                      <p class="checklist-item-details-text m-n" style="padding-left: 0px;"><a target="_self" href="files/download/{{f._id}}">{{f.originalname}}</a>
+                        <!-- <a href="http://www.namviet.tk/files/pdf/59505a02d315f72c9608b6dd" data-fancybox="" target="_top" data-type="pdf">PDF file</a> -->
+                      </p>
+                    </div>
+                  </div>
+                  <div class="">
+                    <a ng-repeat="f in ac.comment_files" ng-if="f.mimetype | isImage" target="_top" class="pull-left thumb thumb-wrapper m-r-xs m-b-xs" href="files/download/{{f._id}}" data-fancybox="images-preview">
+                      <img src="files/thumb/{{f._id}}" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line b-b"></div>
+        </div>
+        <div class="wrapper-xs padder-lg" ng-if="show_button">
+          <button class="col-lg-12 btn btn-success m-t-n-md" ng-click="get_more_activities()">Xem thêm</button>
+        </div>
+      </div>
+    </div>
+  </div>

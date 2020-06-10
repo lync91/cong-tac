@@ -1,0 +1,165 @@
+<div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }">
+  <!-- hbox layout -->
+  <div class="hbox hbox-auto-xs bg-light " size-watcher size-watcher-height="myheight">
+    <!-- column -->
+
+    <!-- /column -->
+
+    <!-- column -->
+    <div class="col">
+      <div class="vbox" ng-controller="duyetcongtac as vm">
+        <div class="row-row">
+          <div class="col w-md lter b-r">
+            <div class="vbox">
+              <div class="wrapper-sm b-b b-light">
+                <div class="font-thin">
+                  <a href="" ui-sref="app.congtac.details({u_id: param.u_id, thang: param.thang, nam: param.nam})" class="btn btn-xs btn-default m-r-sm">
+                    <i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                  <strong>Danh sách công tác</strong>
+                </div>
+              </div>
+              <div class="row-row">
+                <div class="cell">
+                  <div class="cell-inner bg-light lter">
+                    <div class="">
+                      <div class="">
+                        <ul class="nav nav-pills nav-stacked no-radius" ng-repeat="ct in dscongtac">
+                          <li class="b-b" ui-sref-active="active">
+                            <a href="" ui-sref="app.congtac.duyet({u_id: param.u_id, nam: param.nam, thang: param.thang, ct_id: ct._id})">{{ct.ct_num}} | {{ct.tencongtac}}
+                              <span class="badge bg-success pull-right" ng-if="ct.duyet">
+                                <i class="fa fa-check"></i>
+                              </span>
+                            </a>
+                          </li>
+                          <!-- <div class="line b-b"></div> -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cell">
+            <div class="vbox">
+              <div class="row-row">
+                <div class="cell">
+                  <div class="cell-inner">
+                    <div class="hbox hbox-auto-xs ng-scope">
+                      <div class="col">
+                        <div class="" ng-if="show">
+                          <div class="panel panel-default">
+                            <div class="wrapper">
+                              <form accept-charset="utf-8" class="bs-example form-horizontal">
+                                <!-- End discount Fields -->
+                                <div class="form-group terms">
+                                  <label class="col-lg-2 control-label">Xăng xe </label>
+                                  <div class="col-lg-2">
+                                    <input type="text" placeholder="Xăng xe" ng-model="ct.xangxe" class="form-control" value="" ui-number-mask="0">
+                                    <p>{{tongcp(ct.xangxe + ct.khac)}}</p>
+                                  </div>
+                                  <label class="col-lg-2 control-label">Khác </label>
+                                  <div class="col-lg-2">
+                                    <input type="text" placeholder="Khác" ng-model="ct.khac" class="form-control" value="" ui-number-mask="0">
+                                  </div>
+                                  <div class="col-lg-1">
+                                    <a href="" class="btn btn-info" ng-click="tinh(map.directionsRenderers[0].directions.routes[0])"><i class="icon-calculator"></i> Tính chi phí</a>
+                                  </div>
+                                </div>
+                                <div class="form-group terms">
+                                  <label class="col-lg-2 control-label">Tổng chi phí </label>
+                                  <div class="col-lg-2">
+                                    <input type="text" placeholder="Tổng chi phí" ng-model="ct.tong" value="{{tongcp(ct.xangxe + ct.khac)}}" class="form-control"
+                                      ui-number-mask="0">
+                                  </div>
+                                  <label class="col-lg-2 control-label">Ngày TH </label>
+                                  <div class="col-lg-2">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" popup-placement="auto" ng-model="ct.ngayth" is-open="opened"
+                                      datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
+                                      close-text="Close" />
+                                  </div>
+                                  <div class="col-lg-1">
+                                    <a href="" class="btn btn-success" ng-if="!ct.duyet" ng-click="duyet(ct)"><i class="fa fa-check"></i> Duyệt công tác</a>
+                                    <a href="" class="btn btn-danger" ng-if="ct.duyet" ng-click="duyet(ct)"><i class="fa fa-times"></i> Bỏ duyệt công tác</a>
+                                  </div>
+                                </div>
+                                <div class="form-group terms">
+                                  <div style="width: 75%; float:left; height: 600px " class="wrapper">
+                                    <map zoom="16" center="[10.886633, 106.768182]" style="display:block;height:600px">
+                                      <marker position="{{cur_diadiem.pos.lat}}, {{cur_diadiem.pos.lng}}"></marker>
+                                      <directions ng-if="route.length >= 1" draggable="true" travel-mode="DRIVING" origin="{{start.pos[0]}}, {{start.pos[1]}}"
+                                        destination="{{end.pos[0]}}, {{end.pos[1]}}" waypoints="{{theWaypoints}}" suppress-markers="false">
+                                      </directions>
+                                    </map>
+                                  </div>
+                                  <div id="directions-panel" class="wrapper" style="width: 25%; height: 100%; overflow: auto;">
+                                    <!-- <p class="">Route: {{route}}</p>
+                                                                      <p>{{map.directionsRenderers[0].directions.routes[0].legs}}</p> -->
+                                    <div class="streamline b-l m-b">
+
+                                      <div ng-repeat="r in route" class="sl-item b-success b-l">
+                                        <div class="m-l">
+                                          <div class="m-b-xs">
+                                            <span class="badge badge-sm bg-success">{{get_char($index)}}</span>
+                                          </div>
+                                          <p class="text-muted">{{r.name}}</p>
+                                        </div>
+                                      </div>
+                                      <div class="sl-item b-success b-l">
+                                        <div class="m-l">
+                                          <div class="m-b-xs">
+                                            <span class="badge badge-sm bg-danger">{{get_char(route.length)}}</span>
+                                          </div>
+                                          <p class="text-muted">Công ty Nam Việt</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /column -->
+
+  <!-- column -->
+  <div class="col w-md lter b-l hidden">
+    <div class="vbox">
+      <div class="wrapper b-b b-light">
+        <div class="font-thin h4">Header</div>
+        <small class="text-muted">with fluid height</small>
+      </div>
+      <div class="row-row">
+        <div class="cell">
+          <div class="cell-inner">
+            <div class="wrapper-md">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /column -->
+</div>
+<!-- /hbox layout -->
+
+</div>
+<!-- </div> -->
+<!-- / view -->
+<!-- navbar -->
+<!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+    
+    </div> -->
+<!-- /navbar -->

@@ -1,0 +1,224 @@
+<style>
+    body {
+        display: block;
+        margin: 0px;
+    }
+
+    .invoice-box {
+        max-width: 800px;
+        /*margin:auto;*/
+        /*padding:30px;*/
+        /*border:1px solid #eee;*/
+        /*box-shadow:0 0 10px rgba(0, 0, 0, .15);*/
+        /*font-size: 10px;*/
+        line-height: 18px;
+        /*font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;*/
+        color: #555;
+    }
+
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        /*font: italic bold 12px/30px Georgia, serif;*/
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .company-box {
+        line-height: 16px;
+        text-align: right;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .qr-box {
+        width: 100px;
+    }
+
+    .ben-giaonhan-box {
+        padding-bottom: 5px !important;
+    }
+
+    .giaonhan-table {
+        display: table;
+        border-collapse: collapse;
+        ;
+        border-spacing: 0px;
+        border: 1px solid #eee;
+        /*border-color: grey;*/
+    }
+
+    .giaonhan-table tr td {
+        border: 1px solid #eee;
+    }
+
+    .duan-box {
+        padding: 0px !important;
+    }
+</style>
+<!-- <a href="#" target="_top"></a> -->
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Phiếu giao nhận hồ sơ</h4>
+</div>
+<div class="modal-body" id="print-content" style="width: 100%;
+            height: 100%;">
+            <div  id="bbgiaonhan" class="wrapper-md no-padder hidden" data-ng-include=" 'module/projects/tpl/giaonhan.htm' " style="padding-top: 50px;">
+            </div>
+    <div ui-butterbar></div>
+    <div class="invoice-box">
+        <table class="giaonhan-table" style="margin-bottom:24px">
+            <tr class="heading">
+                <td>
+                    Thông tin chung:
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td class="duan-box" style="padding: 0px">
+
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                <b>Dự án: {{p.project_title}}</b><br> Chủ đầu tư: {{p.chudautu.company_name}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Bên giao: Công ty cổ phần đầu tư xây dụng dịch vụ Nam Việt
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                  <label class="control-label m-t-xs lb-diadiem">Bên nhận: </label>
+                                  <div angucomplete-alt id="ex1"
+                                  placeholder="Nhập địa điểm..."
+                                  maxlength="50" pause="100"
+                                  selected-object="selectedBennhan"
+                                  local-data="diadiem"
+                                  local-search="localSearch"
+                                  search-fields="company_name"
+                                  title-field="company_name"
+                                  minlength="1"
+                                  input-class="form-control form-control-small"
+                                  match-class="highlight"
+                                  field-required="true"
+                                  text-no-results="Không có kết quả nào"
+                                  input-changed="inputChanged"
+                                  class="ip-diadiem">
+
+                                  </div>
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Bộ phận: {{tk.phongban.company_name}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Ghi chú: {{tk.ghichu}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="width: 150px; padding-bottom:5px">
+                    <center>
+                        <qr size="160" text="'string'" image="true"></qr>
+                    </center>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Danh mục hồ giao nhận
+                </td>
+
+                <td>
+                    Số lượng
+                </td>
+            </tr>
+
+            <tr class="item" ng-repeat="m in listm">
+                <td>
+                    {{m.milestone_name}}
+                </td>
+
+                <td>
+                  <input type="text" name="" class="form-control sl-giaonhan pull-right" ng-model="m.sl" ui-number-mask="0">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <alert ng-show="printable" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <button type="submit" ng-show="printable" ng-click="print()" class="btn btn-success"><i class="fa fa-print"></i> In văn bản</button>
+    <button type="submit" ng-click="ky()" class="btn btn-info" ng-if="ky == true"><i class="fa fa-pencil"></i> Ký </button>
+    <button type="submit" ng-click="save()" class="btn btn-primary"><i class="fa fa-check"></i> Khởi tạo</button>
+
+    <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+</div>

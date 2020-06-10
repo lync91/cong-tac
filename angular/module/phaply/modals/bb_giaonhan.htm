@@ -1,0 +1,220 @@
+<style>
+    body {
+        display: block;
+        margin: 0px;
+    }
+
+    .invoice-box {
+        max-width: 800px;
+        /*margin:auto;*/
+        /*padding:30px;*/
+        /*border:1px solid #eee;*/
+        /*box-shadow:0 0 10px rgba(0, 0, 0, .15);*/
+        font-size: 10px;
+        line-height: 18px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .company-box {
+        line-height: 16px;
+        text-align: right;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .qr-box {
+        width: 100px;
+    }
+
+    .ben-giaonhan-box {
+        padding-bottom: 5px !important;
+    }
+
+    .giaonhan-table {
+        display: table;
+        border-collapse: collapse;
+        ;
+        border-spacing: 0px;
+        border: 1px solid #eee;
+        /*border-color: grey;*/
+    }
+
+    .giaonhan-table tr td {
+        border: 1px solid #eee;
+    }
+
+    .duan-box {
+        padding: 0px !important;
+    }
+</style>
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Biên bản giao nhận hồ sơ</h4>
+</div>
+<div class="modal-body" id="print-content" style="width: 100%;
+            height: 100%;">
+    <div class="invoice-box">
+        <table class="giaonhan-table" style="margin-bottom:24px">
+            <tr class="heading">
+                <td>
+                    Thông tin chung:
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td class="duan-box" style="padding: 0px">
+
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                <b>Dự án: {{bb.duan.project_title}}</b><br> Chủ đầu tư: {{bb.milestone.project.chudautu.company_name}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Bên giao: {{bb.nguoigiao.fullname}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Bên nhận: {{bb.nguoinhan.fullname}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Ghi chú: {{bb.description}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="width: 150px; padding-bottom:5px">
+                    <center><qrcode data="https://www.namviet.tk/app/projects/view/592332fcf378e954df6f2115/milestones.html?mid=592332fcf378e954df6f2119" version="2" error-correction-level="M" size="120"></qrcode></center>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Danh mục hồ sơ giao nhận
+                </td>
+
+                <td>
+                    Số lượng
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    Chứng chỉ: {{bb.chungchi.loaichungchi.loaichungchi}} {{bb.chungchi.loaicongtrinh.loaicongtrinh}} của {{bb.chungchi.user.fullname}}
+                </td>
+
+                <td>
+                    {{bb.soluong}}
+                </td>
+
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <!-- <br> -->
+                    <center><b>Bên giao
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                   {{bb.nguoigiao.fullname}}</b></center>
+                </td>
+                <td style="">
+                    <!-- <br> -->
+                    <center><b>Bên nhận
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                   {{bb.nguoinhan.fullname}}</b></center>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" ng-click="print()" class="btn btn-primary"><i class="fa fa-print"></i> In văn bản</button>
+        <a href="phaply/bbgiaonhancc/{{bb._id}}/download" class="btn btn-primary"><i class="fa fa-download"></i> Tải xuống</a>
+        <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    </div>

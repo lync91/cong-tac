@@ -1,0 +1,97 @@
+<aside ng-controller="nav_right" class="bg-dark b-r aside-md hidden-print {{is_logedin ? '' : 'hidden'}}" id="nav">
+    <section class="vbox">
+        <section class="scrollable">
+            <div class="slim-scroll" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="5px" data-color="#333333">
+                <!-- nav -->
+                <nav class="nav-primary hidden-xs">
+                    <ul class="nav">
+                        <li class="{{module == 'welcome' ? 'active' : ''}}">
+                            <a href="#/"> <i class="fa fa-dashboard icon"> <b class="bg-info"></b> </i>
+                                <span>Trang chủ</span> </a>
+                        </li>
+                        <li class="{{module == 'calendar' ? 'active' : ''}}">
+                            <a href="#/calendar"> <i class="fa fa-calendar icon"> <b class="bg-info"></b> </i>
+                                <span>Lịch làm việc</span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/kanban"> <i class="fa fa-dashboard icon"> <b class="bg-info"></b> </i>
+                                <span>Công việc</span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/companies"> <i class="fa fa-group icon"> <b class="bg-info"></b> </i>
+                                <span>Phòng ban</span> </a>
+                        </li>
+
+                        <li class="">
+                            <a href="">
+                                <i class="fa fa-university icon"> <b class="bg-info"></b> </i>
+                                <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i>
+                </span>
+                                <span>Pháp nhân </span> </a>
+                            <ul class="nav lt">
+                                <li class="">
+                                    <a href="#/companies/chudautu"> <i class="fa fa-angle-right"></i>
+                                        <span>Chủ đầu tư</span> </a>
+                                </li>
+                                <li class="">
+                                    <a href="#/companies/doitac"> <i class="fa fa-angle-right"></i>
+                                        <span>Đối tác </span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="">
+                                <i class="fa fa-briefcase icon"> <b class="bg-info"></b> </i>
+                                <span class="pull-right"> <i class="fa fa-angle-down text"></i> <i class="fa fa-angle-up text-active"></i>
+                </span>
+                                <span>Văn bản hành chính </span> </a>
+                            <ul class="nav lt">
+                                <li class="">
+                                    <a href="#/estimates"> <i class="fa fa-angle-right"></i>
+                                        <span>Công văn </span> </a>
+                                </li>
+                                <li class="">
+                                    <a href="#/estimates/quyetdinh"> <i class="fa fa-angle-right"></i>
+                                        <span>Quyết định </span> </a>
+                                </li>
+                                <li class="">
+                                    <a href="#/estimates"> <i class="fa fa-angle-right"></i>
+                                        <span>Chứng chỉ </span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="">
+                            <a href="#/invoices"> <i class="fa fa-credit-card icon"> <b class="bg-info"></b> </i>
+                                <span>Hợp đồng - Nghiệm thu </span> </a>
+                        </li>
+                        <li class="{{module == 'projects' ? 'active' : ''}}">
+                            <a href="#/projects/list"> <i class="fa fa-coffee icon"> <b class="bg-info"></b> </i>
+                                <span>Dự án </span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/congtac/account/"> <i class="fa fa-money icon"> <b class="bg-info"></b> </i>
+                                <span>Công tác phí </span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/tainguyen"> <i class="fa fa-book icon"> <b class="bg-info"></b> </i>
+                                <span>Tài nguyên </span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/scan"> <i class="fa fa-book icon"> <b class="bg-info"></b> </i>
+                                <span>Scan </span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/messages"> <b class="badge bg-success pull-right">0</b> <i class="fa fa-envelope-o icon"> <b class="bg-info"></b> </i>
+                                <span>Tin nhắn </span> </a>
+                        </li>
+                        <li class="">
+                            <a href="#/nhansu"> <i class="fa fa-list-alt icon"> <b class="bg-info"></b> </i>
+                                <span>Bình bầu </span> </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- / nav -->
+            </div>
+        </section>
+    </section>
+</aside>

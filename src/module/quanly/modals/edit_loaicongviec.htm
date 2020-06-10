@@ -1,0 +1,51 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Sửa thông tin chức vụ</h4>
+</div>
+<div class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên loại công việc</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="lcv.loaicongviec_new">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Phòng thực hiện</label>
+            <div class="col-lg-8">
+                <ui-select ng-model="lcv.phongth_new" theme="bootstrap">
+                    <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.company_name}}</ui-select-match>
+                    <ui-select-choices repeat="item in phongban | filter: $select.search">
+                        <div ng-bind-html="item.company_name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Thứ tự</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="lcv.thutu_new">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Các công tác</label>
+            <div class="col-lg-8">
+                <!-- <p class="checklist-item-details-text" ng-repeat="ct in congtachd | filter: {loaicongviec : lcv._id}">{{ct.name}} -->
+                <!-- <span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}"></i> {{item.progress}}% </span>
+                    <span class="{{item.progress != 100 ? '' : 'hidden'}}"></i> {{item.progress}}% </span> -->
+                <!-- </p> -->
+                <div class="checklist-item" ng-repeat="ct in congtachd | filter: {loaicongviec : lcv._id}">
+                    <div class="normal-item enabled js-toggle-checklist-item"><i class="fa fa-file-text-o sub-cat-icon"></i>
+                    </div>
+                    <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                        <p class="checklist-item-details-text"><a editable-text="ct.name" onaftersave="update_ct(ct)">{{ ct.name || 'chưa có' }}</a></p>
+                    </div>
+                </div>
+                <a editable-text="congtachd_new.name" onaftersave="congtachd_moi(congtachd_new)">{{ ct.name || 'Thêm công tác mới' }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Lưu thay đổi</button>
+
+    </div>

@@ -1,0 +1,23 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+  <h4 class="modal-title">Theo dõi dự án</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+  <div class="modal-body">
+    <div class="form-group">
+      <label class="col-lg-3 control-label slack-lb"><h4 class="m-n"><span class="fa fa-slack"></span></h4></label>
+      <div class="col-lg-5" style="    margin-left: 25px;">
+        <input type="text" class="form-control tag-duan" name="" value="" ng-model="dt.tag">
+      </div>
+    </div>
+    <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+      <tbody>
+        <tr ng-repeat="n in nhomhs">
+          <td>{{n.nhomhs}}</td>
+          <td class="no-padder"><label class="i-switch m-t-xs"><input type="checkbox" ng-model="flags[n._id]"><i></i></label></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer"> <a href="#" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Đóng</a>
+    <button type="submit" class="btn btn-primary" ng-click="ok()">Theo dõi</button>
+  </div>

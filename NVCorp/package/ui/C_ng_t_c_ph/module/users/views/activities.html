@@ -1,0 +1,30 @@
+<section class="hbox stretch" ng-controller="activities">
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    <aside>
+        <section class="vbox">
+            <section class="scrollable wrapper">
+                <!-- Start Project Form -->
+                <div class="col-sm-12">
+                    <section class="panel panel-default">
+                        <header class="panel-heading font-bold"><i class="fa fa-info-circle"></i> Thông báo hoạt động </header>
+                        <div class="panel-body">
+                            <ul class="list-group list-group-alt list-group-lg no-borders pull-in m-b-none">
+                                <li ng-repeat="ac in activities" class="list-group-item">
+                                    <a href="#" class="pull-left thumb-sm m-r">
+                                        <img src="files/get/{{ac.user.cur_avatar}}" alt="..." class="img-circle">
+                                    </a>
+                                    <div class="clear">
+                                        <a href="">
+                                          <a href="" class="h5 text-primary m-b-sm block">{{ac.user.fullname}} <span class="label label-sm bg-{{ac.user.chucvu.class}}">{{ac.user.chucvu.chucvu}}</span></a>
+                                          <div><a href="{{ac.link}}">{{{ac: ac} | acrender}}</a></div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Project Form -->
+                    </section>
+            </section>
+        </section>
+    </aside>
+</section>

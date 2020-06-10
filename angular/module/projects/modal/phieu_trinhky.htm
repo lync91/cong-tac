@@ -1,0 +1,131 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Phiếu trình ký hồ sơ</h4>
+</div>
+<div class="modal-body" id="print-content" style="width: 100%;
+            height: 100%;">
+    <div class="invoice-box">
+        <table class="giaonhan-table" style="margin-bottom:24px">
+            <tr class="heading">
+                <td>
+                    Thông tin chung:
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td class="duan-box" style="padding: 0px">
+
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                <b>Dự án: {{tk.milestone.project.project_title}}</b><br> Chủ đầu tư: {{tk.milestone.project.chudautu.company_name}}
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="giaonhan-table">
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Người trình ký: {{tk.nhanvientrinhky.fullname}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Người ký: {{tk.nguoiky.fullname}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Bộ phận: {{tk.phongban.company_name}}
+                            </td>
+                        </tr>
+                        <tr class="item">
+                            <td class="ben-giaonhan-box">
+                                Ghi chú: {{tk.ghichu}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td style="width: 150px; padding-bottom:5px">
+                    <center>
+                        <qr size="160" text="'string'" image="true"></qr>
+                    </center>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Danh mục hồ trình ký
+                </td>
+
+                <td>
+                    Số lượng
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    {{tk.milestone.milestone_name}}
+                </td>
+
+                <td>
+                    {{tk.soluong}}
+                </td>
+
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Tập tin đính kèm
+                </td>
+
+                <td>
+                    <!-- Số lượng -->
+                </td>
+            </tr>
+
+            <tr class="item" ng-repeat="f in tk.files">
+                <td colspan="2">
+                    <a target="_self" href="files/download/{{f._id}}"><i class="fa fa-file-text-o"></i> {{f.originalname}}</a>
+                </td>
+
+                <!-- <td>
+                    {{tk.soluong}}
+                </td> -->
+
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <!-- <br> -->
+                    <center><b>Trưởng bộ phận
+                  <div class="" style="height: 100px; width: 274px;">
+                    <img src="img/approved.png" alt="" style="width: 50%; position: relative; top: 20px;" ng-if="tk.sign_token.user1.signed == true">
+                  </div>
+                   {{tk.truongbp.fullname}}</b></center>
+                </td>
+                <td style="">
+                    <!-- <br> -->
+                    <center><b>Người trình ký
+                      <div class="" style="height: 100px; width: 274px;">
+                        <img src="img/approved.png" alt="" style="width: 50%; position: relative; top: 20px;" ng-if="tk.sign_token.user2.signed == true">
+                      </div>
+                   {{tk.nhanvientrinhky.fullname}}</b></center>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="submit" ng-click="print()" class="btn btn-primary"><i class="fa fa-print"></i> In văn bản</button>
+    <button type="submit" ng-click="xacnhan()" class="btn btn-info" ng-if="ky == true"><i class="fa fa-pencil"></i> Ký </button>
+    <button type="submit" ng-click="huy()" class="btn btn-danger" ng-if="ky == true"><i class="fa fa-minus-circle"></i> Hủy </button>
+    <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+</div>

@@ -1,0 +1,745 @@
+<!-- <div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Trình ký hồ sơ</h4>
+</div> -->
+<div class="modal-body no-padder">
+    <div class="no-padder">
+        <div>
+            <div class="panel-body bg-light no-padder">
+                <div class="window-wrapper js-tab-parent">
+                    <button type="button" class="close m-r-sm" ng-click="cancel()">&times;</button>
+                    <!-- <a class="icon-lg icon-close dialog-close-button js-close-window" href="#"></a> -->
+                    <div class="wrapper" style="height:80px;" ng-if="!m">
+                        <th-spinner theme="'initspin'" display="'true'" size="'size-sm'" class="row"></th-spinner>
+                    </div>
+                    <!-- size-lg	size-md	size-sm	STOP -->
+                    <div class="card-detail-window u-clearfix" ng-if="m">
+                        <div class="window-cover hide js-card-cover-box js-open-card-cover-in-viewer">
+                            <div class="window-cover-stickers js-display-stickers"></div>
+                        </div>
+                        <div class="window-archive-banner hide js-archive-banner">
+                            <span class="icon-lg icon-archive window-archive-banner-icon"></span>
+                            <p class="window-archive-banner-text">This card is archived.</p>
+                        </div>
+                        <div class="window-archive-banner hide js-archived-list-banner">
+                            <span class="icon-lg icon-archive window-archive-banner-icon"></span>
+                            <p class="window-archive-banner-text">This card is in an archived list.</p>
+                        </div>
+                        <div class="window-header">
+                            <span class="window-header-icon icon-lg icon-card"></span>
+                            <div class="window-title">
+                                <h2 class="card-detail-title-assist js-title-helper" dir="auto">Need help?</h2>
+                                <h4 class="m-n milestone-title">
+                                    <!-- {{(m.nhomhs._id == '586a0ab8516a3e129131fc86' && m.hopdong) ? 'Hợp đồng ' + m.hopdong.tengoithau : m.milestone_name}} -->
+                                    <a ng-if="m.nhomhs._id != '586a0ab8516a3e129131fc86'" editable-text="m.milestone_name" e-formclass="milestone-name" onaftersave="update_m({ac: 'milestone_name', m: m})">{{ m.milestone_name || 'chưa có' }}</a>
+                                    <a ng-if="m.nhomhs._id == '586a0ab8516a3e129131fc86' && m.hopdong" editable-text="m.hopdong.tengoithau" e-formclass="milestone-name"
+                                        onaftersave="update_hd({hd: m.hopdong, ac: 'tengoithau'})">Hợp đồng {{ m.hopdong.tengoithau || 'chưa có' }}</a>
+                                </h4>
+                            </div>
+                            <div class="window-header-inline-content quiet js-current-list">
+                                <p class="u-inline-block u-bottom m-n" ng-if="m.nhomhs._id == '586a0ab8516a3e129131fc86' && m.hopdong">
+                                    Số hợp đồng:
+                                    <a editable-text="m.hopdong.sohopdong" onaftersave="update_hd({hd: m.hopdong, ac: 'sohopdong'})">{{ m.hopdong.sohopdong || 'chưa có' }}</a>
+                                </p>
+                                <p class="u-inline-block u-bottom m-n" ng-if="m.nhomhs._id != '586a0ab8516a3e129131fc86'">
+                                    Số văn bản:
+                                    <a editable-text="m.sovanban" onaftersave="update_m({ac: 'sovanban', m: m})">{{ m.sovanban || 'chưa có' }}</a>
+                                </p>
+                                <p class="u-inline-block u-bottom m-n" ng-if="m.nhomhs._id == '586a0ab8516a3e129131fc86' && m.hopdong">
+                                    Ngày ký:
+                                    <a editable-date="m.hopdong.ngayky" onaftersave="update_hd({hd: m.hopdong, ac: 'ngayky'})"
+                                        e-ng-change="">{{ (m.hopdong.ngayky | date:"dd/MM/yyyy") || 'chưa có' }}</a>
+                                </p>
+                                <p class="u-inline-block u-bottom m-n" ng-if="m.nhomhs._id != '586a0ab8516a3e129131fc86'">
+                                    Ngày phát hành:
+                                    <a editable-date="m.ngayph" onaftersave="update_m({ac: 'ngayph', m: m})"
+                                        e-ng-change="">{{ (m.ngayph | date:"dd/MM/yyyy") || 'chưa có' }}</a>
+                                </p>
+                                <!-- <p class="u-inline-block u-bottom m-n">Chủ đầu tư: <a class="js-open-move-from-header" href="#">Intermediate</a></p> -->
+                            </div>
+                            <div class="window-header-inline-content hide js-subscribed-indicator-header">
+                                <span class="icon-sm icon-subscribe"></span>
+                            </div>
+
+                            <div class="m-t" style="zoom: 0.9">
+                                <ul class="timeline" id="timeline">
+                                    <li class="li trangthai {{m.trangthai.trangthai.thutu >= 1 ? 'thuchien' : ''}}">
+                                        <div class="timestamp">
+                                            <!-- <span class="date" ng-if="m.trangthai.trangthai.class =='thuchien'">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}</span> -->
+                                            <!-- <span class="date" ng-if="m.trangthai.trangthai.class =='thuchien'">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}<span> -->
+                                            <!-- <span class="date">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}<span> -->
+                                            <span class="date">{{ lichsu_trangthai['thuchien'].date | date:
+                                                'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div class="status">
+                                            <h5> Thực hiện </h5>
+                                        </div>
+                                    </li>
+                                    <li class="li trangthai {{m.trangthai.trangthai.thutu > 3 ? 'chuyenphat' : ''}}">
+                                        <div class="timestamp">
+                                            <!-- <span class="date" ng-if="m.trangthai.trangthai.class =='chuyenphat'">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}</span> -->
+                                            <span class="date">{{ lichsu_trangthai['chuyenphat'].date | date:
+                                                'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div class="status">
+                                            <h5> Chuyển phát </h5>
+                                        </div>
+                                    </li>
+                                    <li class="li trangthai {{m.trangthai.trangthai.thutu >= 5 ? 'pheduyet' : ''}}">
+                                        <div class="timestamp">
+                                            <!-- <span class="date" ng-if="m.trangthai.trangthai.class =='pheduyet'">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}</span> -->
+                                            <span class="date">{{ lichsu_trangthai['pheduyet'].date | date:
+                                                'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div class="status">
+                                            <h5> Phêt duyệt </h5>
+                                        </div>
+                                    </li>
+                                    <li class="li trangthai {{m.trangthai.trangthai.thutu >= 6 ? 'luutru' : ''}}">
+                                        <div class="timestamp">
+                                            <!-- <span class="date" ng-if="m.trangthai.trangthai.class =='luutru'">{{(m.trangthai.date | date: 'dd/MM/yyyy')}}</span> -->
+                                            <span class="date">{{ lichsu_trangthai['luutru'].date | date:
+                                                'dd/MM/yyyy'}}</span>
+                                        </div>
+                                        <div class="status">
+                                            <h5> Lưu trữ </h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-9">
+                            <div class="card-detail-data m-l-lg u-gutter">
+                                <div class="m-l-xs">
+                                    <div class="card-detail-item card-detail-item-labels u-clearfix js-card-detail-labels">
+                                        <h3 class="card-detail-item-header">
+                                            <p>Nhân viên thực hiện</p>
+                                        </h3>
+                                        <div class="js-card-detail-members-list">
+                                            <label ng-repeat="t in m.tasks | orderBy: '-date_added'| limitTo: 3" data-type="info" class="{{t.assigned_to.fullname ? '' : 'hidden'}}"
+                                                ng-click="chitiet_nhiemvu('', '', t, m)">
+                                                <a href="" class="btn btn-xs btn-rounded btn-success no-border no-padder padder m-r-xs">
+                                                    <img alt="member" class="img-circle ms-users no-border m-l-n-xxs" src="files/get/{{t.assigned_to.cur_avatar}}">
+                                                    <font href="" class="m-r-sm">{{t.assigned_to.fullname}}</font>
+                                                </a>
+                                            </label>
+                                            <button class="btn btn-default btn-rounded" ng-if="m.tasks.length > 3">+{{ m.tasks.length - 3}} người khác</button>
+                                            <label class="{{user.chucvu.level <= 2 || (user.chucvu.level = 3 && user.company._id == m.phongth._id) ? '' : 'hidden'}} ">
+                                                <button class="btn btn-default btn-circle btn-lg giaoviec-btn" ng-if="globals.roles.giao_viec_tat_ca || (globals.roles.giao_viec && globals.user_details.company._id == m.loaicongviec.phongth)"
+                                                    tooltip="Giao việc" type="button" ng-click="giaoviec(m)">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="card-detail-item js-card-detail-due-date hidden">
+                                        <h3 class="card-detail-item-header">Giai đoạn</h3>
+                                        <span class="card-detail-badge card-detail-due-date-badge js-card-detail-due-date-badge is-due-past is-clickable"
+                                            title="This card is past due.">
+                                            <span class="card-detail-badge-due-date-complete-box js-card-detail-due-date-badge-complete js-details-toggle-due-date-complete">
+                                                <span class="icon-sm icon-check card-detail-badge-due-date-complete-icon"></span>
+                                            </span>
+                                            <span class="js-date-text card-detail-due-date-text js-details-edit-due-date">Thiết kế bản vẽ thi công</span>
+                                        </span>
+                                    </div>
+                                    <div class="card-detail-item hide js-card-detail-votes">
+                                        <h3 class="card-detail-item-header">Votes</h3>
+                                        <a class="card-detail-badge is-clickable js-card-detail-votes-badge js-show-votes" href="#"></a>
+                                    </div>
+                                    <div class="card-detail-item hide js-card-detail-age">
+                                        <h3 class="card-detail-item-header">Last Updated</h3>
+                                        <div class="card-detail-badge date mod-last-updated js-card-detail-age-badge"></div>
+                                    </div>
+                                    <div class="js-plugin-badges">
+                                        <div></div>
+                                    </div>
+                                    <div class="card-detail-item card-detail-item-block u-clearfix editable" attr="desc">
+                                        <h3 class="card-detail-item-header js-show-with-desc">Thông tin dự án</h3>
+                                        <!-- <a class="card-detail-item-header-edit hide-on-edit js-show-with-desc js-edit-desc" href="#">Edit</a> -->
+                                        <div class="description-content js-desc-content">
+                                            <div class="description-content-fade-button">
+                                                <span class="description-content-fade-button-text">Show full description.</span>
+                                            </div>
+                                            <div class="current markeddown hide-on-edit js-card-desc js-show-with-desc" dir="auto">
+                                                <p>Tên dự án:
+                                                    <a href="">{{p.project_title }}</a>
+                                                </p>
+                                                <p>Loại công trình:
+                                                    <a href="">{{p.loaicongtrinh.loaicongtrinh}}</a>
+                                                </p>
+                                                <p>Cấp công trình:
+                                                    <a href="">Công trình cấp {{p.capcongtrinh}}</a>
+                                                </p>
+                                                <p>Nhóm dự án:
+                                                    <a href="">Dự án nhóm {{p.nhomduan}}</a>
+                                                </p>
+                                                <p>Gói thầu thực hiện:
+                                                    <a href="" ng-repeat="gt in p.goithauthuchien">
+                                                        <font ng-if="gt.loaicongviec != 'Đấu thầu' && gt.loaicongviec !='Chỉ định thầu'">{{gt.loaicongviec}} - </font>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <p class="u-bottom">
+                                                <a class="quiet-button mod-with-image hide-on-edit js-edit-desc js-hide-with-desc hide"
+                                                    href="#">
+                                                    <span class="icon-sm icon-description quiet-button-icon"></span>&nbsp;Edit the description…</a>
+                                            </p>
+                                            <div class="card-detail-edit edit">
+                                                <a class="helper js-format-help" href="#">Formatting help</a>
+                                                <textarea class="field"></textarea>
+                                            </div>
+                                            <p class="edits-warning quiet">You have unsaved edits on this field.
+                                                <a class="js-view-edits" href="#">View edits</a> -
+                                                <a class="js-discard-edits" href="#">Discard</a>
+                                            </p>
+                                            <p class="edits-error error">Edit not saved.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="js-plugin-sections"></div>
+                            <!-- <div class="window-module js-attachments-section u-clearfix">
+                              <div class="window-module-title window-module-title-no-divider"><span class="window-module-title-icon icon-lg icon-attachment"></span>
+                                  <h3 class="u-inline-block">File đính kèm gần đây </h3>
+                              </div>
+                              <div class="u-gutter">
+                                  <div class="u-clearfix js-attachment-list">
+                                      <div class="attachment-thumbnail"><a class="attachment-thumbnail-preview" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html"
+                                              target="_blank" title="INSPINIA _ Agile board.html" style=""><span class="attachment-thumbnail-preview-ext">html</span></a>
+                                          <p class="attachment-thumbnail-details"><a class="attachment-thumbnail-details-title js-attachment-thumbnail-details" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html"
+                                                  title="INSPINIA _ Agile board.html" target="_blank">INSPINIA _ Agile board.html<span class="u-block quiet">Added <span class="date" dt="2017-04-29T16:43:42.708Z" title="April 29, 2017 11:43 PM">7 minutes ago</span></span></a>
+                                              <span
+                                                  class="quiet attachment-thumbnail-details-options"><a class="attachment-thumbnail-details-options-item dark-hover js-download" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html"
+                                                      target="_blank" download="download"><span class="icon-sm icon-download"></span> <span class="attachment-thumbnail-details-options-item-text js-direct-link">Download</span>
+                                                    </a><a class="attachment-thumbnail-details-options-item dark-hover hide js-make-cover" href="#"><span class="icon-sm icon-card-cover"></span> <span class="attachment-thumbnail-details-options-item-text">Make Cover</span></a>
+                                                  <a
+                                                      class="attachment-thumbnail-details-options-item dark-hover hide js-remove-cover" href="#"><span class="icon-sm icon-card-cover"></span> <span class="attachment-thumbnail-details-options-item-text">Remove Cover</span></a><a class="attachment-thumbnail-details-options-item attachment-thumbnail-details-options-item-delete dark-hover js-confirm-delete"
+                                                          href="#"><span class="icon-sm icon-close"></span> <span class="attachment-thumbnail-details-options-item-text">Delete</span></a><a class="attachment-thumbnail-details-options-item js-reply"
+                                                          href="#"><span class="icon-sm icon-comment"></span> <span class="attachment-thumbnail-details-options-item-text">Comment</span></a>
+                                                      </span>
+                                          </p>
+                                      </div>
+                                      <div class="attachment-thumbnail"><a class="attachment-thumbnail-preview" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/3abe23bbb233da4c5f38d35b1ec62ac1/Ment.io_examples.html"
+                                              target="_blank" title="Ment.io examples.html" style=""><span class="attachment-thumbnail-preview-ext">html</span></a>
+                                          <p class="attachment-thumbnail-details"><a class="attachment-thumbnail-details-title js-attachment-thumbnail-details" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/3abe23bbb233da4c5f38d35b1ec62ac1/Ment.io_examples.html"
+                                                  title="Ment.io examples.html" target="_blank">Ment.io examples.html<span class="u-block quiet">Added <span class="date" dt="2016-05-14T14:52:36.508Z" title="May 14, 2016 9:52 PM">May 14, 2016 at 9:52 PM</span></span></a>
+                                              <span
+                                                  class="quiet attachment-thumbnail-details-options"><a class="attachment-thumbnail-details-options-item dark-hover js-download" href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/3abe23bbb233da4c5f38d35b1ec62ac1/Ment.io_examples.html"
+                                                      target="_blank" download="download"><span class="icon-sm icon-download"></span> <span class="attachment-thumbnail-details-options-item-text js-direct-link">Download</span>
+                                                      </a><a class="attachment-thumbnail-details-options-item dark-hover hide js-make-cover" href="#"><span class="icon-sm icon-card-cover"></span> <span class="attachment-thumbnail-details-options-item-text">Make Cover</span></a>
+                                                  <a
+                                                      class="attachment-thumbnail-details-options-item dark-hover hide js-remove-cover" href="#"><span class="icon-sm icon-card-cover"></span> <span class="attachment-thumbnail-details-options-item-text">Remove Cover</span></a><a class="attachment-thumbnail-details-options-item attachment-thumbnail-details-options-item-delete dark-hover js-confirm-delete"
+                                                          href="#"><span class="icon-sm icon-close"></span> <span class="attachment-thumbnail-details-options-item-text">Delete</span></a><a class="attachment-thumbnail-details-options-item js-reply"
+                                                          href="#"><span class="icon-sm icon-comment"></span> <span class="attachment-thumbnail-details-options-item-text">Comment</span></a>
+                                                      </span>
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <p class="js-show-fewer-attachments hide"><a class="quiet-button js-view-some-attachments" href="#">Show fewer attachments.</a>
+                                  </p>
+                                  <p class="js-show-more-attachments hide"><a class="quiet-button js-view-all-attachments" href="#">View all attachments (-2 hidden)</a>
+                                  </p>
+                                  <p><a class="quiet-button js-attach" href="#">Add an attachment…</a>
+                                  </p>
+                              </div>
+                          </div> -->
+                            <div class="checklist-list window-module js-checklist-list js-no-higher-edits ui-sortable">
+                                <div class="checklist">
+                                    <div class="">
+                                        <h4 class="m-l-xxs">
+                                            <span class="fa fa-bookmark-o m-l-xs cat-icon m-r-sm"></span>
+                                            <font class="milestone-cat m-l-xs">Trình ký | Chuyển phát:
+                                                <strong>{{ m.trinhky.length }}</strong>
+                                            </font>
+                                        </h4>
+                                    </div>
+                                    <div class="checklist-items-list js-checklist-items-list js-no-higher-edits ui-sortable">
+                                        <div class="checklist-item m-list-item" ng-repeat="tk in m.trinhky | orderBy: '-ngaytrinhky' | limitTo: 3">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-dot-circle-o sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">
+                                                    <a href="" class="{{tk.sign_token.user1.signed ? 'text-info' : 'text-danger'}}"
+                                                        ng-click="phieu_trinhky(tk)">{{tk.nhanvientrinhky.fullname}} ({{tk.ngaytrinhky | date:'dd/MM/yyyy'}})</a>
+                                                    <a href="" class="text-info" ng-click="phieu_chuyenphat(tk.chuyenphaths)">
+                                                        <font ng-if="tk.chuyenphaths">| {{tk.chuyenphaths.nhanvienchuyenphat.fullname}} ({{tk.chuyenphaths.ngaychuyenphat
+                                                            | date:'dd/MM/yyyy'}})</font>
+                                                    </a>
+                                                    <a href="" class="btn btn-xs btn-default pull-right m-l-xs m-t-n-xxs mlbutton" ng-if="!tk.chuyenphaths" ng-show="options"
+                                                        ng-click="chuyenphat(tk)">Chuyển phát</a>
+                                                </p>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checklist-list window-module js-checklist-list js-no-higher-edits ui-sortable">
+                                <div class="checklist">
+                                    <div class="">
+                                        <h4>
+                                            <span class="fa fa-reorder m-l-xs cat-icon m-r-sm"></span>
+                                            <font class="milestone-cat m-l-xs">Số lượng hồ sơ lưu:
+                                                <strong>{{ m.slluu}}</strong>
+                                            </font>
+                                        </h4>
+                                        <span class="editing-members js-editing-members hide"></span>
+                                    </div>
+                                    <div class="checklist-items-list js-checklist-items-list js-no-higher-edits ui-sortable">
+                                        <div class="checklist-item m-list-item" ng-repeat="pb in hosoluu">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-archive sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">{{pb._id.company_name[0]}}: {{pb.slluu}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checklist-list window-module js-checklist-list js-no-higher-edits ui-sortable">
+                                <div class="checklist">
+                                    <div class="">
+                                        <h4 style="margin-bottom: 0px">
+                                            <span class="fa fa-folder-o m-l-xs cat-icon m-r-sm"></span>
+                                            <font class="milestone-cat m-l-xs">Tập tin số</font>
+                                            <span class="btn btn-default btn-xs btn-file m-xs">
+                                                <span class="fileinput-new">
+                                                    <i class="fa fa-paperclip"></i> Đính kèm</span>
+                                                <input type="file" nv-file-select="" uploader="uploader"
+                                                    options="{headers: {id: m._id, type: 'so'}, autoUpload: 'true'}" multiple
+                                                />
+                                            </span>
+                                        </h4>
+                                        <span class="editing-members js-editing-members hide">
+                                        </span>
+                                    </div>
+                                    <div class="checklist-items-list js-checklist-items-list js-no-higher-edits ui-sortable">
+                                        <div class="checklist-item" ng-repeat="item in uploader.queue | filter: {headers : {type : 'so'}}">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">{{item.file.name}}
+                                                    <span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}">
+                                                        </i> {{item.progress}}% </span>
+                                                    <span class="{{item.progress != 100 ? '' : 'hidden'}}">
+                                                        </i> {{item.progress}}% </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="checklist-item" ng-repeat="f in m.fileso">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">
+                                                    <a target="_self" href="files/get/{{f._id}}" download="{{f.originalname}}">{{f.originalname}}</a>
+                                                    <a href="" class="btn btn-xs btn-danger pull-right m-l-xs m-t-n-xxs  mlbutton" ng-show="options" ng-click="delete_file(f)">Xóa</a>
+                                                    <a href="" class="btn btn-xs btn-danger pull-right m-l-xs m-t-n-xxs  mlbutton" ng-show="options">Xem</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="checklist-list window-module js-checklist-list js-no-higher-edits ui-sortable">
+                                <div class="checklist">
+                                    <div class="">
+                                        <h4 style="margin-bottom: 0px">
+                                            <span class="fa fa-folder m-l-xs cat-icon m-r-sm"></span>
+                                            <font class="milestone-cat m-l-xs">Tập tin scan</font>
+                                            <span class="btn btn-default btn-xs btn-file m-xs">
+                                                <span class="fileinput-new">
+                                                    <i class="fa fa-paperclip"></i> Đính kèm</span>
+                                                <input type="file" nv-file-select="" uploader="uploader"
+                                                    options="{headers: {id: m._id, type: 'scan'}, autoUpload: 'true'}" multiple
+                                                />
+                                            </span>
+                                        </h4>
+                                        <span class="editing-members js-editing-members hide"></span>
+                                    </div>
+                                    <!-- item in uploader.queue | filter: {headers : {id : cc._id}} -->
+                                    <div class="checklist-items-list js-checklist-items-list js-no-higher-edits ui-sortable">
+                                        <div class="checklist-item" ng-repeat="item in uploader.queue | filter: {headers : {type : 'scan'}}">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">{{item.file.name}}
+                                                    <span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}">
+                                                        </i> {{item.progress}}% </span>
+                                                    <span class="{{item.progress != 100 ? '' : 'hidden'}}">
+                                                        </i> {{item.progress}}% </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="checklist-item" ng-repeat="f in m.filescan">
+                                            <div class="normal-item enabled js-toggle-checklist-item">
+                                                <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">
+                                                    <a target="_self" href="files/get/{{f._id}}" download="{{f.originalname}}">{{f.originalname}}</a>
+                                                    <a href="" class="btn btn-xs btn-danger pull-right m-l-xs m-t-n-xxs  mlbutton" ng-show="options" ng-click="delete_file(f)">Xóa</a>
+                                                    <a href="files/pdf/{{f._id}}" target="_blank" class="btn btn-xs btn-default pull-right m-l-xs m-t-n-xxs  mlbutton" ng-show="options">
+                                                        <i class="fa fa-eye"></i>Xem</a>
+                                                    <a target="_self" href="files/get/{{f._id}}" download="{{f.originalname}}" class="btn btn-xs btn-default pull-right m-l-xs m-t-n-xxs  mlbutton"
+                                                        ng-show="options">
+                                                        <i class="fa fa-download"></i> Tải xuống</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checklist-list window-module js-checklist-list js-no-higher-edits ui-sortable" ng-repeat="lcv in project.goithauthuchien">
+                                <div class="checklist" ng-if="lcv.loaicongviec != 'Đấu thầu' && lcv.loaicongviec !='Chỉ định thầu'">
+                                    <div class="window-module-title no-padder window-module-title-no-divider u-clearfix ed grab">
+                                        <span class="window-module-title-icon m-t-n-sm icon-lg icon-checklist"></span>
+                                        <div class="editable non-empty checklist-title" attr="name">
+                                            <h4 class="current no-padder hide-on-edit" dir="auto">Nhân sự {{lcv.loaicongviec}}
+                                                <a href="" class="btn btn-xs btn-default" ng-click="them_nhansu(lcv)">
+                                                    <i class="fa fa-upload"></i> Tải lên</a>
+                                            </h4>
+                                            <div class="window-module-title-options hidden">
+                                                <a class="hide hide-on-edit quiet js-show-checked-items" href="#" style="margin: 0 8px;">Show checked items (10)</a>
+                                                <a class="hide-on-edit quiet js-hide-checked-items"
+                                                    href="#" style="margin: 0 8px;">Hide completed items</a>
+                                                <a class="hide-on-edit quiet js-confirm-delete hidden" href="#">Delete…</a>
+                                            </div>
+                                            <div class="edit edit-heavy">
+                                                <textarea class="field full single-line" dir="auto"></textarea>
+                                            </div>
+                                            <p class="edits-warning quiet">You have unsaved edits on this field.
+                                                <a class="js-view-edits" href="#">View edits</a> -
+                                                <a class="js-discard-edits" href="#">Discard</a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="checklist-items-list js-checklist-items-list js-no-higher-edits ui-sortable">
+                                        <div class="checklist-item" ng-repeat="ns in project.nhansu | filter: { loaicongviec : lcv._id}">
+                                            <div class="checklist-item-checkbox enabled js-toggle-checklist-item">
+                                                <span class="icon-sm icon-check checklist-item-checkbox-check"></span>
+                                            </div>
+                                            <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                <p class="checklist-item-details-text">{{ns.chucdanh.chucdanh}}: {{ns.nhansu.fullname}}
+                                                    <a href="" class="btn btn-xs btn-danger pull-right m-l-xs m-t-n-xxs"
+                                                        ng-show="options" ng-click="delete_nhansu_duan(ns)">Xóa</a>
+                                                    <a href="" class="btn btn-xs btn-default pull-right m-t-n-xxs"
+                                                        ng-show="options" ng-click="sua_nhansu(ns, lcv)">Sửa</a>
+                                                </p>
+                                                <div class="edit delete convert options-menu">
+                                                    <textarea class="field full single-line js-checkitem-input" type="text"></textarea>
+                                                </div>
+                                                <p class="edits-warning quiet">You have unsaved edits on this field.
+                                                    <a class="js-view-edits" href="#">View edits</a> -
+                                                    <a class="js-discard-edits" href="#">Discard</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="window-module add-comment-section">
+                                <div class="">
+                                    <h4>
+                                        <span class="icon-bubble m-l-xs cat-icon m-r-sm"></span>
+                                        <font class="milestone-cat">Bình luận</font>
+                                    </h4>
+                                    <span class="editing-members js-editing-members hide"></span>
+                                </div>
+                                <div class="new-comment js-new-comment">
+                                    <div class="member member-no-menu">
+                                        <span class="member-initials" title="{{globals.user_details.fullname}}">
+                                            <a class="pull-left thumb-xs">
+                                                <img src="files/get/{{globals.user_details.cur_avatar}}" class="" alt="...">
+                                            </a>
+                                        </span>
+                                        <span class="member-gold-badge" title="This member has Trello Gold."></span>
+                                    </div>
+                                    <form>
+                                        <div class="comment-frame">
+                                            <div class="comment-box">
+                                                <!-- <textarea class="comment-box-input js-new-comment-input" ng-model="comment.message" placeholder="Viết bình luận…" tabindex="1" dir="auto" style="overflow: hidden; word-wrap: break-word; height: 45px !important; min-height: 45px; border-bottom-width: 0px;"></textarea> -->
+                                                <!-- <textarea ng-model="comment.message" aria-label="Dynamic textarea"></textarea> -->
+                                                <div contenteditable contenteditabl="true" only-text="true" placeholder="Hãy bình luận gì đó..." convert-new-lines="true"
+                                                    ng-model="comment.message" ng-trim="true" rows="5" cols="100" flag="@" at-user
+                                                    atEmoji ng-keydown="e_keydown(this)" style="height: auto; border-bottom-width: 0px;"
+                                                    auto-complete class="comment comment-box-input js-new-comment-input"></div>
+                                                <!-- <textarea ng-model="comment.message" rows="8" cols="80"></textarea> -->
+                                                <span auto-follow="true" ng-if="!isAtListHidden">
+                                                    <div ui-scroll-viewport class="aem-picker-panel b" style="height: 200px;">
+                                                        <div class="list-group-item user-item" ng-repeat="u in listchungchi | filter: {fullname : query.text}" ng-click="autoComplete(u)">
+                                                            <a herf class="pull-left thumb-xxs avatar m-r m-r-xxs m-t-xxs" ng-click="autoComplete(u)">
+                                                                <img src="files/get/{{u.cur_avatar}}" alt="..." class="img-circle m-t-xxs">
+                                                                <i class="on b-white bottom"></i>
+                                                            </a>
+                                                            <div class="clear">
+                                                                <div>
+                                                                    <a ui-toggle-class="show" style="font-weight: normal;" ng-click="autoComplete(u)">{{u.fullname}}</a>
+                                                                </div>
+                                                                <small class="text-muted text-user-item-chucvu">{{u.chucvu.chucvu ? u.chucvu.chucvu : 'Chưa có'}}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </span>
+
+                                                <span auto-follow="true" ng-if="!isAtListHidden_e">
+                                                    <!-- <div emoji class="list-group users-list emoji-list no-borders pull-in aem-picker-panel b">
+                                                      <div ng-repeat="e in aemoji" class="aem aem-{{e.class}}" ng-click="autoComplete_e(e)"></div>
+                                                  </div> -->
+                                                    <div emoji class=" aem-picker-panel b">
+                                                        <div class="" value="{{e.class}}">
+                                                            <div ng-repeat="e in aemoji" class="aem-select">
+                                                                <div class="aem aem-{{e.class}}" ng-click="autoComplete_e(e)"></div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                                <!-- {{comment.message}} -->
+                                                <div class="line b-b" ng-if="uploader.queue.length > 0"></div>
+                                                <h3 class="card-detail-item-header js-show-with-desc padder" ng-if="uploader.queue.length > 0">Tập tin đính kèm</h3>
+                                                <div class="checklist-item" ng-repeat="item in uploader.queue | filter: {headers : {type : 'comments'}}">
+                                                    <div class="normal-item enabled js-toggle-checklist-item">
+                                                        <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                                    </div>
+                                                    <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                        <p class="checklist-item-details-text">{{item.file.name}}
+                                                            <span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}">
+                                                                </i> {{item.progress}}% </span>
+                                                            <span class="{{item.progress != 100 ? '' : 'hidden'}}">
+                                                                </i> {{item.progress}}% </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="" style="height: 36px;"></div>
+                                                <div class="comment-box-options">
+                                                    <span class="comment-box-options-item js-comment-add-attachment btn-file">
+                                                        <span class="fileinput-new">
+                                                            <span class="icon-sm icon-attachment"></span>
+                                                        </span>
+                                                        <input type="file" nv-file-select="" uploader="uploader" options="{headers: {id: m._id, type: 'comments'}, autoUpload: 'true'}"
+                                                            multiple />
+                                                    </span>
+                                                    <a class="comment-box-options-item js-comment-mention-member" href="#" title="Mention a member…">
+                                                        <span class="icon-sm icon-mention"></span>
+                                                    </a>
+                                                    <a class="comment-box-options-item js-comment-add-emoji" href="" title="Add emoji…">
+                                                        <span class="icon-sm icon-emoji"></span>
+                                                    </a>
+                                                    <a class="comment-box-options-item js-comment-add-card" href="#" title="Add card…">
+                                                        <span class="icon-sm icon-card"></span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="comment-controls u-clearfix">
+                                            <button type="" class="btn btn-info" name="button" ng-click="comment_m()">
+                                                <i class="fa fa-send-o"></i> Gửi</button>
+                                        </div>
+                                    </form>
+                                    <div class="comment-too-long-warning">
+                                        <p>Your comment is too long! You can add it as a text attachment or truncate it.</p>
+                                        <input class="primary js-attach-comment" type="submit" value="Add as an Attachment" tabindex="4">
+                                        <input class="js-truncate-comment" type="submit" value="Truncate" tabindex="5">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="window-module">
+                                <div class="window-module-title window-module-title-no-divider">
+                                    <span class="window-module-title-icon icon-lg icon-activity"></span>
+                                    <h3>Hoạt động</h3>
+                                    <div class="window-module-title-options hidden">
+                                        <a class="quiet hide js-show-details" href="#">Show Details</a>
+                                        <a class="quiet js-hide-details" href="#">Hide Details</a>
+                                    </div>
+                                </div>
+                                <div class="js-list-actions">
+                                    <div class="phenom mod-comment-type hidden  ">
+                                        <div class="phenom-creator">
+                                            <div class="member js-show-mem-menu" idmember="572eb403c6122f11a439a2bc">
+                                                <span class="member-initials" title="Lịch Vũ (lichvu)">LV</span>
+                                                <span class="member-gold-badge" title="This member has Trello Gold."></span>
+                                            </div>
+                                        </div>
+                                        <div class="phenom-desc">
+                                            <span class="inline-member js-show-mem-menu" idmember="572eb403c6122f11a439a2bc">
+                                                <span class="u-font-weight-bold">Lịch Vũ</span>
+                                            </span>
+                                            <div class="comment-container">
+                                                <div class="action-comment markeddown js-comment" dir="auto">
+                                                    <div class="current-comment js-friendly-links js-open-card">
+                                                        <p>
+                                                            <a href="https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html"
+                                                                target="_blank" rel="noreferrer">INSPINIA _ Agile board.html</a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="comment-box">
+                                                        <textarea class="comment-box-input js-text" tabindex="1">[INSPINIA _ Agile board.html](https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html)
+                                                            </textarea>
+                                                        <div class="comment-box-options">
+                                                            <a class="comment-box-options-item js-comment-add-attachment" href="#"
+                                                                title="Add an attachment…">
+                                                                <span class="icon-sm icon-attachment"></span>
+                                                            </a>
+                                                            <a class="comment-box-options-item js-comment-mention-member"
+                                                                href="#" title="Mention a member…">
+                                                                <span class="icon-sm icon-mention"></span>
+                                                            </a>
+                                                            <a class="comment-box-options-item js-comment-add-emoji" href="#" title="Add emoji…">
+                                                                <span class="icon-sm icon-emoji"></span>
+                                                            </a>
+                                                            <a class="comment-box-options-item js-comment-add-card" href="#"
+                                                                title="Add card…">
+                                                                <span class="icon-sm icon-card"></span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hide embedly js-embedly"></div>
+                                        </div>
+                                        <p class="phenom-meta quiet">
+                                            <a class="date js-hide-on-sending js-highlight-link" dt="2017-04-29T16:43:44.646Z"
+                                                href="/c/9QCnGRoK/16-need-help#comment-5904c2c0e30546aba2994f1b" title="April 29, 2017 11:43 PM">7 minutes ago</a>
+                                            <span class="js-spinner hide">
+                                                <span class="spinner spinner--inline mod-left small"></span> Sending…</span>
+                                            <span class="js-hide-on-sending"> -
+                                                <a class="js-edit-action" href="#">Edit</a> -
+                                                <a class="js-confirm-delete-action" href="#">Delete</a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="phenom mod-attachment-type" ng-repeat="ac in m.activities | orderBy: '-activity_date'">
+                                        <div class="phenom-creator">
+                                            <div class="member js-show-mem-menu" idmember="572eb403c6122f11a439a2bc">
+                                                <a class="pull-left thumb-xs">
+                                                    <img src="files/get/{{ac.user.cur_avatar}}" class="" alt="...">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="phenom-desc">
+                                            <span class="inline-member js-show-mem-menu" idmember="572eb403c6122f11a439a2bc">
+                                                <span class="u-font-weight-bold">
+                                                    <strong>{{ac.user.fullname}}</strong>
+                                                </span>
+                                            </span> {{ {ac: ac, state: 'milestones'} | acrender}}
+                                        </div>
+                                        <div class="comment-container" ng-if="ac.sub_sub_module == 'comments'">
+                                            <div class="action-comment markeddown js-comment" dir="auto">
+                                                <div class="current-comment js-friendly-links js-open-card">
+                                                    <p>
+                                                        <a href="" target="_blank" rel="noreferrer" ng-bind-html="ac.sub_sub_module_content.message | comments_render"></a>
+                                                        <!-- <a href="" target="_blank" rel="noreferrer"></a>{{ac.sub_sub_module_content.message}} -->
+                                                    </p>
+                                                </div>
+                                                <div class="line b-b" ng-if="ac.sub_sub_module_content.files.length > 0"></div>
+                                                <h3 class="card-detail-item-header js-show-with-desc padder" ng-if="ac.sub_sub_module_content.files.length > 0">Tập tin đính kèm</h3>
+                                                <div class="checklist-item" ng-repeat="f in ac.sub_sub_module_content.files">
+                                                    <div class="normal-item enabled js-toggle-checklist-item">
+                                                        <i class="fa fa-file-text-o sub-cat-icon"></i>
+                                                    </div>
+                                                    <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                                                        <p class="checklist-item-details-text">
+                                                            <a target="_self" href="files/download/{{f._id}}">{{f.originalname}}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="comment-box">
+                                                    <textarea class="comment-box-input js-text" tabindex="1">[INSPINIA _ Agile board.html](https://trello-attachments.s3.amazonaws.com/572eb403c6122f11a439a2c3/572eb404c6122f11a439a2e2/0a10478fe784064f7b3edb49596505c2/INSPINIA___Agile_board.html) </textarea>
+                                                    <div class="comment-box-options"><a class="comment-box-options-item js-comment-add-attachment" href="#" title="Add an attachment…"><span class="icon-sm icon-attachment"></span></a><a class="comment-box-options-item js-comment-mention-member"
+                                                            href="#" title="Mention a member…"><span class="icon-sm icon-mention"></span></a>
+                                                        <a class="comment-box-options-item js-comment-add-emoji" href="#" title="Add emoji…"><span class="icon-sm icon-emoji"></span></a><a class="comment-box-options-item js-comment-add-card" href="#"
+                                                            title="Add card…"><span class="icon-sm icon-card"></span></a>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                        </div>
+                                        <p class="phenom-meta quiet">
+                                            <a class="date js-hide-on-sending js-highlight-link" dt="2017-04-29T16:43:13.119Z" href="/c/9QCnGRoK/16-need-help#action-5904c2a12ac0a1d783e76208"
+                                                title="April 29, 2017 11:43 PM">{{ac.activity_date | fromNow}}</a>
+                                            <span class="js-spinner hide">
+                                                <span class="spinner spinner--inline mod-left small"></span> Sending…
+                                            </span>
+                                            <span class="js-hide-on-sending"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="spinner loading js-loading-card-actions" style="display: none;"></div>
+                                <p class="u-bottom">
+                                    <a class="show-more hide js-show-all-actions" href="#">Show all actions…</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="window-sidebar hidden-md">
+                            <div class="window-module u-clearfix">
+                                <h4>Thao tác</h4>
+                                <div class="u-clearfix">
+                                    <a class="button-link js-change-card-members" href="" ng-click="them_goithau()">
+                                        <span class="fa fa-edit"></span>&nbsp;Sửa</a>
+                                    <a class="button-link js-change-card-members" ng-if="m.hopdong" href="" ng-click="chitiet_hopdong(m)">
+                                        <span class="fa fa-edit"></span>&nbsp;Chi tiết HĐ</a>
+                                    <a class="button-link js-change-card-members" ng-click="khoitaohopdong(m)" ng-if="m.nhomhs._id == '586a0ab8516a3e129131fc86' && !m.hopdong">
+                                        <i class="fa fa-book"></i> Khởi tạo HĐ</a>
+                                    <a class="button-link js-change-card-members" ng-click="ketnoi_nghiemthu(m)" ng-if="m.nhomhs._id == '586a0ab8516a3e129131fc87' && !m.hopdong">
+                                        <i class="fa fa-link"></i> Kết nối HĐ</a>
+                                    <a class="button-link js-change-card-members" href="" ng-if="globals.roles.giao_viec_tat_ca || (globals.roles.giao_viec && globals.user_details.company._id == m.loaicongviec.phongth)"
+                                        ng-click="giaoviec(m)">
+                                        <span class="fa fa-users"></span>&nbsp;Giao việc</a>
+                                    <a class="button-link js-change-card-members" href="" ng-if="m.tasks | check_assigned" ng-click="trinhky(m)">
+                                        <span class="fa fa-pencil"></span>&nbsp;Trình ký</a>
+                                    <a class="button-link js-change-card-members" href="" ng-if="(m.tasks | check_assigned)|| globals.user_details.chucvu.level <=4"
+                                        ng-click="baoduyet(m)">
+                                        <span class="fa fa-thumbs-o-up"></span>&nbsp;Báo phê duyệt</a>
+                                    <a class="button-link js-change-card-members hidden" href="" ng-click="baoloi(m)">
+                                        <span class="fa fa-bug"></span>&nbsp;Báo lỗi</a>
+                                    <!-- <a class="button-link js-change-card-members" href="" ng-click="chuyenphat(m)"><span class="fa fa-flag"></span>&nbsp;Chuyển phát</a> -->
+                                    <a class="button-link js-change-card-members" href="" ng-click="delete_milestone('', '', m)">
+                                        <span class="fa fa-trash"></span>&nbsp;Xóa hồ sơ</a>
+                                    <!-- {{globals.user_details.company._id}} {{m.loaicongviec.phongth}} -->
+                                </div>
+                            </div>
+                            <!-- <div class="js-plugin-buttons">
+                                <div class="window-module u-clearfix hide">
+                                    <h3>Power-Ups</h3>
+                                    <div class="u-clearfix js-button-list"></div>
+                                </div>
+                            </div> -->
+                            <div class="window-module other-actions u-clearfix">
+                                <h4>HS Lưu</h4>
+                                <div class="u-clearfix">
+                                    <a class="button-link js-move-card" href="#">
+                                        <span class="fa fa-file-text"></span>&nbsp;Mẫu bìa</a>
+                                    <a class="button-link js-copy-card" href="#" ng-click="giaonhanhs('', '', m, 'nhan', 1)">
+                                        <span class="fa fa-sign-in"></span>&nbsp;Nhận</a>
+                                    <a class="button-link js-copy-card" href="#" ng-if="m.slluu > 0" ng-click="giaonhanhs('', '', m, 'giao', -1)">
+                                        <span class="fa fa-sign-out"></span>&nbsp;Giao</a>
+                                    <!-- <a class="button-link js-copy-card" href="#"><span class="fa fa-legal"></span>&nbsp;Niêm phong</a>
+                                <a class="button-link js-copy-card" href="#"><span class="fa fa-paw"></span>&nbsp;Mở niêm phong</a>
+                                <a class="button-link js-copy-card" href="#"><span class="fa fa-archive"></span>&nbsp;Lưu trữ</a>
+                                <a class="button-link js-copy-card" href="#"><span class="fa fa-trash-o"></span>&nbsp;Xóa</a> -->
+                                </div>
+                            </div>
+                            <div class="window-module u-clearfix hidden">
+                                <p class="quiet u-bottom">
+                                    <a class="quiet-button js-more-menu" href="#">Share and more…</a>
+                                </p>
+                            </div>
+                        </div>
+                        <p class="dropzone">Drop files to upload.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a><a href="" class="btn btn-default" ng-click="trinhky(m)">Test</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Trình ký</button>
+</div> -->

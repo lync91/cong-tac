@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">{{hsnhan.ac == 'nhan' ? 'Nhận chứng chỉ' : 'Giao chứng chỉ'}}</h4>
+</div>
+<div class="modal-body">
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Nhân sự <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            {{cc.user.fullname}} 
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Chứng chỉ <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            {{cc.loaichungchi.loaichungchi}}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Công trình <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            {{cc.loaicongtrinh.loaicongtrinh}}
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Dự án <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+          <ui-select ng-model="cc.duan" theme="bootstrap" ng-disabled="ctrl.disabled" style="width: 380px;" title="Choose a country" append-to-body="true">
+              <ui-select-match placeholder="Chọn loại công trình">{{$select.selected.project_title}}</ui-select-match>
+              <ui-select-choices repeat="pb in duan | filter: $select.search">
+                  <span ng-bind-html="pb.project_title | highlight: $select.search"></span>
+              </ui-select-choices>
+          </ui-select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Số lượng <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <div class="input-group bootstrap-touchspin number-txt-box">
+                <span class="input-group-btn"><button class="btn btn-white bootstrap-touchspin-down" ng-click="sl_tru()" type="button">-</button></span>
+                <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                <input class="touchspin1 form-control num-txt-height" type="text" value="0" ng-model="cc.sl" style="display: block;">
+                <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                <span class="input-group-btn"><button class="btn btn-white bootstrap-touchspin-up" ng-click="sl_cong()" type="button">+</button></span>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Ghi chú </label></div>
+        <div class="col-lg-8">
+            <textarea name="description" class="form-control" ng-model="cc.description" placeholder="Ghi chú"></textarea>
+        </div>
+    </div>
+    <div class="row form-group">
+
+        <div class="col-lg-4"><label class=" pull-right control-label">Người {{hsnhan.ac == 'nhan' ? 'giao' : 'nhận'}} <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8" style="z-index:0">
+            <ui-select ng-model="cc.nguoigiaonhan" theme="bootstrap" on-select="changenv(u_giao_nhan)" title="Choose a person">
+                <ui-select-match placeholder="Chọn nhân viên">{{$select.selected.fullname}}</ui-select-match>
+                <ui-select-choices repeat="item in nv | filter: $select.search">
+                    <div ng-bind-html="item.fullname | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Thoát</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update_luuhs()">OK</button>
+</div>

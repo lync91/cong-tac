@@ -1,0 +1,226 @@
+<div class="hbox hbox-auto-xs ng-scope" ng-controller="congtac_details">
+    <div class="col w-md w-auto-xs bg-light lter b-r">
+        <div class="wrapper no-padder">
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 0 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 0})">
+                        <i class="fa fa-fw fa-dashboard"></i> Cả năm</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 1 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 1})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 1</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 2 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 2})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 2</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 3 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 3})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 3</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 4 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 4})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 4</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 5 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 5})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 5</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 6 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 6})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 6</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 7 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 7})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 7</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 8 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 8})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 8</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 9 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 9})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 9</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 10 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 10})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 10</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 11 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 11})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 11</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked no-radius">
+                <li class=" {{ param.thang == 12 ? 'active' : '' }}">
+                    <a href="" ui-sref="app.congtac.details({u_id: param.u_id, nam: param.nam, thang: 12})">
+                        <i class="fa fa-fw fa-dashboard"></i> Tháng 12</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <label ng-if="param.thang == 0">Tổng hợp công tác năm</label>
+                    <label ng-if="param.thang > 0">Tổng hợp công tác tháng
+                        <b class="text-danger">{{param.thang}}</b> năm</label>
+                    <div class="btn-group dropdown" dropdown>
+                        <button class="btn btn-xs btn-default" dropdown-toggle>
+                            <b class="text-danger">{{param.nam}}</b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href ui-sref="app.congtac.details({ u_id: param.u_id, nam: 1*param.nam -2, thang: 0})">{{1*param.nam -2}}</a>
+                            </li>
+                            <li>
+                                <a href ui-sref="app.congtac.details({ u_id: param.u_id, nam: 1*param.nam -1, thang: 0})">{{1*param.nam -1}}</a>
+                            </li>
+                            <li>
+                                <a href ui-sref="app.congtac.details({ u_id: param.u_id, nam: 1*param.nam -0, thang: 0})">{{1*param.nam -0}}</a>
+                            </li>
+                            <li>
+                                <a href ui-sref="app.congtac.details({ u_id: param.u_id, nam: 1*param.nam +1, thang: 0})">{{1*param.nam +1}}</a>
+                            </li>
+                            <li>
+                                <a href ui-sref="app.congtac.details({ u_id: param.u_id, nam: 1*param.nam +2, thang: 0})">{{1*param.nam +2}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                        <a href class="btn btn-info m-l-xs btn-xs pull-right" ui-sref="app.congtac.duyet({nam: param.nam, thang: param.thang, ct_id: dscongtac[0]._id, u_id: param.u_id})">
+                            <i class="fa fa-plus"></i> Duyệt công tác</a>
+                        <a href class="btn btn-primary btn-xs pull-right" ui-sref="app.congtac.add({u_id: param.u_id, nam: param.nam, thang: param.thang})">
+                            <i class="fa fa-plus"></i> Thêm công tác</a>
+                        <a href="" ui-sref="app.congtac.xuatdulieu({u_id: param.u_id, thang: param.thang, nam: param.nam})" class="btn btn-default btn-xs pull-right m-r-xs">
+                            <i class="fa fa-download"></i> Xuất dữ liệu</a>
+                            <!-- <a href="files/congtac/{{param.u_id}}/{{param.nam}}/{{param.thang}}" target="_self" class="btn btn-default btn-xs pull-right m-r-xs">
+                                <i class="fa fa-download"></i> Xuất dữ liệu</a> -->
+                </div>
+                <div class="row padder m-t">
+                    <div class="col-lg-9 no-padder">
+                        <div class="col-lg-4">
+                            <p>Nhân viên:
+                                <b>{{dscongtac[0].nguoith.fullname}}</b>
+                            </p>
+                            <p>Hành trình:
+                                <b>{{(dscongtac | tinhtong: 'tongkm_duyet') | number}} km</b>
+                            </p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="" ng-if="param.thang != 0">Công tác được duyệt:
+                                <b>{{dscongtac | tinhtong: 'ct_duyet'}} CT</b>
+                            </p>
+                            <p class="">Tổng chi phí:
+                                <b>{{(dscongtac | tinhtong: 'tong_duyet') | number}} đồng</b>
+                            </p>
+                        </div>
+                        <div class="col-lg-4">
+                                <p class="" ng-if="param.thang != 0">Tổng số công tác:
+                                    <b>{{dscongtac.length}} CT</b>
+                                </p>
+                            </div>
+                    </div>
+                    <div class="row col-lg-3 dataTables_filter m-r">
+                        <label>
+                            <input id="filter" type="search" class="form-control input-sm" placeholder="" aria-controls="table-projects">
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+
+                    </div>
+                </div>
+                <div>
+                    <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tên công tác
+                                </th>
+                                <th>
+                                    Ngày TH
+                                </th>
+                                <th class="text-right">
+                                    Tổng km
+                                </th>
+                                <th class="text-right">
+                                    Tổng CP
+                                </th>
+                                <th class="text-right">
+                                    Trạng thái
+                                </th>
+                                    <th class="pull-right">
+                                    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ct in dscongtac">
+                                <td>
+                                    <a href class="text-info" ng-if="param.thang != 0" ui-sref="app.congtac.view({ct_id: ct._id})">{{ct.tencongtac}}</a>
+                                    <a href class="text-info" ng-if="param.thang == 0" ui-sref="app.congtac.details({u_id: param.u_id, nam: ct._id.nam, thang: ct._id.thang})">Tháng {{ct._id.thang}}</a>
+                                </td>
+                                <td>
+                                    <a href>{{ct.ngayth | date: 'dd/MM/yyyy'}}</a>
+                                </td>
+                                <td class="text-right">
+                                    <a href>{{ct.tongkm | number:3}}</a>
+                                </td>
+                                <td class="text-right">
+                                    <a href>{{ct.tong_duyet | number:0}}</a>
+                                </td>
+                                <td class="text-right">
+                                    <span class="badge" ng-if="!ct.duyet">Chưa duyệt</span>
+                                    <span class="badge bg-success" ng-if="ct.duyet">Đã duyệt</span>
+                                </td>
+                                    <td>
+                                        <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-if="param.thang != 0" ng-click="delete_congtac(ct)">
+                                            <i class="fa fa-circle-o-notch text-danger"></i>
+                                        </a>
+                                        <a href class="btn btn-default btn-xs pull-right m-l-xs hidden" ng-click="user_role(u)">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <a href class="btn btn-default btn-xs pull-right hidden" ng-click="edit_user(u)">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="hide-if-no-paging">
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <ul class="pagination"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

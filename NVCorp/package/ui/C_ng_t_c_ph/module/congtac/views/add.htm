@@ -1,0 +1,138 @@
+<div class="hbox hbox-auto-xs ng-scope" ng-controller="congtac_add as vm">
+
+    <div class="col">
+      <!-- toaster directive -->
+      <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+      <!-- / toaster directive -->
+        <div class="">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href class="btn btn-default btn-xs btn-default" ui-sref="app.congtac.details(param)"><i class="fa fa-chevron-left"></i> Quay lại</a>
+                    Thêm công tác:
+                    <a href class="btn btn-default btn-xs btn-success m-l pull-right" ng-click="add_congtac(param.u_id)"><i class="fa fa-check"></i> Thêm công tác</a>
+                    <a href class="btn btn-default btn-xs btn-default pull-right" ng-click="edit_dinhmuc(dinhmuc)"><i class="fa fa-pencil"></i> Sửa định mức</a>
+                </div>
+                <div class="wrapper">
+                    <form accept-charset="utf-8" class="bs-example form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Tên công tác <span class="text-danger">*</span></label>
+                            <div class="col-lg-6">
+                                <input type="text" placeholder="Tên công tác" ng-model="ct.tencongtac" class="form-control" value="" name="reference_no">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Người giao việc <span class="text-danger">*</span> </label>
+                            <div class="col-lg-4">
+                                <div class="m-b">
+                                    <ui-select ng-model="ct.nguoigiaoviec" theme="bootstrap" ng-disabled="ctrl.disabled" title="Choose a country" append-to-body="true">
+                                        <ui-select-match placeholder="Người giao việc">{{$select.selected.fullname}}</ui-select-match>
+                                        <ui-select-choices repeat="nv in ds_nhanvien | filter: $select.search ">
+                                            <span ng-bind-html="nv.fullname | highlight: $select.search"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Ngày thực hiện</label>
+                            <div class="col-lg-3">
+                                <p class="input-group">
+                                    <input type="date" class="form-control" ng-model="ct.ngayth"/>
+                                    <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- End discount Fields -->
+                        <div class="form-group terms">
+                            <label class="col-lg-3 control-label">Xăng xe </label>
+                            <div class="col-lg-3">
+                                <input type="text" placeholder="Xăng xe" ng-model="ct.xangxe" class="form-control" value="" ui-number-mask="0">
+                                <p>{{tongcp(ct.xangxe + ct.khac)}}</p>
+                            </div>
+                            <label class="col-lg-1 control-label">Khác </label>
+                            <div class="col-lg-3">
+                                <input type="text" placeholder="Khác" ng-model="ct.khac" class="form-control" value="" ui-number-mask="0">
+                            </div>
+                        </div>
+                        <div class="form-group terms">
+                            <label class="col-lg-3 control-label">Tổng chi phí </label>
+                            <div class="col-lg-3">
+                                <input type="text" placeholder="Tổng chi phí" ng-model="ct.tong" value="{{tongcp(ct.xangxe + ct.khac)}}" class="form-control" ui-number-mask="0">
+                            </div>
+                        </div>
+                        <div class="form-group terms">
+                            <label class="col-lg-3 control-label">Ghi chú </label>
+                            <div class="col-lg-6">
+                                <textarea name="ghi chú" ng-model="ct.ghichu" class="form-control ng-pristine ng-valid ng-touched" placeholder="Ghi chú"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group terms">
+                            <label class="col-lg-2 control-label">Địa điểm </label>
+                            <div class="col-lg-4">
+                                <div angucomplete-alt id="ex1" placeholder="Nhập địa điểm..." maxlength="50" pause="100" selected-object="selectedCountry" local-data="diadiem" search-fields="name" title-field="name" minlength="1" input-class="form-control form-control-small" match-class="highlight" field-required="true" text-no-results="Không có kết quả nào" input-changed="inputChanged">
+                                </div>
+                                <p>{{select_diadiem(selectedCountry.originalObject)}}</p>
+                            </div>
+                            <div class="col-lg-4">
+                                <!-- <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-map-autocomplete options="options" details="details"/> -->
+                                <!-- <input type="text" class="form-control"  ng-map-autocomplete ng-model="autocomplete" options="options" details="details"/> -->
+                                <input id="address_box" places-auto-complete class="form-control" placeholder="Nhập địa địa chỉ..." ng-model="address" component-restrictions="{country:'vn'}" types="{{types}}" on-place-changed="placeChanged()" />
+                            </div>
+                            <div class="col-lg-2">
+                                <a href class="btn btn-default" ng-click="find(address)">Tìm</a>
+                                <a href class="btn btn-default" ng-click="add_diadiem(selected_diadiem, place, address)">Thêm</a>
+                            </div>
+                            <div style="width: 68%; float:left; height: 600px " class="wrapper">
+                                <map zoom="16" center="[10.886633, 106.768182]" style="display:block;height:600px">
+                                  <marker position="{{cur_diadiem.pos.lat}}, {{cur_diadiem.pos.lng}}"></marker>
+                                  <directions ng-if="route.length >= 1"
+                                    draggable="true"
+                                    travel-mode="DRIVING"
+                                    origin="{{start.pos[0]}}, {{start.pos[1]}}"
+                                    destination="{{end.pos[0]}}, {{end.pos[1]}}"
+                                    waypoints="{{theWaypoints}}"
+                                    suppress-markers="false">
+                                  </directions>
+
+                                </map>
+                                <p class="hidden">Route: {{route}}</p>
+                                <p class="hidden">Start: {{start}}</p>
+                                <p class="hidden">Waypoints: {{theWaypoints}}</p>
+                                <p class="hidden">End: {{end}}</p>
+                                <!-- <p>{{tinh(map.directionsRenderers[0].directions.routes[0])}}</p> -->
+                            </div>
+
+                            <div id="directions-panel" class="wrapper" style="width: 28%; height: 100%; overflow: auto;">
+                                <!-- <p class="">Route: {{route}}</p>
+                              <p>{{map.directionsRenderers[0].directions.routes[0].legs}}</p> -->
+                                <div class="streamline b-l m-b">
+
+                                    <div  ng-repeat="r in route" class="sl-item b-success b-l">
+                                        <div class="m-l">
+                                            <div class="m-b-xs"><span class="badge badge-sm bg-success">{{get_char($index)}}</span></div>
+                                            <p class="text-muted">{{r.name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="sl-item b-success b-l">
+                                        <div class="m-l">
+                                            <div class="m-b-xs"><span class="badge badge-sm bg-danger">{{get_char(route.length)}}</span></div>
+                                            <p class="text-muted">Công ty Nam Việt</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

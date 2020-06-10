@@ -1,0 +1,16 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">×</button>
+    <h4 class="modal-title">Phân quyền nhân viên</h4>
+</div>
+<div class="modal-body">
+    <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+        <tbody>
+            <tr ng-repeat="(key, val) in roles">
+                <td>{{key}}</td>
+                <td class="no-padder"><label class="i-switch m-t-xs"><input type="checkbox" ng-model="roles[key]"><i></i></label></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Đóng</a>
+    <button type="submit" class="btn btn-primary" ng-click="ok()">Lưu thay đổi</button>
+</div>

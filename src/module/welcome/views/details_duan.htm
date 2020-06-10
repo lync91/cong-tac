@@ -1,0 +1,139 @@
+<div class="vbox " ng-controller="duan">
+  <div class="wrapper b-b b-light no-padder" data-spy="affix" data-offset-top="205">
+    <div class="">
+      <div class="team-menu hidden">Team Awesome</div>
+      <div class="channel-menu"><span class="channel-menu_name"><span class="channel-menu_prefix">#</span>{{tag_label}}</span><span class="channel-menu_name pull-right"><i class="icon-settings m-xs" ng-click="follow_config()"></i> <a href ui-sref="app.projects.view.project_details({p_id: p._id})"><i class="icon-share-alt m-xs"></i></a></span></div>
+    </div>
+  </div>
+  <div class="padder b-t b-light">
+    <div class="">
+      <form>
+        <div class="comment-frame">
+          <div class="comment-box">
+            <div class="user {{picker_w}}">
+              <!-- <ul ng-if="!isAtListHidden" class="{{!isAtListHidden ? 'ul-show' : ''}}">
+                <li ng-repeat="u in dsnhanvien | unisearch: {fullname : query.text} | limitTo:10"><a href ng-click="autoComplete(u)"><img src="files/get/{{u.cur_avatar}}" alt="..." class="img-circle avatar-75 m-t-xxs">{{u.fullname}}</a></li>
+              </ul> -->
+              <!-- <ul ng-if="!isAtListHidden_m" class="{{!isAtListHidden_m ? 'ul-show' : ''}}">
+                <li ng-repeat="m in milestones | unisearch: {milestone_name : query_m.text} | limitTo:10"><a href ng-click="autoComplete_m(m)">{{m.milestone_name}}</a></li>
+              </ul> -->
+              <!-- <ul ng-if="!isAtListHidden_p" class="{{!isAtListHidden_p ? 'ul-show' : ''}}">
+                <li ng-repeat="p in projects | unisearch: {project_code : query_p.text} | limitTo:10"><a href ng-click="autoComplete_p(p)">{{p.project_code}}</a></li>
+              </ul> -->
+              <!-- <ul ng-if="!isAtListHidden_e" class="{{!isAtListHidden_e ? 'ul-show' : ''}} e-pane">
+                <div ng-repeat="e in aemoji" class="aem-select">
+                  <div class="aem aem-{{e.class}}" ng-click="autoComplete_e(e)"></div>
+                </div>
+              </ul> -->
+            </div>
+            <div contenteditable contenteditabl="true" only-text="true" placeholder="Hãy cập nhật gì đó..." convert-new-lines="true" ng-model="comment.message" ng-trim="true" rows="5" cols="100" flag="@" at-user atEmoji ng-keydown="e_keydown(this)" style="height: auto; border-bottom-width: 0px; padding-right: 100px;"
+              auto-complete class="comment comment-box-input js-new-comment-input" class="h-comment-box "></div>
+            <span auto-follow="true" ng-if="!isAtListHidden">
+                      <div ui-scroll-viewport class="aem-picker-panel no-padder b">
+                        <div class="list-group-item user-item user-picker-list" ng-repeat="u in dsnhanvien | unisearch: {fullname : query.text} | limitTo:10" ng-click="autoComplete(u)">
+                          <a herf class="pull-left thumb-xxs avatar avatar-user-picker m-r m-r-xxs m-t-xxs" ng-click="autoComplete(u)">
+                            <img src="files/get/{{u.cur_avatar}}" alt="..." class="img-circle avatar-75 m-t-xxs">
+                          </a>
+                          <div class="clear">
+                            <div><a ui-toggle-class="show" style="font-weight: normal;" ng-click="autoComplete(u)">{{u.fullname}}</a></div>
+                          </div>
+                        </div>
+                      </div>
+                  </span>
+            <span auto-follow="true" ng-if="!isAtListHidden_p">
+                    <div ui-scroll-viewport class="aem-picker-panel no-padder b">
+                      <div class="list-group-item user-item user-picker-list" ng-repeat="p in projects | unisearch: {project_code : query_p.text} | limitTo:10" ng-click="autoComplete_p(p)" ng-if="p.project_code  ">
+                        <div class="clear">
+                          <div><a ui-toggle-class="show" style="font-weight: normal;" ng-click="autoComplete_p(p)">{{p.project_code}}</a></div>
+                        </div>
+                      </div>
+                    </div>
+                </span>
+            <span auto-follow="true" ng-if="!isAtListHidden_m">
+                  <div ui-scroll-viewport class="aem-picker-panel no-padder b">
+                    <div class="list-group-item user-item user-picker-list" ng-repeat="m in milestones | unisearch: {fullname : query.text}" ng-click="autoComplete_m(m)">
+                      <div><a ui-toggle-class="show" style="font-weight: normal;" ng-click="autoComplete_m(m)">{{m.milestone_name}}</a></div>
+                    </div>
+                  </div>
+              </span>
+            <span auto-follow="true" ng-if="!isAtListHidden_e">
+                    <div emoji class=" aem-picker-panel b">
+                      <div class="" value="{{e.class}}">
+                        <div ng-repeat="e in aemoji" class="aem-select">
+                          <div class="aem aem-{{e.class}}" ng-click="autoComplete_e(e)"></div>
+                        </div>
+                      </div>
+                    </div>
+                </span>
+            <div class="wrapper-xs editor" ng-show="showeditor">
+              <div lazy-load="textAngular">
+                <div text-angular ng-model="htmlcontent" class="btn-groups"></div>
+              </div>
+            </div>
+            <div class="line b-b" ng-if="uploader.queue.length > 0"></div>
+
+            <h3 class="card-detail-item-header file-list-header js-show-with-desc padder" ng-if="uploader.queue.length > 0">Tập tin đính kèm</h3>
+            <div class="attack-pane">
+              <div class="checklist-item" ng-repeat="item in uploader.queue | filter: {headers : {type : 'comments'}}" ng-if="!(item.file.type | isImage)">
+                <div class="normal-item enabled js-toggle-checklist-item"><i class="fa fa-file-text-o sub-cat-icon"></i>
+                </div>
+                <div class="checklist-item-details non-empty editable" ng-mouseenter="options=true" ng-mouseleave="options=false" attr="name">
+                  <p class="checklist-item-details-text file-list-header">{{item.file.name}}
+                    <span class="{{item.progress == 100 ? 'elementToFadeInAndOut2' : 'hidden'}}"></i> {{item.progress}}% </span>
+                    <span class="{{item.progress != 100 ? '' : 'hidden'}}"></i> {{item.progress}}% </span>
+                  </p>
+                </div>
+              </div>
+              <div ng-if="(uploader.queue | imgFilter | filter: {headers : {type : 'comments'}}).length > 0" class="img-thumb-pane">
+                <div class="pull-left thumb thumb-wrapper m-r-xs m-b-xs" ng-repeat="item in uploader.queue | imgFilter | filter: {headers : {type : 'comments'}} ">
+                  <div class="" ng-thumb="{ file: item._file, height: 50 }"></div>
+                </div>
+              </div>
+            </div>
+            <div class="hidden" style="height: 36px;"></div>
+            <div class="comment-box-options">
+              <span class="comment-box-options-item js-comment-add-attachment btn-file">
+                        <span class="fileinput-new"><span class="icon-sm icon-attachment"></span></span>
+              <input type="file" nv-file-select="" uploader="uploader" options="{headers: {id: m._id, type: 'comments'}, autoUpload: 'true'}" multiple />
+              </span>
+              <a class="comment-box-options-item js-comment-mention-member hidden" href="#" title="Mention a member…">
+                          <span class="icon-sm icon-mention"></span>
+                      </a>
+              <a class="comment-box-options-item js-comment-add-emoji hidden" href="" title="Add emoji…">
+                          <span class="icon-sm icon-emoji"></span></a>
+              <a class="comment-box-options-item js-comment-add-card" href="" ng-click="showeditor = !showeditor" title="Nội dung nâng cao">
+                          <span class="fa fa-list-alt"></span>
+                      </a>
+              <a class="comment-box-options-item " href="#" title="Gửi" ng-click="send_comment()">
+                          <span class="fa fa-send-o text-info"></span>
+                      </a>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="comment-too-long-warning">
+        <p>Your comment is too long! You can add it as a text attachment or truncate it.</p>
+        <input class="primary js-attach-comment" type="submit" value="Add as an Attachment" tabindex="4">
+        <input class="js-truncate-comment" type="submit" value="Truncate" tabindex="5">
+      </div>
+    </div>
+  </div>
+  <div class="row-row">
+    <div class="cell">
+      <!-- <md-content scroll-to-bottom="activities" layout="column" style="background-color: #F5F5F5;" ng-style="{'height':ctrl.messageWindowHeight}">
+        <div class="chat-box">
+          <ol class="discussion">
+            <li ng-repeat="ac in activities track by $index" id="msg-{{$index}}">
+              fsd fjksdh fkjdshf kjsdhf kjshfkjshfkjsd h
+            </li>
+          </ol>
+        </div>
+    </md-content> -->
+      <div class="cell-inner">
+        <div class="wrapper-md no-padder" data-ng-include=" 'module/welcome/views/groups/duan.htm' " style="padding-top: 50px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

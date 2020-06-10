@@ -1,0 +1,27 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">×</button>
+    <h4 class="modal-title">Thêm cá nhân mới</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên đầy đủ</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="u.fullname" value="{{u.fullname}}" name="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Trình độ <span class="text-danger">*</span></label>
+            <div class="col-lg-8">
+                <ui-select ng-model="u.trinhdo" theme="bootstrap">
+                    <ui-select-match placeholder="Chọn trình độ">{{$select.selected.trinhdo}}</ui-select-match>
+                    <ui-select-choices repeat="item in trinhdo | filter: $select.search">
+                        <div ng-bind-html="item.trinhdo | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Thêm nhân viên</button>
+
+    </div>

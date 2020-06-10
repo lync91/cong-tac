@@ -1,0 +1,33 @@
+<div class="hbox hbox-auto-xs ng-scope">
+  <div class="col w-md w-auto-xs bg-light lter b-r">
+    <div class="">
+      <ul class="nav nav-pills nav-stacked no-radius">
+        <li ui-sref-active="active">
+          <a ng-if="globals.user_details.admin == true" href="" ui-sref="app.quanly.thietlap.quanlyhethong.chung"><i class="fa fa-fw fa-dashboard"></i> Hệ thống</a>
+          <!-- <a href="" ui-sref="app.quanly.thietlap.duan"><i class="fa fa-fw fa-dashboard"></i> Dự án</a> -->
+        </li>
+        <li ng-if="globals.user_details.admin == true" ui-sref-active="active">
+          <a href="" ui-sref="app.quanly.thietlap.quanlychucvu"><i class="fa fa-fw fa-group"></i> Chức vụ</a>
+          <!-- <a href="" ui-sref="app.quanly.thietlap.duan"><i class="fa fa-fw fa-dashboard"></i> Dự án</a> -->
+        </li>
+        <li ui-sref-active="active">
+          <!-- <a href="" ui-sref="app.quanly.thietlap.quanlychucvu"><i class="fa fa-fw fa-dashboard"></i> Chúc vụ</a> -->
+          <a href="" ui-sref="app.quanly.thietlap.duan.loaicongviec"><i class="fa fa-fw fa-suitcase"></i> Dự án</a>
+        </li>
+        <li ng-if="globals.user_details.admin == true" ui-sref-active="active">
+          <a href="" ui-sref="app.quanly.thietlap.lang"><i class="fa fa-fw fa-group"></i> Ngôn ngữ</a>
+        </li>
+        <li ng-if="globals.user_details.admin == true" ui-sref-active="active">
+          <a href="" ui-sref="app.quanly.thietlap.project_roles"><i class="fa fa-fw fa-group"></i> Quyền dự án</a>
+        </li>
+        <li ng-if="globals.user_details.admin == true" ui-sref-active="active">
+          <a href="" ui-sref="app.quanly.thietlap.app_roles"><i class="fa fa-fw fa-group"></i> Quyền hê thống</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col">
+    <div class="" ui-view>
+    </div>
+  </div>
+</div>

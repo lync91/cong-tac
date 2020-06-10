@@ -1,0 +1,126 @@
+<!-- <aside ng-controller="project_view" class="bg-light lter b-l">
+        <header class="header bg-white b-b clearfix">
+            <div class="row m-t-sm project-header">
+                <div class="col-sm-12 m-b-xs">
+                    <div class="" style="position: absolute; padding-left: 10px">
+                        <h5><b>Dự án: {{p.project_code}}</b></h5>
+                    </div>
+                    <ul class="breadcrumb pull-right bg-white" style="margin-bottom:0px">
+                      <li><a href ui-sref="app.projects.view.project_details({p_id : param.p_id })" ui-sref-active="active">Thông tin dự án</a></li>
+                      <li><a href ui-sref="app.projects.view.milestones({p_id : param.p_id })"  ui-sref-active="active">Danh mục hồ sơ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="scrollable group-panel" ui-view></section>
+</aside> -->
+<!-- navbar -->
+<!-- <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+  </div> -->
+<!-- / navbar -->
+
+<!-- menu -->
+<!-- <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}" ng-class="{'hide': app.hideAside }">
+  </div> -->
+<!-- / menu -->
+
+<!-- view -->
+<div ng-controller="project_view" class="app-content" ng-class="{'m-n': app.hideAside, 'h-full': app.hideFooter }">
+  <div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }" style="left:200px">
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs bg-light " ng-init="
+  app.settings.asideFolded = false; 
+  app.settings.asideFixed = true;
+  app.settings.asideDock = false;
+  app.settings.container = false;
+  app.hideAside = false;
+  mtool = '';
+  overflow = 'auto'
+  ">
+      <!-- column -->
+      <div class="col">
+        <div class="vbox">
+          <header class="header bg-white b-b clearfix">
+            <div class="row m-t-sm project-header">
+              <div class="col-sm-12 m-b-xs">
+                <div class="" style="position: absolute; padding-left: 10px">
+                  <h5>
+                    <b>Dự án: {{p.project_code}}</b>
+                  </h5>
+                </div>
+                <ul class="breadcrumb pull-right bg-white" style="margin-bottom:0px">
+                  <li>
+                    <a href ui-sref="app.projects.view.project_details({p_id : param.p_id })" ui-sref-active="active">Thông tin</a>
+                  </li>
+                  <li>
+                    <a href ui-sref="app.projects.view.milestones({p_id : param.p_id })" ui-sref-active="active">Hồ sơ</a>
+                  </li>
+                  <li>
+                    <a href ui-sref="app.projects.view.khoiluong({p_id : param.p_id })" ui-sref-active="active">Giám sát</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </header>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner"  size-watcher size-watcher-height="myheight" style="overflow-y : {{overflow}}">
+                <div ui-view >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /column -->
+      <!-- Giao việc nhanh -->
+      <div ng-if="mtool == 'giaoviec'" ng-include="'modules/projects/mtools/giaoviec.htm'" class="col w-md lter b-l">
+
+      </div>
+      <!-- /Giao việc nhanh -->
+      <!-- Chuyển phát hồ sơ -->
+      <div ng-if="mtool == 'chuyenphaths'" ng-include="'modules/projects/mtools/chuyenphaths.htm'" class="col w-md lter b-l">
+
+      </div>
+      <!-- /Chuyển phát hồ sơ -->
+      <!-- File Scan-->
+      <div ng-if="mtool == 'filescan'" class="col w-md lter b-l">
+        <div class="vbox">
+          <div class="wrapper b-b b-light">
+            <div class="font-thin h4">FILE HỒ SƠ SCAN</div>
+            <small class="text-muted">Kéo và thả file scan vào hồ sơ</small>
+          </div>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner">
+                <div class="assign-panel">
+                  <!-- <ul ng-repeat="pb in dsnhanvien" class="list-group list-group-lg no-bg auto" dnd-list dnd-drop="add_hscp(list, item, index, nv)">
+                      
+                    </ul> -->
+                  <div class="list-group bg-white" dnd-list="files_scan">
+                    <a href="" ng-repeat="f in files_scan" class="list-group-item" dnd-draggable="f" dnd-type="'fscan'">
+                      {{f}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="padder b-t b-light text-center hidden">
+            <div class="wrapper-xs">
+              <a href class="btn btn-success pull-right" ng-click="tao_giaonhan(list_m)">Chuyển phát</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /File Scan-->
+    </div>
+    <!-- /hbox layout -->
+  </div>
+</div>
+<!-- / view -->
+<!-- navbar -->
+<!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+    
+  </div> -->
+<!-- /navbar -->

@@ -1,0 +1,32 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Thêm nhân viên tham gia dự án</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên nhân sự</label>
+            <div class="col-lg-8">
+              <ui-select ng-model="pc.user" theme="bootstrap">
+                  <ui-select-match placeholder="Chọn nhân sự">{{$select.selected.fullname}}</ui-select-match>
+                  <ui-select-choices repeat="item in users | filter: $select.search">
+                      <div ng-bind-html="item.fullname | highlight: $select.search"></div>
+                  </ui-select-choices>
+              </ui-select>
+            </div>
+        </div>
+        <div>
+            <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+                <tbody>
+                    <tr ng-repeat="r in roles">
+                        <td><span class="padder">{{r.lang.value}}</span></td>
+                        <td class="no-padder"><label class="i-switch m-t-xs"><input type="checkbox" ng-model="_roles[r.key]"><i></i></label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Thêm</button>
+
+    </div>

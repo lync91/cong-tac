@@ -1,0 +1,28 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Sửa thông tin chức vụ</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên loại công việc</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="lcv.loaicongviec">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Phòng thực hiện</label>
+            <div class="col-lg-8">
+              <ui-select ng-model="lcv.phongth" theme="bootstrap">
+                  <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.company_name}}</ui-select-match>
+                  <ui-select-choices repeat="item in phongban | filter: $select.search">
+                      <div ng-bind-html="item.company_name | highlight: $select.search"></div>
+                  </ui-select-choices>
+              </ui-select>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Lưu thay đổi</button>
+
+    </div>

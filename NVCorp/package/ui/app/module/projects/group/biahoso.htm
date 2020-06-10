@@ -1,0 +1,133 @@
+<!-- navbar -->
+<!-- <div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+</div> -->
+<!-- / navbar -->
+
+<!-- menu -->
+<!-- <div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}" ng-class="{'hide': app.hideAside }">
+</div> -->
+<!-- / menu -->
+
+<!-- view -->
+<!-- <div class="app-content" ng-class="{'m-n': app.hideAside, 'h-full': app.hideFooter }"> -->
+  <div class="app-content-body app-content-full fade-in-up" ng-class="{'h-full': app.hideFooter }">
+    <!-- hbox layout -->
+    <div class="hbox hbox-auto-xs bg-light " size-watcher size-watcher-height="myheight">
+      <!-- column -->
+      <!-- <div class="col w lter b-r hidden">
+        <div class="vbox">
+          <div class="wrapper-sm b-b b-light">
+            <div class="font-thin"><strong>Hồ sơ</strong></div>
+          </div>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner">
+                <div ng-repeat="lcv in milestones" class="">
+                  <div class="panel panel-info m-n" draggable="true">
+                    <div class="panel-heading">
+                      {{lcv._id.lcv[0]}}
+                    </div>
+                    <div class="list-group bg-white" ng-repeat="gd in lcv.gd">
+                      <a ng-repeat="m in gd.m" href="" class="list-group-item" ui-sref="app.projects.mtools.biavb({id: pid, mid: m.milestone_num})" ui-sref-active="active">
+                        {{m.milestone_name}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- /column -->
+
+      <!-- column -->
+      <div class="col">
+        <div class="vbox" ng-controller="edit_project">
+          <div class="row-row">
+              <div class="col w-xxl lter b-r">
+                  <div class="vbox">
+                      <div class="wrapper-sm b-b b-light">
+                          <div class="font-thin">
+                                  <a href="" ui-sref="app.projects.giamsat.kehoach({p_id: param.p_id, kh_id: param.kh_id})" class="btn btn-xs btn-default m-r-sm"><i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                              <strong>Danh sách biểu mẫu</strong>
+                          </div>
+                      </div>
+                      <div class="row-row">
+                          <div class="cell">
+                              <div class="cell-inner bg-light lter">
+                                  <div class="">
+                                    <div class="wrapper-md">
+                                      <p>Chiều rộng bìa: ( {{bia_width}} mm)</p>
+                                      <slider ng-model="bia_width" floor="50" ceiling="200">
+                                      </slider>
+                                      <p>Cỡ chữ ID: ( {{size_id}} px)</p>
+                                      <slider ng-model="size_id" floor="16" ceiling="50">
+                                      </slider>
+                                      <p>Cỡ chữ tên công trình: ( {{size_congtrinh}} px)</p>
+                                      <slider ng-model="size_congtrinh" floor="16" ceiling="50">
+                                      </slider>
+                                      <p>Cỡ chữ phòng ban: ( {{size_phongban}} px)</p>
+                                      <slider ng-model="size_phongban" floor="15" ceiling="30">
+                                      </slider>
+                                      <a href="" class="btn btn-success" ng-click="ok()">Tạo mẫu bìa</a>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="cell">
+                  <div class="vbox">
+                      <div class="wrapper-sm b-b b-light">
+                          <div class="font-thin">
+                              <strong ng-if="param.ac == 'kehoach'">Nội dung</strong>
+                              <a href="" ng-if="param.ac == 'baocaokehoach'" class="btn btn-default btn-xs m-r-xs" ui-sref="app.projects.giamsat.baocaokehoach({p_id: param.p_id, kh_id: param.kh_id})">
+                                      <i class="glyphicon glyphicon-chevron-left"></i> Quay lại</a>
+                              <strong ng-if="param.ac == 'baocaokehoach'">| Biểu mẫu báo cáo hoàn thành kế hoạch gián sát</strong>
+                          </div>
+                      </div>
+                      <div class="row-row">
+                          <div class="cell">
+                              <div class="cell-inner">
+                                  <iframe id='pdfV' class="pdf-frame"></iframe>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+      <!-- /column -->
+
+      <!-- column -->
+      <div class="col w-md lter b-l hidden">
+        <div class="vbox">
+          <div class="wrapper b-b b-light">
+            <div class="font-thin h4">Header</div>
+            <small class="text-muted">with fluid height</small>
+          </div>
+          <div class="row-row">
+            <div class="cell">
+              <div class="cell-inner">
+                <div class="wrapper-md">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /hbox layout -->
+
+  </div>
+<!-- </div> -->
+<!-- / view -->
+<!-- navbar -->
+<!-- <div class="app-footer navbar navbar-fixed-bottom bg-light lt b-t" ng-class="{'m-n': app.hideAside, 'hide': app.hideFooter}" ui-view="footer">
+
+</div> -->
+<!-- /navbar -->

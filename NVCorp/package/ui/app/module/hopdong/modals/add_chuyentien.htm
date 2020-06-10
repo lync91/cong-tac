@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">Thêm chuyển tiền</h4>
+</div>
+<div class="modal-body">
+  <form accept-charset="utf-8" class="bs-example form-horizontal">
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Têm thanh toán<span class="text-danger">*</span></label>
+          <div class="col-lg-9">
+              <input type="text" placeholder="Tên thanh toán" ng-model="tt.tenthanhtoan" class="form-control" value="" name="reference_no">
+          </div>
+
+      </div>
+
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Ngày thanh toán</label>
+          <div class="col-lg-4">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" popup-placement="auto" ng-model="tt.ngaychuyentien" is-open="opened" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+      </div>
+      <!-- End discount Fields -->
+      <div class="form-group">
+          <label class="col-lg-3 control-label">Giá trị<span class="text-danger">*</span></label>
+          <div class="col-lg-6">
+              <input type="text" placeholder="Giá trị" ng-model="tt.giatri" ui-number-mask="0" class="form-control" value="" name="reference_no">
+          </div>
+
+      </div>
+  </form>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Thêm thanh toán</button>
+</div>

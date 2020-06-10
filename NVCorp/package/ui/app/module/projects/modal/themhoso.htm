@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Thêm hồ sơ</h4>
+</div>
+<div class="modal-body">
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Tên hồ sơ <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" ng-model="hs.name" value="" placeholder="Tên hồ sơ" name="task_name" required>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Loại công việc<span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <ui-select ng-model="hs.lcv" theme="bootstrap" on-select="chon_lcv(_lcv)" title="Choose a person">
+                <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.loaicongviec}}</ui-select-match>
+                <ui-select-choices repeat="item in lcv | filter: $select.search">
+                    <div ng-bind-html="item.loaicongviec | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Giai đoạn <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <ui-select ng-model="hs.gd" theme="bootstrap" on-select="chon_gd(_gd)" title="Choose a person">
+                <ui-select-match placeholder="Chọn giai đoạn">{{$select.selected.giaidoan}}</ui-select-match>
+                <ui-select-choices repeat="item in gd | filter: $select.search">
+                    <div ng-bind-html="item.giaidoan | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-lg-4"><label class=" pull-right control-label">Nhóm hồ sơ <span class="text-danger">*</span></label></div>
+        <div class="col-lg-8">
+            <ui-select ng-model="hs.nhs" theme="bootstrap" on-select="chon_gd(_gd)" title="Choose a person">
+                <ui-select-match placeholder="Chọn nhóm hồ sơ">{{$select.selected.nhomhs}}</ui-select-match>
+                <ui-select-choices repeat="item in nhs | filter: $select.search">
+                    <div ng-bind-html="item.nhomhs | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+
+        </div>
+    </div>
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Đóng</a>
+    <button type="submit" ng-click="ok()" class="btn btn-primary">Thêm hồ sơ</button>
+</div>

@@ -1,0 +1,10 @@
+<div class="modal-header" style="background: red; color: white">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title">{{ac.title}}</h4>
+</div>
+<div class="modal-body">
+    {{ac.noti}}
+</div>
+<div class="modal-footer"> <a href="" class="btn btn-default" ng-click="cancel()">Hủy</a>
+    <button type="submit" ng-click="ok()" class="btn btn-danger">{{ac.ok_button || 'Vẫn xóa'}}</button>
+</div>

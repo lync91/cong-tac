@@ -1,0 +1,41 @@
+<div class="panel panel-default" ng-controller="diadiem">
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <map ng-if="$parent.render" center="[{{$parent.lat}}, {{$parent.lng}}]" zoom-control="true" zoom="8"> </map>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    <div class="no-padder">
+        <div class="panel-heading">
+            Danh sách nhân viên
+        </div>
+        <div>
+            <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="dd in dsdiadiem">
+                        <td><a href class="text-info" ui-sref="app.congtac.edit_diadiem({id: dd._id})">{{dd.name}}</a></td>
+                        <td>
+                            <a href class="btn btn-default btn-xs pull-right m-l-xs" ng-click="delete_diadiem(dd)"><i class="fa fa-circle-o-notch text-danger"></i></a>
+                            <a href class="btn btn-default btn-xs pull-right m-l-xs" ui-sref="app.congtac.edit_diadiem({id: dd._id})"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="hide-if-no-paging">
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

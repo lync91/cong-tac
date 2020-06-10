@@ -1,0 +1,115 @@
+<div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button>
+    <h4 class="modal-title">Sửa thông tin chức vụ</h4>
+</div>
+<form accept-charset="utf-8" class="bs-example form-horizontal">
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Tên chức vụ</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="cv.chucvu_new">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Level</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="cv.level_new">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">AD code</label>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" ng-model="cv.ADcode_new">
+            </div>
+        </div>
+        <div class="line line-dashed b-b line-lg"></div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Phân quyền</label>
+            <div class="col-lg-8">
+                <!-- <input type="text" class="form-control" ng-model="cv.level_new"> -->
+            </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 no-padder">
+            <label class="i-switch m-t-xs m-r pull-right">
+              <input type="checkbox" ng-model="cv.roles_new.tao_duan" checked>
+              <i></i>
+            </label>
+          </div>
+          <label class="col-sm-8 m-t-xs">Tạo dự án</label>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 no-padder">
+            <label class="i-switch m-t-xs m-r pull-right">
+              <input type="checkbox" ng-model="cv.roles_new.them_ho_so" checked>
+              <i></i>
+            </label>
+          </div>
+          <label class="col-sm-8 m-t-xs">Thêm hồ sơ dự án</label>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 no-padder">
+            <label class="i-switch m-t-xs m-r pull-right">
+              <input type="checkbox" ng-model="cv.roles_new.giao_viec_tat_ca" checked>
+              <i></i>
+            </label>
+          </div>
+          <label class="col-sm-8 m-t-xs">Giao việc tất cả</label>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4 no-padder">
+            <label class="i-switch m-t-xs m-r pull-right">
+              <input type="checkbox" ng-model="cv.roles_new.giao_viec_gioi_thuyen" checked>
+              <i></i>
+            </label>
+          </div>
+          <label class="col-sm-8 m-t-xs">Giao việc dưới quyền</label>
+        </div>
+        <!-- <div class="form-group">
+            <label class="col-lg-4 control-label">Email <span class="text-danger">*</span></label>
+            <div class="col-lg-8">
+                <input type="email" class="form-control" ng-model="u.email_new" value="{{u.email}}" name="email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Mật khẩu</label>
+            <div class="col-lg-8">
+                <input type="password" class="form-control" ng-model="u.password_new" value="" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Xác nhận mật khẩu</label>
+            <div class="col-lg-8">
+                <input type="password" class="form-control" ng-model="u.password_comfirm" value="" name="confirm_password">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Phòng ban <span class="text-danger">*</span></label>
+            <div class="col-lg-8">
+                <ui-select ng-model="u.company_new" theme="bootstrap">
+                    <ui-select-match placeholder="Chọn phòng ban">{{$select.selected.company_name}}</ui-select-match>
+                    <ui-select-choices repeat="item in phongban | filter: $select.search">
+                        <div ng-bind-html="item.company_name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-4 control-label">Chức vụ <span class="text-danger">*</span></label>
+            <div class="col-lg-8">
+                <ui-select ng-model="u.chucvu_new" theme="bootstrap">
+                    <ui-select-match placeholder="Chọn chức vụ">{{$select.selected.chucvu}}</ui-select-match>
+                    <ui-select-choices repeat="item in chucvu | filter: $select.search">
+                        <div ng-bind-html="item.chucvu | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div> -->
+
+
+
+    </div>
+    <div class="modal-footer"> <a href="#" class="btn btn-default" data-dismiss="modal">Đóng</a>
+        <button type="submit" class="btn btn-primary" ng-click="ok()">Lưu thay đổi</button>
+
+    </div>

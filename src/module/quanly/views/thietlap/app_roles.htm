@@ -1,0 +1,46 @@
+<div class="panel panel-default" ng-controller="app_roles">
+    <div class="panel-heading">
+        Quản lý quyền truy cập hệ thống
+      <a href class="btn btn-default btn-xs pull-right" ng-click="add()">Thêm quyền</a>
+    </div>
+    <div>
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="30">
+        <thead>
+          <tr>
+              <th>
+                  Module
+              </th>
+              <th>
+                  key
+              </th>
+              <th>
+                  lang
+              </th>
+              <th class="pull-right">
+                  Tùy chọn
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in roles | orderBy: 'module'">
+              <td><strong>{{r.module}}</strong></td>
+              <td>{{r.key}}</td>
+              <td><a href>{{r.lang.value}}</a></td>
+              <td>
+                <div class="pull-right">
+                  <!-- <a href class="btn btn-default btn-xs m-l-xs pull-right" ng-click="delete_chucvu(cv)"><i class="fa fa-trash text-danger"></i></a> -->
+                  <a href class="btn btn-default btn-xs pull-right" ng-click="edit_chucvu(cv)"><i class="fa fa-pencil"></i></a>
+                </div>
+              </td>
+          </tr>
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
