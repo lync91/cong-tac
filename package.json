@@ -3,7 +3,8 @@
   "version": "2.0.1",
   "description": "Admin web application template with Bootstrap 3 and AngularJS.",
   "scripts": {
-    "start": "http-server ./ 8080"
+    "start": "http-server ./ 8080",
+    "synopackage": "grunt synopackage"
   },
   "keywords": [
     "AngularJS",
