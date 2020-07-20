@@ -89,7 +89,7 @@ module.exports = {
             {expand: true, src: "node_modules/angular-input-masks/releases/angular-input-masks-standalone.js", dest: "angular"},
             {expand: true, src: "node_modules/angular-input-masks/releases/angular-input-masks-dependencies.min.js", dest: "angular"},
             {expand: true, src: "node_modules/pdfmake/build/pdfmake.min.js", dest: "angular"},
-            {expand: true, src: "pdf-font/vfs_fonts.js", dest: "angular/node_modules/pdfmake/build"},
+            {expand: true, src: "vfs_fonts.js", dest: "angular/node_modules/pdfmake/build"},
             {src: 'src/index.min.html', dest : 'angular/index.html'}
         ]
     },
@@ -195,7 +195,7 @@ module.exports = {
             {expand: true, src: "node_modules/angular-input-masks/releases/angular-input-masks-standalone.js", dest: "src"},
             {expand: true, src: "node_modules/angular-input-masks/releases/angular-input-masks-dependencies.min.js", dest: "src"},
             {expand: true, src: "node_modules/pdfmake/build/pdfmake.min.js", dest: "src"},
-            {expand: true, src: "vfs_fonts.js", dest: "src/node_modules/pdfmake/build/"},
+            {expand: true, src: "src/vfs_fonts.js", dest: "src/node_modules/pdfmake/build/"},
         ]
     },
     syno: {

@@ -922,7 +922,7 @@ app.controller('xuatdulieu', ['$rootScope', '$scope', 'socket', '$http', '$windo
                       fontSize: 10
                     },
                     {
-                      text: "Điện thoại: 12345668899             Fax: 12345678",
+                      text: "Điện thoại: 08.37245963             Fax: 08.37245962",
                       italics: true,
                       fontSize: 10
                     }
@@ -1190,7 +1190,7 @@ app.controller('xuatdulieu', ['$rootScope', '$scope', 'socket', '$http', '$windo
               fontSize: 11
             },
             {
-              text: 'Tp. HCM, ngày     tháng     năm 2018',
+              text: ['Tp. HCM, ngày     tháng     năm ', $scope.param.nam],
               style: 'date_header'
             },
             {

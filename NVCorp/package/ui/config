@@ -3,7 +3,7 @@
     "NVCorp.App.C_ng_t_c_ph": {
       "itemType": 2,
       "type": "legacy",
-      "allUsers": false,
+      "allUsers": true,
       "title": "Công tác phí",
       "desc": "",
       "icon": "images/C_ng_t_c_ph_{0}.png",
