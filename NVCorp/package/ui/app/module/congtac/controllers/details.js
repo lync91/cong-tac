@@ -380,7 +380,7 @@ app.controller('congtac_chitiet', ['$rootScope', '$scope', 'socket', '$http', '$
   // map object
 
   var vm = this;
-  $scope.types = "['establishment']";
+  $scope.types = "['address']";
   $scope.placeChanged = function () {
     $scope.place = this.getPlace();
     // console.log('location', $scope.place.geometry.location);
